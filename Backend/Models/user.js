@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
-    user_id: {
-        type: mongoose.SchemaTypes.Number,
-        required: true,
-    },
     firstName: {
         type: mongoose.SchemaTypes.String,
         required: true,
@@ -13,37 +9,34 @@ const UserSchema = new mongoose.Schema({
         type: mongoose.SchemaTypes.String,
         required: true,
     },
-    username: {
-        type: mongoose.SchemaTypes.String,
-        required: true,
-    },
-    password: {
-        type: mongoose.SchemaTypes.String,
-        required: true,
-    },
     email: {
         type: mongoose.SchemaTypes.String,
         required: true,
-        lowercase: true, 
+        lowercase: true,
+        unique: true,
     },
     phoneNumber: {
-        type: mongoose.SchemaTypes.Number,
+        type: mongoose.SchemaTypes.String,
         required: true,
+        unique: true,
     },
     JoinedIn: {
         type: mongoose.SchemaTypes.Date,
         required: true, 
         default: Date.now,
     },
-    Dept: {
+    createdAt: {
+        type: mongoose.SchemaTypes.Date,
+        default: new Date(),
+    },
+    statut: {
         type: mongoose.SchemaTypes.String,
         required: true,
     },
-    createdAt: {
-        type: mongoose.SchemaTypes.Date,
+    balance: {
+        type: mongoose.SchemaTypes.Number,
         required: true,
-        default: new Date(),
-    },
+    }
 });
 /*
 const User = mongoose.model('user', UserSchema);

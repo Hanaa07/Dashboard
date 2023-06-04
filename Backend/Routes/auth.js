@@ -6,7 +6,7 @@ const router = Router();
 
 
 
-router.get('/save', (req,res) => {
+/*router.get('/save', (req,res) => {
     const Admin1 = new User({
         user_id: 1,
         fn: "salim",
@@ -24,7 +24,7 @@ router.get('/save', (req,res) => {
     });
 });
 
-/*const { hashPwd, comparePwd } = require('../utils/helpers.js')
+const { hashPwd, comparePwd } = require('../utils/helpers.js')
 
 
 
