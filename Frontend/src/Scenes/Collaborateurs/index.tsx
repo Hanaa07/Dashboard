@@ -76,9 +76,8 @@ const Collaborateurs = () => {
                         }
                         borderRadius="4px"
                     >
-                        {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
-                        {access === "salarié" && <SecurityOutlinedIcon />}
-                        {access === "stagiaire" && <LockOpenOutlinedIcon />}
+                        {access === "Admin" && <AdminPanelSettingsOutlinedIcon />}
+                        {access !== "Admin" && <LockOpenOutlinedIcon />}
                         <Typography color={colors.gray[100]} sx={{ ml: "5px" }}>
                             {access}
                         </Typography>

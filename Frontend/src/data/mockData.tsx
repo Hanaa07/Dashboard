@@ -33,7 +33,7 @@ export const mockDataTeam = [{
     "first_name": "Julienne",
     "last_name": "Lighton",
     "start_date": "4/4/2023",
-    "access": " Salarié",
+    "access": "Salarié",
     "balance": 24
 }, {
     "id": 6,
@@ -110,7 +110,7 @@ export const mockDataTeam = [{
     "first_name": "Odelia",
     "last_name": "Jansky",
     "start_date": "6/2/2023",
-    "access": " Salarié",
+    "access": "Salarié",
     "balance": 16
 }, {
     "id": 17,
@@ -131,7 +131,7 @@ export const mockDataTeam = [{
     "first_name": "Alys",
     "last_name": "Bussey",
     "start_date": "17/5/2023",
-    "access": " Salarié",
+    "access": "Salarié",
     "balance": 6
 }, {
     "id": 20,
@@ -145,14 +145,14 @@ export const mockDataTeam = [{
     "first_name": "Dagny",
     "last_name": "Paul",
     "start_date": "29/5/2023",
-    "access": " Salarié",
+    "access": "Salarié",
     "balance": 23
 }, {
     "id": 22,
     "first_name": "Humfried",
     "last_name": "Hackin",
     "start_date": "12/1/2023",
-    "access": " Salarié",
+    "access": "Salarié",
     "balance": 24
 }, {
     "id": 23,
@@ -166,7 +166,7 @@ export const mockDataTeam = [{
     "first_name": "Theresina",
     "last_name": "Shirrell",
     "start_date": "30/5/2023",
-    "access": " Salarié",
+    "access": "Salarié",
     "balance": 3
 }, {
     "id": 25,
@@ -201,7 +201,7 @@ export const mockDataTeam = [{
     "first_name": "Marilyn",
     "last_name": "Harbage",
     "start_date": "13/4/2023",
-    "access": " Salarié",
+    "access": "Salarié",
     "balance": 18
 }, {
     "id": 30,
@@ -278,7 +278,7 @@ export const mockDataTeam = [{
     "first_name": "Josi",
     "last_name": "Espadater",
     "start_date": "7/4/2023",
-    "access": " Salarié",
+    "access": "Salarié",
     "balance": 30
 }, {
     "id": 41,
@@ -404,7 +404,7 @@ export const mockDataTeam = [{
     "first_name": "Quill",
     "last_name": "Lively",
     "start_date": "10/1/2023",
-    "access": " Salarié",
+    "access": "Salarié",
     "balance": 8
 }, {
     "id": 59,
@@ -460,7 +460,7 @@ export const mockDataTeam = [{
     "first_name": "Web",
     "last_name": "Steuhlmeyer",
     "start_date": "15/3/2023",
-    "access": " Salarié",
+    "access": "Salarié",
     "balance": 16
 }, {
     "id": 67,
@@ -509,21 +509,21 @@ export const mockDataTeam = [{
     "first_name": "Brnaby",
     "last_name": "Thor",
     "start_date": "12/4/2023",
-    "access": " Salarié",
+    "access": "Salarié",
     "balance": 22
 }, {
     "id": 74,
     "first_name": "Findley",
     "last_name": "Wickson",
     "start_date": "4/4/2023",
-    "access": " Salarié",
+    "access": "Salarié",
     "balance": 5
 }, {
     "id": 75,
     "first_name": "Josias",
     "last_name": "Jakovijevic",
     "start_date": "9/3/2023",
-    "access": " Salarié",
+    "access": "Salarié",
     "balance": 15
 }, {
     "id": 76,
@@ -593,21 +593,21 @@ export const mockDataTeam = [{
     "first_name": "Josh",
     "last_name": "Dukelow",
     "start_date": "10/2/2023",
-    "access": " Salarié",
+    "access": "Salarié",
     "balance": 27
 }, {
     "id": 86,
     "first_name": "Cory",
     "last_name": "Dilland",
     "start_date": "8/5/2023",
-    "access": " Salarié",
+    "access": "Salarié",
     "balance": 20
 }, {
     "id": 87,
     "first_name": "Ive",
     "last_name": "Walrond",
     "start_date": "14/2/2023",
-    "access": " Salarié",
+    "access": "Salarié",
     "balance": 13
 }, {
     "id": 88,
@@ -621,7 +621,7 @@ export const mockDataTeam = [{
     "first_name": "Blanch",
     "last_name": "Lapre",
     "start_date": "31/1/2023",
-    "access": " Salarié",
+    "access": "Salarié",
     "balance": 15
 }, {
     "id": 90,
