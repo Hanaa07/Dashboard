@@ -1,93 +1,80 @@
 const { Router } = require('express');
-const Abs = require('../Models/absence.js');
+const Absence = require('../Models/absence.js');
 
 
 const router = Router();
 
+router.get('/', (req, res) => {
+    Absence.find((err,data) => {
+        if (err){
+            console.log(err);
+        }
+        else {
+            res.send(data);
+        }
+    });
+});
 
-
-router.get('/save', (req,res) => {
+router.post('/new', (req,res) => {
 //create a new user object with our model and pass with it the request data from Postman.
-    const Abs1 = new Abs({
-        AbsId : 1,
-        AbsInDays : 3,
-        createdAt: '2023-05-02',
-        TypeOfAbs: 'congé',
-        startedAt: '2023-05-02',
-        endedAt: '2023-05-08',
-        createdBy: '6454f1e2f9b259374cc7132a',
-        UserId: '6454f1e2f9b259374cc7132a',
-    });
+    const attendance = new Absence();
+        attendance.AbsenceInDays = req.body.AbsenceInDays;
+        attendance.createdAt = req.body.createdAt;
+        attendance.TypeOfAbsence = req.body.TypeOfAbsence;
+        attendance.startedAt = req.body.startedAt;
+        attendance.endedAt = req.body.endedAt;
+        attendance.balance = req.body.balance;
+        attendance.soldeId = req.body.soldeId;
 //save to the database
-    Abs1.save((err,data) => {
-        (err) ? console.log(err) : res.send('Data inserted');
-    });
+    attendance.save((err, savedData) => {
+        if (err) res.send({"success": false, "message": err.message ,"data": null});
+
+        res.send({"success": true, "message": "Votre opération a été exécutée avec succès !" ,"data": savedData})
+    })
+
+    return null;
 });
 
-router.get('/findall', (req, res) => {
-//To retrieve records from a database collection using .find() function.
-    User.find((err,data) => {
-        if (err){
-            console.log(err);
-        }
-        else {
-            res.send(data);
-        }
-    });
+router.get('/:id', (req, res) => {
+    const {id} = req.params;
+    User.findOne({ _id:  id },
+        (err, savedData) => {
+            if (err){
+                res.send({"success": false, "message": err.message ,"data": null});
+            }
+            else {
+                res.send({"success": true, "message": "Votre opération a été exécutée avec succès !" ,"data": savedData})
+            }
+        });
 });
 
-router.get('/findfirst', (req, res) => {
-//To retrieve a single record or the first matched document using findOne(). 
-    User.findOne({ Absid: { $lt : "3" } }, 
-    (err, data) => {
-        if (err){
-            console.log(err);
-        }
-        else {
-            res.send(data);
-        }
-    });
+router.get('/delete/:id', (req, res) => {
+    const data = req.params.id;
+    Absence.findByIdAndDelete(data,
+        (err, savedData) => {
+            if (err){
+                res.send({"success": false, "message": err.message ,"data": null});
+            }
+            else {
+                res.send({"success": true, "message": "Votre opération a été exécutée avec succès !" ,"data": savedData})
+            }
+        });
 });
 
 
-router.get('/delete', (req,res) => {
-//To delete a record from the database using .remove()
-    User.remove({ AbsInDays: 3 },
-    (err, data) => {
-        if (err){
-            console.log(err);
-        }
-        else {
-            res.send(data);
-        }
-    });
-});
-
-router.post('/delete', (req, res) => {
-
-    User.findByIdAndDelete((req.body.Absid),
-    (err, data) => {
-        if (err){
-            console.log(err);
-        }
-        else {
-            res.send(data);
-        }
-    });
-});
 
 //Just like with the delete request, we’ll be using the _id to target the correct item.
-router.post('/update', (req, res) => {
-    User.findByIdAndUpdate(req.body.Absid, 
-        {username : req.body.username}, 
-            (err, data) => {
-                if (err){
-                    console.log(err);
-                }
-                else {
-                    res.send(data);
-                }
-            });
+router.put('/edit/:id', async (req, res) => {
+    const data = req.params.id;
+    const absence = await Absence.findByIdAndUpdate(data, req.body,
+        (err, savedData) => {
+            if (err){
+                res.send({"success": false, "message": err.message ,"data": null});
+            }
+            else {
+                res.send({"success": true, "message": "Votre opération a été exécutée avec succès !" ,"data": savedData})
+            }
+        });
 });
 
 module.exports = router;

@@ -6,28 +6,7 @@ const router = Router();
 
 
 
-router.post('/save', (req,res) => {
-//create a new user object with our model and pass with it the request data from Postman.
-    const Admin1 = new User({
-        user_id: 1,
-        firstName: "salim",
-        lastName: "el bouanani",
-        username: "MIT",
-        password: "MIT123",
-        email: "mit@gmail.com",
-        phoneNumber: 0612345145,
-        createdAt: '2023-02-03',
-        JoinedIn: '2020-01-01',
-        Dept: "Dev",
-    });
-//save to the database
-    Admin1.save((err,data) => {
-        (err) ? console.log(err) : res.send('Data inserted');
-    });
-});
-
-router.get('/findall', (req, res) => {
-//To retrieve records from a database collection using .find() function.
+router.get('/', (req, res) => {
     User.find((err,data) => {
         if (err){
             console.log(err);
@@ -38,57 +17,65 @@ router.get('/findall', (req, res) => {
     });
 });
 
-router.get('/findfirst', (req, res) => {
-//To retrieve a single record or the first matched document using findOne(). 
-    User.findOne({ user_id: { $lt : "3" } }, 
-    (err, data) => {
-        if (err){
-            console.log(err);
-        }
-        else {
-            res.send(data);
-        }
-    });
+router.post('/new', (req,res) => {
+    const data = req.body;
+    const user = new User ();
+    user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
+    user.email = req.body.email;
+    user.phoneNumber = req.body.phoneNumber;
+    user.joinedIn = req.body.joinedIn;
+    user.createdAt = req.body.createdAt;
+    user.statut = req.body.statut;
+    user.balance = req.body.balance;
+
+    user.save(function(err, savedData) {
+        if (err) res.send({"success": false, "message": err.message ,"data": null});
+
+        res.send({"success": true, "message": "Votre opération a été exécutée avec succès !" ,"data": savedData})
+    })
+
+    return null;
 });
-//To delete a record from the database using .remove()
-router.get('/delete', (req,res) => {
-    User.remove({ username: "MIT" },
-    (err, data) => {
+
+router.get('/:id', (req, res) => {
+    const {id} = req.params;
+    User.findOne({ _id:  id },
+    (err, savedData) => {
         if (err){
-            console.log(err);
+            res.send({"success": false, "message": err.message ,"data": null});
         }
         else {
-            res.send(data);
+            res.send({"success": true, "message": "Votre opération a été exécutée avec succès !" ,"data": savedData})
         }
     });
 });
 
-//we can also use .findByIdAndDelete() to easily remove a record from the db
-/*
-router.post('/delete', (req, res) => {
-    User.findByIdAndDelete((req.body.user_id),
-    (err, data) => {
+router.get('/delete/:id', (req, res) => {
+    const data = req.params.id;
+    User.findByIdAndDelete(data,
+    (err, savedData) => {
         if (err){
-            console.log(err);
+            res.send({"success": false, "message": err.message ,"data": null});
         }
         else {
-            res.send(data);
+            res.send({"success": true, "message": "Votre opération a été exécutée avec succès !" ,"data": savedData})
         }
     });
 });
-*/
+
 
 
 //Just like with the delete request, we’ll be using the _id to target the correct item.
-router.put('/update', (req, res) => {
-    User.findByIdAndUpdate(req.body.user_id, 
-        {username : req.body.username}, 
-            (err, data) => {
+router.put('/edit/:id', async (req, res) => {
+    const data = req.params.id;
+    const user = await User.findByIdAndUpdate(data, req.body,
+            (err, savedData) => {
                 if (err){
-                    console.log(err);
+                    res.send({"success": false, "message": err.message ,"data": null});
                 }
                 else {
-                    res.send(data);
+                    res.send({"success": true, "message": "Votre opération a été exécutée avec succès !" ,"data": savedData})
                 }
             });
 });

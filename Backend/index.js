@@ -3,8 +3,9 @@ const connectDB = require('./config/mongodb');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 require("dotenv").config();
-const absRoute = require('./Routes/absenceCRUD');
-const userRoute = require('./Routes/userCRUD');
+const absenceRoute = require('./Routes/absence.routes');
+const userRoute = require('./Routes/user.routes');
+const soldeRoute = require('./Routes/solde.routes');
 const mongoose = require('mongoose');
 
 
@@ -34,8 +35,9 @@ app.use((req, res, next) => {
     next();
   });
 
-app.use('/api/v1/absenceCRUD', absRoute);
-app.use('/api/v1/userCRUD', userRoute);
+app.use('/api/absence', absenceRoute);
+app.use('/api/user', userRoute);
+app.use('/api/solde', soldeRoute);
 
 app.listen(PORT, () => {
   console.log(`Running Express Server on Port ${PORT}!`)});
