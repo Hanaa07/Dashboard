@@ -1,897 +1,136 @@
 import {tokens} from "../Theme.tsx";
 
-export const mockDataTeam = [{
+export const mockDataContacts = [{
     "id": 1,
-    "first_name": "Aeriell",
-    "last_name": "Quarterman",
-    "start_date": "27/5/2023",
-    "access": "Admin",
-    "balance": 7
+    "prenom": "Sheff",
+    "nom": "Rabjohns",
+    "adresse": "68 Johnson Lane",
+    "adresse_mail": "srabjohns0@nsw.gov.au",
+    "num_tel": "(471) 9306830",
+    "start_date": "28/6/2023",
+    "balance": 9,
+    "exp_pro": "3/23/2023",
+    "exp_mit": "5/9/2023",
+    "birth": "10/13/2022",
+    "statut": "admin"
 }, {
     "id": 2,
-    "first_name": "Jens",
-    "last_name": "Maciak",
-    "start_date": "26/2/2023",
-    "access": "Salarié",
-    "balance": 29
+    "prenom": "Simeon",
+    "nom": "Redsall",
+    "adresse": "3 Waubesa Lane",
+    "adresse_mail": "sredsall1@google.com.br",
+    "num_tel": "(272) 6495370",
+    "start_date": "21/1/2023",
+    "balance": 15,
+    "exp_pro": "5/3/2023",
+    "exp_mit": "8/19/2022",
+    "birth": "12/31/2022",
+    "statut": "employee"
 }, {
     "id": 3,
-    "first_name": "Nikita",
-    "last_name": "Bewsey",
-    "start_date": "4/4/2023",
-    "access": "Salarié",
-    "balance": 13
+    "prenom": "Silvio",
+    "nom": "Skains",
+    "adresse": "357 Vidon Trail",
+    "adresse_mail": "sskains2@exblog.jp",
+    "num_tel": "(783) 3263266",
+    "start_date": "9/5/2023",
+    "balance": 5,
+    "exp_pro": "7/13/2022",
+    "exp_mit": "2/16/2023",
+    "birth": "2/25/2023",
+    "statut": "employee"
 }, {
     "id": 4,
-    "first_name": "Anatole",
-    "last_name": "Gipp",
-    "start_date": "26/4/2023",
-    "access": "Salarié",
-    "balance": 12
+    "prenom": "Roxana",
+    "nom": "Foulkes",
+    "adresse": "477 Westport Alley",
+    "adresse_mail": "rfoulkes3@google.com",
+    "num_tel": "(571) 4657174",
+    "start_date": "4/3/2023",
+    "balance": 25,
+    "exp_pro": "7/26/2022",
+    "exp_mit": "12/1/2022",
+    "birth": "3/16/2023",
+    "statut": "employee"
 }, {
     "id": 5,
-    "first_name": "Julienne",
-    "last_name": "Lighton",
-    "start_date": "4/4/2023",
-    "access": "Salarié",
-    "balance": 24
+    "prenom": "Erv",
+    "nom": "Olekhov",
+    "adresse": "5321 Charing Cross Center",
+    "adresse_mail": "eolekhov4@hibu.com",
+    "num_tel": "(203) 8661429",
+    "start_date": "16/3/2023",
+    "balance": 10,
+    "exp_pro": "6/7/2022",
+    "exp_mit": "7/14/2022",
+    "birth": "12/1/2022",
+    "statut": "intern"
 }, {
     "id": 6,
-    "first_name": "Ninnette",
-    "last_name": "Kubis",
-    "start_date": "18/5/2023",
-    "access": "Stagiaire",
-    "balance": 11
+    "prenom": "Dorene",
+    "nom": "Lettson",
+    "adresse": "7 Rutledge Place",
+    "adresse_mail": "dlettson5@icio.us",
+    "num_tel": "(487) 6454885",
+    "start_date": "24/6/2023",
+    "balance": 2,
+    "exp_pro": "7/12/2022",
+    "exp_mit": "1/7/2023",
+    "birth": "11/24/2022",
+    "statut": "employee"
 }, {
     "id": 7,
-    "first_name": "Emilie",
-    "last_name": "Jacqueme",
-    "start_date": "24/1/2023",
-    "access": "Stagiaire",
-    "balance": 28
+    "prenom": "Shelden",
+    "nom": "Suatt",
+    "adresse": "7350 Mallory Center",
+    "adresse_mail": "ssuatt6@sbwire.com",
+    "num_tel": "(371) 2754147",
+    "start_date": "19/6/2023",
+    "balance": 6,
+    "exp_pro": "7/18/2022",
+    "exp_mit": "9/11/2022",
+    "birth": "4/3/2023",
+    "statut": "admin"
 }, {
     "id": 8,
-    "first_name": "Skyler",
-    "last_name": "Tugman",
-    "start_date": "19/4/2023",
-    "access": "Salarié",
-    "balance": 23
+    "prenom": "Selena",
+    "nom": "Petriello",
+    "adresse": "80 Maywood Plaza",
+    "adresse_mail": "spetriello7@google.ru",
+    "num_tel": "(910) 5094921",
+    "start_date": "12/4/2023",
+    "balance": 18,
+    "exp_pro": "5/14/2023",
+    "exp_mit": "1/8/2023",
+    "birth": "11/4/2022",
+    "statut": "employee"
 }, {
     "id": 9,
-    "first_name": "Mic",
-    "last_name": "Seviour",
-    "start_date": "17/3/2023",
-    "access": "Admin",
-    "balance": 1
+    "prenom": "Timoteo",
+    "nom": "Rayer",
+    "adresse": "518 Dwight Junction",
+    "adresse_mail": "trayer8@jimdo.com",
+    "num_tel": "(318) 1614719",
+    "start_date": "21/3/2023",
+    "balance": 8,
+    "exp_pro": "5/3/2023",
+    "exp_mit": "12/23/2022",
+    "birth": "11/3/2022",
+    "statut": "intern"
 }, {
     "id": 10,
-    "first_name": "Corabelle",
-    "last_name": "Saturley",
-    "start_date": "13/3/2023",
-    "access": "Stagiaire",
-    "balance": 8
-}, {
-    "id": 11,
-    "first_name": "Yasmeen",
-    "last_name": "Kofax",
-    "start_date": "13/2/2023",
-    "access": "Stagiaire",
-    "balance": 5
-}, {
-    "id": 12,
-    "first_name": "Addy",
-    "last_name": "Gilpin",
-    "start_date": "20/2/2023",
-    "access": "Stagiaire",
-    "balance": 13
-}, {
-    "id": 13,
-    "first_name": "Virgil",
-    "last_name": "Loveland",
-    "start_date": "31/3/2023",
-    "access": "Salarié",
-    "balance": 17
-}, {
-    "id": 14,
-    "first_name": "Yvonne",
-    "last_name": "Toffolo",
-    "start_date": "22/2/2023",
-    "access": "Salarié",
-    "balance": 27
-}, {
-    "id": 15,
-    "first_name": "Ellen",
-    "last_name": "Bungey",
-    "start_date": "7/1/2023",
-    "access": "Salarié",
-    "balance": 1
-}, {
-    "id": 16,
-    "first_name": "Odelia",
-    "last_name": "Jansky",
-    "start_date": "6/2/2023",
-    "access": "Salarié",
-    "balance": 16
-}, {
-    "id": 17,
-    "first_name": "Constantina",
-    "last_name": "Garmey",
-    "start_date": "6/2/2023",
-    "access": "Salarié",
-    "balance": 17
-}, {
-    "id": 18,
-    "first_name": "Mada",
-    "last_name": "Bohling",
-    "start_date": "27/3/2023",
-    "access": "Stagiaire",
-    "balance": 22
-}, {
-    "id": 19,
-    "first_name": "Alys",
-    "last_name": "Bussey",
-    "start_date": "17/5/2023",
-    "access": "Salarié",
-    "balance": 6
-}, {
-    "id": 20,
-    "first_name": "Jerad",
-    "last_name": "Heersema",
-    "start_date": "5/1/2023",
-    "access": "Salarié",
-    "balance": 22
-}, {
-    "id": 21,
-    "first_name": "Dagny",
-    "last_name": "Paul",
-    "start_date": "29/5/2023",
-    "access": "Salarié",
-    "balance": 23
-}, {
-    "id": 22,
-    "first_name": "Humfried",
-    "last_name": "Hackin",
-    "start_date": "12/1/2023",
-    "access": "Salarié",
-    "balance": 24
-}, {
-    "id": 23,
-    "first_name": "Pete",
-    "last_name": "Petracchi",
-    "start_date": "29/4/2023",
-    "access": "Salarié",
-    "balance": 5
-}, {
-    "id": 24,
-    "first_name": "Theresina",
-    "last_name": "Shirrell",
-    "start_date": "30/5/2023",
-    "access": "Salarié",
-    "balance": 3
-}, {
-    "id": 25,
-    "first_name": "Leona",
-    "last_name": "Faux",
-    "start_date": "11/4/2023",
-    "access": "Salarié",
-    "balance": 4
-}, {
-    "id": 26,
-    "first_name": "Hernando",
-    "last_name": "McClean",
-    "start_date": "15/1/2023",
-    "access": "Salarié",
-    "balance": 8
-}, {
-    "id": 27,
-    "first_name": "Reynolds",
-    "last_name": "Stucksbury",
-    "start_date": "13/1/2023",
-    "access": "Stagiaire",
-    "balance": 14
-}, {
-    "id": 28,
-    "first_name": "Boy",
-    "last_name": "Eagar",
-    "start_date": "13/4/2023",
-    "access": "Salarié",
-    "balance": 17
-}, {
-    "id": 29,
-    "first_name": "Marilyn",
-    "last_name": "Harbage",
-    "start_date": "13/4/2023",
-    "access": "Salarié",
-    "balance": 18
-}, {
-    "id": 30,
-    "first_name": "Averill",
-    "last_name": "Benedek",
-    "start_date": "9/5/2023",
-    "access": "Salarié",
-    "balance": 14
-}, {
-    "id": 31,
-    "first_name": "Koral",
-    "last_name": "Wattingham",
-    "start_date": "8/2/2023",
-    "access": "Stagiaire",
-    "balance": 10
-}, {
-    "id": 32,
-    "first_name": "Lefty",
-    "last_name": "Megroff",
-    "start_date": "3/1/2023",
-    "access": "Stagiaire",
-    "balance": 5
-}, {
-    "id": 33,
-    "first_name": "Darill",
-    "last_name": "Matheson",
-    "start_date": "13/3/2023",
-    "access": "Admin",
-    "balance": 21
-}, {
-    "id": 34,
-    "first_name": "Chery",
-    "last_name": "Leese",
-    "start_date": "18/4/2023",
-    "access": "Salarié",
-    "balance": 26
-}, {
-    "id": 35,
-    "first_name": "Meaghan",
-    "last_name": "Binnion",
-    "start_date": "25/5/2023",
-    "access": "Stagiaire",
-    "balance": 3
-}, {
-    "id": 36,
-    "first_name": "Whitney",
-    "last_name": "Mayho",
-    "start_date": "9/3/2023",
-    "access": "Stagiaire",
-    "balance": 8
-}, {
-    "id": 37,
-    "first_name": "Sheena",
-    "last_name": "Mellonby",
-    "start_date": "23/4/2023",
-    "access": "Stagiaire",
-    "balance": 16
-}, {
-    "id": 38,
-    "first_name": "Magda",
-    "last_name": "Fenners",
-    "start_date": "2/5/2023",
-    "access": "Salarié",
-    "balance": 9
-}, {
-    "id": 39,
-    "first_name": "Berkeley",
-    "last_name": "Holson",
-    "start_date": "6/3/2023",
-    "access": "Salarié",
-    "balance": 20
-}, {
-    "id": 40,
-    "first_name": "Josi",
-    "last_name": "Espadater",
-    "start_date": "7/4/2023",
-    "access": "Salarié",
-    "balance": 30
-}, {
-    "id": 41,
-    "first_name": "Greggory",
-    "last_name": "Becks",
-    "start_date": "24/5/2023",
-    "access": "Admin",
-    "balance": 22
-}, {
-    "id": 42,
-    "first_name": "Morena",
-    "last_name": "Exelby",
-    "start_date": "7/4/2023",
-    "access": "Stagiaire",
-    "balance": 3
-}, {
-    "id": 43,
-    "first_name": "Julee",
-    "last_name": "Jaray",
-    "start_date": "8/1/2023",
-    "access": "Salarié",
-    "balance": 30
-}, {
-    "id": 44,
-    "first_name": "Bogey",
-    "last_name": "Fernanando",
-    "start_date": "2/2/2023",
-    "access": "Salarié",
-    "balance": 27
-}, {
-    "id": 45,
-    "first_name": "Fenelia",
-    "last_name": "Finnan",
-    "start_date": "4/1/2023",
-    "access": "Stagiaire",
-    "balance": 2
-}, {
-    "id": 46,
-    "first_name": "Boone",
-    "last_name": "Chomicz",
-    "start_date": "16/2/2023",
-    "access": "Salarié",
-    "balance": 15
-}, {
-    "id": 47,
-    "first_name": "Lila",
-    "last_name": "Staning",
-    "start_date": "25/5/2023",
-    "access": "Stagiaire",
-    "balance": 4
-}, {
-    "id": 48,
-    "first_name": "Benny",
-    "last_name": "Liles",
-    "start_date": "19/4/2023",
-    "access": "Stagiaire",
-    "balance": 20
-}, {
-    "id": 49,
-    "first_name": "Lombard",
-    "last_name": "Tremmil",
-    "start_date": "2/2/2023",
-    "access": "Salarié",
-    "balance": 18
-}, {
-    "id": 50,
-    "first_name": "Goldy",
-    "last_name": "Leaf",
-    "start_date": "11/2/2023",
-    "access": "Salarié",
-    "balance": 30
-}, {
-    "id": 51,
-    "first_name": "Avie",
-    "last_name": "Mc Andrew",
-    "start_date": "12/4/2023",
-    "access": "Admin",
-    "balance": 3
-}, {
-    "id": 52,
-    "first_name": "Berton",
-    "last_name": "Calafato",
-    "start_date": "26/1/2023",
-    "access": "Stagiaire",
-    "balance": 24
-}, {
-    "id": 53,
-    "first_name": "Jerrilee",
-    "last_name": "Close",
-    "start_date": "22/4/2023",
-    "access": "Salarié",
-    "balance": 28
-}, {
-    "id": 54,
-    "first_name": "Danny",
-    "last_name": "Cuttings",
-    "start_date": "1/1/2023",
-    "access": "Salarié",
-    "balance": 7
-}, {
-    "id": 55,
-    "first_name": "Scottie",
-    "last_name": "Wrack",
-    "start_date": "23/4/2023",
-    "access": "Salarié",
-    "balance": 13
-}, {
-    "id": 56,
-    "first_name": "Allyce",
-    "last_name": "Hawgood",
-    "start_date": "30/4/2023",
-    "access": "Salarié",
-    "balance": 2
-}, {
-    "id": 57,
-    "first_name": "Chloris",
-    "last_name": "McNiff",
-    "start_date": "13/5/2023",
-    "access": "Salarié",
-    "balance": 24
-}, {
-    "id": 58,
-    "first_name": "Quill",
-    "last_name": "Lively",
-    "start_date": "10/1/2023",
-    "access": "Salarié",
-    "balance": 8
-}, {
-    "id": 59,
-    "first_name": "Cullen",
-    "last_name": "Telega",
-    "start_date": "15/1/2023",
-    "access": "Stagiaire",
-    "balance": 30
-}, {
-    "id": 60,
-    "first_name": "Cecilius",
-    "last_name": "Dawber",
-    "start_date": "21/1/2023",
-    "access": "Salarié",
-    "balance": 11
-}, {
-    "id": 61,
-    "first_name": "Dorotea",
-    "last_name": "Eaklee",
-    "start_date": "26/2/2023",
-    "access": "Stagiaire",
-    "balance": 5
-}, {
-    "id": 62,
-    "first_name": "Franz",
-    "last_name": "Stainton",
-    "start_date": "18/2/2023",
-    "access": "Stagiaire",
-    "balance": 4
-}, {
-    "id": 63,
-    "first_name": "Sloan",
-    "last_name": "Bexley",
-    "start_date": "4/2/2023",
-    "access": "Stagiaire",
-    "balance": 27
-}, {
-    "id": 64,
-    "first_name": "Nonie",
-    "last_name": "Dorin",
-    "start_date": "22/1/2023",
-    "access": "Salarié",
-    "balance": 16
-}, {
-    "id": 65,
-    "first_name": "Faith",
-    "last_name": "Pendle",
-    "start_date": "23/3/2023",
-    "access": "Admin",
-    "balance": 18
-}, {
-    "id": 66,
-    "first_name": "Web",
-    "last_name": "Steuhlmeyer",
-    "start_date": "15/3/2023",
-    "access": "Salarié",
-    "balance": 16
-}, {
-    "id": 67,
-    "first_name": "Sherry",
-    "last_name": "Dresse",
-    "start_date": "12/2/2023",
-    "access": "Stagiaire",
-    "balance": 15
-}, {
-    "id": 68,
-    "first_name": "Tiphany",
-    "last_name": "Lewcock",
-    "start_date": "4/3/2023",
-    "access": "Salarié",
-    "balance": 26
-}, {
-    "id": 69,
-    "first_name": "Trey",
-    "last_name": "Brech",
-    "start_date": "3/3/2023",
-    "access": "Salarié",
-    "balance": 4
-}, {
-    "id": 70,
-    "first_name": "Kally",
-    "last_name": "Kingsworth",
-    "start_date": "26/4/2023",
-    "access": "Stagiaire",
-    "balance": 9
-}, {
-    "id": 71,
-    "first_name": "Aldrich",
-    "last_name": "Robelow",
-    "start_date": "24/1/2023",
-    "access": "Salarié",
-    "balance": 7
-}, {
-    "id": 72,
-    "first_name": "Jeno",
-    "last_name": "Broomhead",
-    "start_date": "2/4/2023",
-    "access": "Salarié",
-    "balance": 5
-}, {
-    "id": 73,
-    "first_name": "Brnaby",
-    "last_name": "Thor",
-    "start_date": "12/4/2023",
-    "access": "Salarié",
-    "balance": 22
-}, {
-    "id": 74,
-    "first_name": "Findley",
-    "last_name": "Wickson",
-    "start_date": "4/4/2023",
-    "access": "Salarié",
-    "balance": 5
-}, {
-    "id": 75,
-    "first_name": "Josias",
-    "last_name": "Jakovijevic",
-    "start_date": "9/3/2023",
-    "access": "Salarié",
-    "balance": 15
-}, {
-    "id": 76,
-    "first_name": "Chrystel",
-    "last_name": "Soar",
-    "start_date": "30/1/2023",
-    "access": "Salarié",
-    "balance": 17
-}, {
-    "id": 77,
-    "first_name": "Toinette",
-    "last_name": "Murname",
-    "start_date": "15/4/2023",
-    "access": "Stagiaire",
-    "balance": 26
-}, {
-    "id": 78,
-    "first_name": "Demetri",
-    "last_name": "Earwaker",
-    "start_date": "6/2/2023",
-    "access": "Salarié",
-    "balance": 19
-}, {
-    "id": 79,
-    "first_name": "Elizabeth",
-    "last_name": "Lehenmann",
-    "start_date": "24/1/2023",
-    "access": "Salarié",
-    "balance": 26
-}, {
-    "id": 80,
-    "first_name": "Reuben",
-    "last_name": "Kinghorn",
-    "start_date": "16/5/2023",
-    "access": "Stagiaire",
-    "balance": 1
-}, {
-    "id": 81,
-    "first_name": "Lester",
-    "last_name": "Fane",
-    "start_date": "16/3/2023",
-    "access": "Stagiaire",
-    "balance": 10
-}, {
-    "id": 82,
-    "first_name": "Stanford",
-    "last_name": "Coneron",
-    "start_date": "25/3/2023",
-    "access": "Stagiaire",
-    "balance": 20
-}, {
-    "id": 83,
-    "first_name": "Glad",
-    "last_name": "Mayston",
-    "start_date": "15/5/2023",
-    "access": "Salarié",
-    "balance": 29
-}, {
-    "id": 84,
-    "first_name": "Marje",
-    "last_name": "Lander",
-    "start_date": "1/1/2023",
-    "access": "Salarié",
-    "balance": 16
-}, {
-    "id": 85,
-    "first_name": "Josh",
-    "last_name": "Dukelow",
-    "start_date": "10/2/2023",
-    "access": "Salarié",
-    "balance": 27
-}, {
-    "id": 86,
-    "first_name": "Cory",
-    "last_name": "Dilland",
-    "start_date": "8/5/2023",
-    "access": "Salarié",
-    "balance": 20
-}, {
-    "id": 87,
-    "first_name": "Ive",
-    "last_name": "Walrond",
-    "start_date": "14/2/2023",
-    "access": "Salarié",
-    "balance": 13
-}, {
-    "id": 88,
-    "first_name": "Reece",
-    "last_name": "Lindro",
-    "start_date": "11/1/2023",
-    "access": "Salarié",
-    "balance": 5
-}, {
-    "id": 89,
-    "first_name": "Blanch",
-    "last_name": "Lapre",
-    "start_date": "31/1/2023",
-    "access": "Salarié",
-    "balance": 15
-}, {
-    "id": 90,
-    "first_name": "Johna",
-    "last_name": "Connal",
-    "start_date": "16/4/2023",
-    "access": "Stagiaire",
-    "balance": 3
-}, {
-    "id": 91,
-    "first_name": "Chris",
-    "last_name": "Lazenby",
-    "start_date": "15/3/2023",
-    "access": "Stagiaire",
-    "balance": 3
-}, {
-    "id": 92,
-    "first_name": "Freddie",
-    "last_name": "Swinbourne",
-    "start_date": "5/5/2023",
-    "access": "Salarié",
-    "balance": 7
-}, {
-    "id": 93,
-    "first_name": "Nicolis",
-    "last_name": "Chamberlin",
-    "start_date": "6/5/2023",
-    "access": "Salarié",
-    "balance": 24
-}, {
-    "id": 94,
-    "first_name": "Fielding",
-    "last_name": "Mayall",
-    "start_date": "11/5/2023",
-    "access": "Stagiaire",
-    "balance": 10
-}, {
-    "id": 95,
-    "first_name": "Walliw",
-    "last_name": "Clendennen",
-    "start_date": "9/3/2023",
-    "access": "Salarié",
-    "balance": 24
-}, {
-    "id": 96,
-    "first_name": "Claude",
-    "last_name": "Tungay",
-    "start_date": "20/1/2023",
-    "access": "Salarié",
-    "balance": 9
-}, {
-    "id": 97,
-    "first_name": "Marena",
-    "last_name": "Drennan",
-    "start_date": "27/3/2023",
-    "access": "Salarié",
-    "balance": 16
-}, {
-    "id": 98,
-    "first_name": "Roscoe",
-    "last_name": "Guillond",
-    "start_date": "8/5/2023",
-    "access": "Salarié",
-    "balance": 8
-}, {
-    "id": 99,
-    "first_name": "Shay",
-    "last_name": "Ashburne",
-    "start_date": "4/5/2023",
-    "access": "Salarié",
-    "balance": 2
-}, {
-    "id": 100,
-    "first_name": "Zarah",
-    "last_name": "Satyford",
-    "start_date": "11/3/2023",
-    "access": "Stagiaire",
-    "balance": 13
+    "prenom": "Deny",
+    "nom": "Gianinotti",
+    "adresse": "24648 Sugar Court",
+    "adresse_mail": "dgianinotti9@cocolog-nifty.com",
+    "num_tel": "(686) 3735565",
+    "start_date": "6/4/2023",
+    "balance": 16,
+    "exp_pro": "10/16/2022",
+    "exp_mit": "10/4/2022",
+    "birth": "4/17/2023",
+    "statut": "intern"
 }];
-
-export const mockDataContacts = [
-    {
-        id: 1,
-        name: "Jon Snow",
-        email: "jonsnow@gmail.com",
-        age: 35,
-        phone: "(665)121-5454",
-        address: "0912 Won Street, Alabama, SY 10001",
-        city: "New York",
-        zipCode: "10001",
-        registrarId: 123512,
-    },
-    {
-        id: 2,
-        name: "Cersei Lannister",
-        email: "cerseilannister@gmail.com",
-        age: 42,
-        phone: "(421)314-2288",
-        address: "1234 Main Street, New York, NY 10001",
-        city: "New York",
-        zipCode: "13151",
-        registrarId: 123512,
-    },
-    {
-        id: 3,
-        name: "Jaime Lannister",
-        email: "jaimelannister@gmail.com",
-        age: 45,
-        phone: "(422)982-6739",
-        address: "3333 Want Blvd, Estanza, NAY 42125",
-        city: "New York",
-        zipCode: "87281",
-        registrarId: 4132513,
-    },
-    {
-        id: 4,
-        name: "Anya Stark",
-        email: "anyastark@gmail.com",
-        age: 16,
-        phone: "(921)425-6742",
-        address: "1514 Main Street, New York, NY 22298",
-        city: "New York",
-        zipCode: "15551",
-        registrarId: 123512,
-    },
-    {
-        id: 5,
-        name: "Daenerys Targaryen",
-        email: "daenerystargaryen@gmail.com",
-        age: 31,
-        phone: "(421)445-1189",
-        address: "11122 Welping Ave, Tenting, CD 21321",
-        city: "Tenting",
-        zipCode: "14215",
-        registrarId: 123512,
-    },
-    {
-        id: 6,
-        name: "Ever Melisandre",
-        email: "evermelisandre@gmail.com",
-        age: 150,
-        phone: "(232)545-6483",
-        address: "1234 Canvile Street, Esvazark, NY 10001",
-        city: "Esvazark",
-        zipCode: "10001",
-        registrarId: 123512,
-    },
-    {
-        id: 7,
-        name: "Ferrara Clifford",
-        email: "ferraraclifford@gmail.com",
-        age: 44,
-        phone: "(543)124-0123",
-        address: "22215 Super Street, Everting, ZO 515234",
-        city: "Evertin",
-        zipCode: "51523",
-        registrarId: 123512,
-    },
-    {
-        id: 8,
-        name: "Rossini Frances",
-        email: "rossinifrances@gmail.com",
-        age: 36,
-        phone: "(222)444-5555",
-        address: "4123 Ever Blvd, Wentington, AD 142213",
-        city: "Esteras",
-        zipCode: "44215",
-        registrarId: 512315,
-    },
-    {
-        id: 9,
-        name: "Harvey Roxie",
-        email: "harveyroxie@gmail.com",
-        age: 65,
-        phone: "(444)555-6239",
-        address: "51234 Avery Street, Cantory, ND 212412",
-        city: "Colunza",
-        zipCode: "111234",
-        registrarId: 928397,
-    },
-    {
-        id: 10,
-        name: "Enteri Redack",
-        email: "enteriredack@gmail.com",
-        age: 42,
-        phone: "(222)444-5555",
-        address: "4123 Easer Blvd, Wentington, AD 142213",
-        city: "Esteras",
-        zipCode: "44215",
-        registrarId: 533215,
-    },
-    {
-        id: 11,
-        name: "Steve Goodman",
-        email: "stevegoodmane@gmail.com",
-        age: 11,
-        phone: "(444)555-6239",
-        address: "51234 Fiveton Street, CunFory, ND 212412",
-        city: "Colunza",
-        zipCode: "1234",
-        registrarId: 92197,
-    },
-];
-
-export const mockDataInvoices = [
-    {
-        id: 1,
-        name: "Jon Snow",
-        email: "jonsnow@gmail.com",
-        cost: "21.24",
-        phone: "(665)121-5454",
-        date: "03/12/2022",
-    },
-    {
-        id: 2,
-        name: "Cersei Lannister",
-        email: "cerseilannister@gmail.com",
-        cost: "1.24",
-        phone: "(421)314-2288",
-        date: "06/15/2021",
-    },
-    {
-        id: 3,
-        name: "Jaime Lannister",
-        email: "jaimelannister@gmail.com",
-        cost: "11.24",
-        phone: "(422)982-6739",
-        date: "05/02/2022",
-    },
-    {
-        id: 4,
-        name: "Anya Stark",
-        email: "anyastark@gmail.com",
-        cost: "80.55",
-        phone: "(921)425-6742",
-        date: "03/21/2022",
-    },
-    {
-        id: 5,
-        name: "Daenerys Targaryen",
-        email: "daenerystargaryen@gmail.com",
-        cost: "1.24",
-        phone: "(421)445-1189",
-        date: "01/12/2021",
-    },
-    {
-        id: 6,
-        name: "Ever Melisandre",
-        email: "evermelisandre@gmail.com",
-        cost: "63.12",
-        phone: "(232)545-6483",
-        date: "11/02/2022",
-    },
-    {
-        id: 7,
-        name: "Ferrara Clifford",
-        email: "ferraraclifford@gmail.com",
-        cost: "52.42",
-        phone: "(543)124-0123",
-        date: "02/11/2022",
-    },
-    {
-        id: 8,
-        name: "Rossini Frances",
-        email: "rossinifrances@gmail.com",
-        cost: "21.24",
-        phone: "(222)444-5555",
-        date: "05/02/2021",
-    },
-];
 
 export const mockAbsences = [{
     "id": 1,
@@ -1593,6 +832,608 @@ export const mockAbsences = [{
     "start_date": "31/3/2023",
     "end_date": "20/5/2023",
     "days": 9
+}]
+
+export const mockSolde = [{
+    "id": 1,
+    "start_date": "14/6/2023",
+    "end_date": "6/6/2023",
+    "balance": 12,
+    "days": 12
+}, {
+    "id": 2,
+    "start_date": "22/1/2023",
+    "end_date": "26/5/2023",
+    "balance": 26,
+    "days": 22
+}, {
+    "id": 3,
+    "start_date": "17/4/2023",
+    "end_date": "2/2/2023",
+    "balance": 1,
+    "days": 10
+}, {
+    "id": 4,
+    "start_date": "29/6/2023",
+    "end_date": "22/1/2023",
+    "balance": 20,
+    "days": 3
+}, {
+    "id": 5,
+    "start_date": "5/5/2023",
+    "end_date": "19/3/2023",
+    "balance": 4,
+    "days": 3
+}, {
+    "id": 6,
+    "start_date": "27/4/2023",
+    "end_date": "14/5/2023",
+    "balance": 28,
+    "days": 17
+}, {
+    "id": 7,
+    "start_date": "2/3/2023",
+    "end_date": "23/3/2023",
+    "balance": 28,
+    "days": 26
+}, {
+    "id": 8,
+    "start_date": "18/1/2023",
+    "end_date": "13/4/2023",
+    "balance": 20,
+    "days": 9
+}, {
+    "id": 9,
+    "start_date": "7/2/2023",
+    "end_date": "2/4/2023",
+    "balance": 26,
+    "days": 27
+}, {
+    "id": 10,
+    "start_date": "24/3/2023",
+    "end_date": "16/5/2023",
+    "balance": 29,
+    "days": 19
+}, {
+    "id": 11,
+    "start_date": "21/4/2023",
+    "end_date": "30/5/2023",
+    "balance": 14,
+    "days": 24
+}, {
+    "id": 12,
+    "start_date": "5/4/2023",
+    "end_date": "4/3/2023",
+    "balance": 12,
+    "days": 5
+}, {
+    "id": 13,
+    "start_date": "10/3/2023",
+    "end_date": "4/4/2023",
+    "balance": 19,
+    "days": 10
+}, {
+    "id": 14,
+    "start_date": "19/3/2023",
+    "end_date": "3/1/2023",
+    "balance": 12,
+    "days": 17
+}, {
+    "id": 15,
+    "start_date": "17/1/2023",
+    "end_date": "11/3/2023",
+    "balance": 20,
+    "days": 6
+}, {
+    "id": 16,
+    "start_date": "22/3/2023",
+    "end_date": "3/3/2023",
+    "balance": 4,
+    "days": 19
+}, {
+    "id": 17,
+    "start_date": "7/5/2023",
+    "end_date": "2/5/2023",
+    "balance": 4,
+    "days": 30
+}, {
+    "id": 18,
+    "start_date": "27/4/2023",
+    "end_date": "5/6/2023",
+    "balance": 11,
+    "days": 2
+}, {
+    "id": 19,
+    "start_date": "1/1/2023",
+    "end_date": "25/3/2023",
+    "balance": 15,
+    "days": 6
+}, {
+    "id": 20,
+    "start_date": "20/1/2023",
+    "end_date": "4/1/2023",
+    "balance": 18,
+    "days": 8
+}, {
+    "id": 21,
+    "start_date": "7/2/2023",
+    "end_date": "9/2/2023",
+    "balance": 17,
+    "days": 19
+}, {
+    "id": 22,
+    "start_date": "19/1/2023",
+    "end_date": "10/5/2023",
+    "balance": 19,
+    "days": 7
+}, {
+    "id": 23,
+    "start_date": "9/5/2023",
+    "end_date": "8/5/2023",
+    "balance": 12,
+    "days": 25
+}, {
+    "id": 24,
+    "start_date": "12/4/2023",
+    "end_date": "19/5/2023",
+    "balance": 29,
+    "days": 18
+}, {
+    "id": 25,
+    "start_date": "12/3/2023",
+    "end_date": "23/1/2023",
+    "balance": 10,
+    "days": 19
+}, {
+    "id": 26,
+    "start_date": "21/6/2023",
+    "end_date": "30/4/2023",
+    "balance": 21,
+    "days": 18
+}, {
+    "id": 27,
+    "start_date": "29/6/2023",
+    "end_date": "11/2/2023",
+    "balance": 27,
+    "days": 25
+}, {
+    "id": 28,
+    "start_date": "2/6/2023",
+    "end_date": "4/2/2023",
+    "balance": 23,
+    "days": 1
+}, {
+    "id": 29,
+    "start_date": "27/6/2023",
+    "end_date": "24/1/2023",
+    "balance": 12,
+    "days": 2
+}, {
+    "id": 30,
+    "start_date": "27/1/2023",
+    "end_date": "21/2/2023",
+    "balance": 8,
+    "days": 17
+}, {
+    "id": 31,
+    "start_date": "19/2/2023",
+    "end_date": "13/1/2023",
+    "balance": 20,
+    "days": 19
+}, {
+    "id": 32,
+    "start_date": "14/4/2023",
+    "end_date": "3/1/2023",
+    "balance": 22,
+    "days": 12
+}, {
+    "id": 33,
+    "start_date": "13/3/2023",
+    "end_date": "17/5/2023",
+    "balance": 17,
+    "days": 3
+}, {
+    "id": 34,
+    "start_date": "18/6/2023",
+    "end_date": "19/4/2023",
+    "balance": 12,
+    "days": 1
+}, {
+    "id": 35,
+    "start_date": "13/5/2023",
+    "end_date": "13/3/2023",
+    "balance": 28,
+    "days": 14
+}, {
+    "id": 36,
+    "start_date": "26/4/2023",
+    "end_date": "30/4/2023",
+    "balance": 2,
+    "days": 20
+}, {
+    "id": 37,
+    "start_date": "22/1/2023",
+    "end_date": "5/6/2023",
+    "balance": 5,
+    "days": 12
+}, {
+    "id": 38,
+    "start_date": "21/5/2023",
+    "end_date": "16/2/2023",
+    "balance": 21,
+    "days": 25
+}, {
+    "id": 39,
+    "start_date": "1/5/2023",
+    "end_date": "14/4/2023",
+    "balance": 16,
+    "days": 15
+}, {
+    "id": 40,
+    "start_date": "29/5/2023",
+    "end_date": "19/5/2023",
+    "balance": 29,
+    "days": 11
+}, {
+    "id": 41,
+    "start_date": "28/2/2023",
+    "end_date": "19/3/2023",
+    "balance": 16,
+    "days": 6
+}, {
+    "id": 42,
+    "start_date": "9/6/2023",
+    "end_date": "11/3/2023",
+    "balance": 20,
+    "days": 7
+}, {
+    "id": 43,
+    "start_date": "27/6/2023",
+    "end_date": "6/5/2023",
+    "balance": 29,
+    "days": 6
+}, {
+    "id": 44,
+    "start_date": "8/4/2023",
+    "end_date": "18/1/2023",
+    "balance": 2,
+    "days": 20
+}, {
+    "id": 45,
+    "start_date": "7/1/2023",
+    "end_date": "18/3/2023",
+    "balance": 21,
+    "days": 19
+}, {
+    "id": 46,
+    "start_date": "22/2/2023",
+    "end_date": "3/2/2023",
+    "balance": 11,
+    "days": 10
+}, {
+    "id": 47,
+    "start_date": "5/1/2023",
+    "end_date": "8/1/2023",
+    "balance": 19,
+    "days": 26
+}, {
+    "id": 48,
+    "start_date": "25/3/2023",
+    "end_date": "16/5/2023",
+    "balance": 24,
+    "days": 30
+}, {
+    "id": 49,
+    "start_date": "2/2/2023",
+    "end_date": "24/1/2023",
+    "balance": 30,
+    "days": 15
+}, {
+    "id": 50,
+    "start_date": "9/1/2023",
+    "end_date": "12/1/2023",
+    "balance": 15,
+    "days": 18
+}, {
+    "id": 51,
+    "start_date": "25/5/2023",
+    "end_date": "6/2/2023",
+    "balance": 30,
+    "days": 20
+}, {
+    "id": 52,
+    "start_date": "17/6/2023",
+    "end_date": "4/5/2023",
+    "balance": 19,
+    "days": 2
+}, {
+    "id": 53,
+    "start_date": "31/3/2023",
+    "end_date": "18/2/2023",
+    "balance": 4,
+    "days": 19
+}, {
+    "id": 54,
+    "start_date": "9/5/2023",
+    "end_date": "10/4/2023",
+    "balance": 3,
+    "days": 24
+}, {
+    "id": 55,
+    "start_date": "11/1/2023",
+    "end_date": "24/4/2023",
+    "balance": 19,
+    "days": 23
+}, {
+    "id": 56,
+    "start_date": "16/3/2023",
+    "end_date": "25/1/2023",
+    "balance": 24,
+    "days": 24
+}, {
+    "id": 57,
+    "start_date": "23/3/2023",
+    "end_date": "23/5/2023",
+    "balance": 7,
+    "days": 24
+}, {
+    "id": 58,
+    "start_date": "24/5/2023",
+    "end_date": "2/2/2023",
+    "balance": 8,
+    "days": 20
+}, {
+    "id": 59,
+    "start_date": "12/3/2023",
+    "end_date": "22/2/2023",
+    "balance": 26,
+    "days": 2
+}, {
+    "id": 60,
+    "start_date": "5/2/2023",
+    "end_date": "26/3/2023",
+    "balance": 24,
+    "days": 6
+}, {
+    "id": 61,
+    "start_date": "14/2/2023",
+    "end_date": "26/3/2023",
+    "balance": 22,
+    "days": 10
+}, {
+    "id": 62,
+    "start_date": "18/6/2023",
+    "end_date": "29/5/2023",
+    "balance": 21,
+    "days": 8
+}, {
+    "id": 63,
+    "start_date": "18/2/2023",
+    "end_date": "14/2/2023",
+    "balance": 6,
+    "days": 11
+}, {
+    "id": 64,
+    "start_date": "10/6/2023",
+    "end_date": "6/1/2023",
+    "balance": 16,
+    "days": 17
+}, {
+    "id": 65,
+    "start_date": "14/6/2023",
+    "end_date": "25/4/2023",
+    "balance": 26,
+    "days": 21
+}, {
+    "id": 66,
+    "start_date": "24/4/2023",
+    "end_date": "11/2/2023",
+    "balance": 15,
+    "days": 4
+}, {
+    "id": 67,
+    "start_date": "12/2/2023",
+    "end_date": "22/5/2023",
+    "balance": 5,
+    "days": 15
+}, {
+    "id": 68,
+    "start_date": "10/2/2023",
+    "end_date": "9/2/2023",
+    "balance": 17,
+    "days": 9
+}, {
+    "id": 69,
+    "start_date": "16/4/2023",
+    "end_date": "25/3/2023",
+    "balance": 8,
+    "days": 14
+}, {
+    "id": 70,
+    "start_date": "13/1/2023",
+    "end_date": "24/5/2023",
+    "balance": 30,
+    "days": 26
+}, {
+    "id": 71,
+    "start_date": "18/2/2023",
+    "end_date": "8/5/2023",
+    "balance": 1,
+    "days": 28
+}, {
+    "id": 72,
+    "start_date": "9/3/2023",
+    "end_date": "6/2/2023",
+    "balance": 30,
+    "days": 14
+}, {
+    "id": 73,
+    "start_date": "30/5/2023",
+    "end_date": "22/1/2023",
+    "balance": 22,
+    "days": 19
+}, {
+    "id": 74,
+    "start_date": "8/1/2023",
+    "end_date": "12/1/2023",
+    "balance": 9,
+    "days": 26
+}, {
+    "id": 75,
+    "start_date": "13/4/2023",
+    "end_date": "5/2/2023",
+    "balance": 19,
+    "days": 2
+}, {
+    "id": 76,
+    "start_date": "2/6/2023",
+    "end_date": "20/2/2023",
+    "balance": 2,
+    "days": 30
+}, {
+    "id": 77,
+    "start_date": "18/2/2023",
+    "end_date": "27/2/2023",
+    "balance": 9,
+    "days": 30
+}, {
+    "id": 78,
+    "start_date": "24/5/2023",
+    "end_date": "17/2/2023",
+    "balance": 14,
+    "days": 1
+}, {
+    "id": 79,
+    "start_date": "21/1/2023",
+    "end_date": "15/4/2023",
+    "balance": 19,
+    "days": 9
+}, {
+    "id": 80,
+    "start_date": "19/5/2023",
+    "end_date": "18/2/2023",
+    "balance": 30,
+    "days": 20
+}, {
+    "id": 81,
+    "start_date": "27/2/2023",
+    "end_date": "6/2/2023",
+    "balance": 4,
+    "days": 15
+}, {
+    "id": 82,
+    "start_date": "2/5/2023",
+    "end_date": "12/4/2023",
+    "balance": 16,
+    "days": 23
+}, {
+    "id": 83,
+    "start_date": "31/5/2023",
+    "end_date": "7/3/2023",
+    "balance": 6,
+    "days": 8
+}, {
+    "id": 84,
+    "start_date": "30/1/2023",
+    "end_date": "25/4/2023",
+    "balance": 16,
+    "days": 20
+}, {
+    "id": 85,
+    "start_date": "31/1/2023",
+    "end_date": "23/5/2023",
+    "balance": 14,
+    "days": 30
+}, {
+    "id": 86,
+    "start_date": "11/6/2023",
+    "end_date": "21/2/2023",
+    "balance": 13,
+    "days": 7
+}, {
+    "id": 87,
+    "start_date": "4/3/2023",
+    "end_date": "13/5/2023",
+    "balance": 16,
+    "days": 24
+}, {
+    "id": 88,
+    "start_date": "17/3/2023",
+    "end_date": "28/2/2023",
+    "balance": 4,
+    "days": 27
+}, {
+    "id": 89,
+    "start_date": "12/6/2023",
+    "end_date": "5/1/2023",
+    "balance": 26,
+    "days": 27
+}, {
+    "id": 90,
+    "start_date": "18/4/2023",
+    "end_date": "13/4/2023",
+    "balance": 25,
+    "days": 22
+}, {
+    "id": 91,
+    "start_date": "10/4/2023",
+    "end_date": "5/6/2023",
+    "balance": 29,
+    "days": 25
+}, {
+    "id": 92,
+    "start_date": "11/1/2023",
+    "end_date": "26/1/2023",
+    "balance": 19,
+    "days": 7
+}, {
+    "id": 93,
+    "start_date": "1/4/2023",
+    "end_date": "13/3/2023",
+    "balance": 4,
+    "days": 6
+}, {
+    "id": 94,
+    "start_date": "29/4/2023",
+    "end_date": "25/2/2023",
+    "balance": 5,
+    "days": 7
+}, {
+    "id": 95,
+    "start_date": "22/1/2023",
+    "end_date": "6/6/2023",
+    "balance": 1,
+    "days": 6
+}, {
+    "id": 96,
+    "start_date": "9/5/2023",
+    "end_date": "5/3/2023",
+    "balance": 25,
+    "days": 4
+}, {
+    "id": 97,
+    "start_date": "8/1/2023",
+    "end_date": "31/3/2023",
+    "balance": 23,
+    "days": 7
+}, {
+    "id": 98,
+    "start_date": "8/4/2023",
+    "end_date": "17/2/2023",
+    "balance": 26,
+    "days": 5
+}, {
+    "id": 99,
+    "start_date": "15/3/2023",
+    "end_date": "29/4/2023",
+    "balance": 7,
+    "days": 5
+}, {
+    "id": 100,
+    "start_date": "25/1/2023",
+    "end_date": "14/4/2023",
+    "balance": 9,
+    "days": 15
 }]
 
 export const mockBarData = [

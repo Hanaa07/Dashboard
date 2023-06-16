@@ -1,6 +1,6 @@
 import {ColorModeContext, useMode} from "./Theme.tsx";
 import {CssBaseline, ThemeProvider} from "@mui/material";
-import {Routes, Route, Link} from "react-router-dom";
+import {Routes, Route, Link, useParams} from "react-router-dom";
 import { LocalizationProvider} from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Topbar from "./Scenes/Global/Topbar.tsx";
@@ -9,7 +9,18 @@ import Sidebar from "./Scenes/Global/Sidebar.tsx";
 import Collaborateurs from "./Scenes/Collaborateurs";
 import {useState} from "react";
 import Absences from "./Scenes/Absences"
-import UserForm from "./Scenes/UserForm";
+import CreateUser from "./Scenes/UserForm/CreateUser.tsx";
+import EditUser from "./Scenes/UserForm/EditUser.tsx";
+import SoldeForm from "./Scenes/SoldeForm/CreateSolde.tsx";
+import AbsenceForm from "./Scenes/AbsenceForm/CreateAbsence.tsx";
+import ViewUser from "./Scenes/ViewUser";
+import SoldeUser from "./Scenes/SoldeUser";
+import "react-datepicker/dist/react-datepicker.css"
+import AbsenceUser from "./Scenes/AbsenceUser";
+import CreateSolde from "./Scenes/SoldeForm/CreateSolde.tsx";
+import EditSolde from "./Scenes/SoldeForm/EditSolde.tsx";
+import CreateAbsence from "./Scenes/AbsenceForm/CreateAbsence.tsx";
+import EditAbsence from "./Scenes/AbsenceForm/EditAbsence.tsx";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -28,7 +39,18 @@ function App() {
                 <Route path="/" element={<Dashboard />}/>
                 <Route path="/Collaborateurs" element={<Collaborateurs />}/>
                 <Route path="/Absences" element={<Absences/>}/>
-                <Route path="/UserForm" element={<UserForm/>} />
+                <Route path="/Collaborateurs/CreateUser" element={<CreateUser/>}/>
+                <Route path="/Collaborateurs/EditUser" element={<EditUser/>}/>
+                <Route path="/AbsenceForm" element={<AbsenceForm/>} />
+                <Route path="/SoldeForm" element={<SoldeForm/>} />
+                <Route path="/Collaborateurs/ViewUser" element={<ViewUser/>} />
+                <Route path="/ViewUser/SoldeUser" element={<SoldeUser/>} />
+                <Route path="/ViewUser/AbsenceUser" element={<AbsenceUser/>} />
+                <Route path="/SoldeUser/CreateSolde" element={<CreateSolde/>}/>
+                <Route path="/SoldeUser/EditSolde" element={<EditSolde/>}/>
+                <Route path="/ViewUser/CreateAbsence" element={<CreateAbsence/>} />
+                <Route path="/AbsenceUser/EditAbsence" element={<EditAbsence/>} />
+                <Route path="/AbsenceUser/CreateAbsence" element={<CreateAbsence/>} />
             </Routes>
         </main>
       </div>

@@ -24,6 +24,7 @@ const Absences = () => {
         {
             field: "actions",
             headerName: "Actions",
+            sortable: false,
             flex: 1,
             renderCell: () => (
                 <Stack spacing={2} direction="row">
