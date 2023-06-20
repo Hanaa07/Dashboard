@@ -36,7 +36,7 @@ const StatBox = (props: StatBoxProps) => {
             >
                 <Box>
                     <Typography
-                        variant="h6"
+                        variant="subtitle1"
                         fontWeight="bold"
                         sx={{ color: `${colors.gray[100]}`}} // Replace with your desired text color
                     >

@@ -21,6 +21,7 @@ import CreateSolde from "./Scenes/SoldeForm/CreateSolde.tsx";
 import EditSolde from "./Scenes/SoldeForm/EditSolde.tsx";
 import CreateAbsence from "./Scenes/AbsenceForm/CreateAbsence.tsx";
 import EditAbsence from "./Scenes/AbsenceForm/EditAbsence.tsx";
+import Calendar from "./Scenes/Calendar/calendar.tsx";
 import backgroundLogo from "./assets/Asset-6-01-1.svg"
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
                 <Route path="/SoldeUser/EditSolde" element={<EditSolde/>}/>
                 <Route path="/Absences" element={<Absences/>}/>
                 <Route path="/Absences/EditAbsence" element={<EditAbsence/>}/>
+                <Route path="/Calendar" element={<Calendar/>}/>
             </Routes>
         </main>
       </div>
