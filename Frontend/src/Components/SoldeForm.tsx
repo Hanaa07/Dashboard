@@ -4,7 +4,7 @@ import {Formik, FormikValues} from "formik";
 import * as yup from "yup";
 import {useMediaQuery} from "@mui/material";
 import {tokens} from "../Theme.tsx";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {SoldeType} from "../Types/SoldeType.tsx";
 
 type SoldeProps = {

@@ -1,6 +1,6 @@
 import {ColorModeContext, useMode} from "./Theme.tsx";
 import {CssBaseline, ThemeProvider} from "@mui/material";
-import {Routes, Route, Link, useParams} from "react-router-dom";
+import {Routes, Route} from "react-router-dom";
 import { LocalizationProvider} from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Topbar from "./Scenes/Global/Topbar.tsx";

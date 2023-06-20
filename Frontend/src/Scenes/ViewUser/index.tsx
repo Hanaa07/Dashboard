@@ -7,13 +7,13 @@ import {
     TableContainer,
     TableBody,
     TableRow,
-    useTheme, Button, MenuItem, Typography, Paper
+    useTheme, Button, Typography, Paper
 } from "@mui/material";
 import React, { useContext, useState } from "react";
 import { ColorModeContext, tokens } from "../../Theme.tsx";
 import Header from "../../Components/Header.tsx";
 //import newLogo from "../../assets/Asset-6-01-1.svg";
-import {generatePath, Link, Path, useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {mockDataContacts} from "../../data/mockData.tsx";
 import AddIcon from '@mui/icons-material/Add';
 
@@ -21,8 +21,6 @@ const ViewUser = () => {
     const [selected, setSelected] = useState<string>("ViewUser");
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const colorMode = useContext(ColorModeContext);
-    const [isHovered, setIsHovered] = useState<boolean>(false);
 
     const currentUser = mockDataContacts.find((data) => data.id == 4);
 

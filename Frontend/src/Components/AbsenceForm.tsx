@@ -3,7 +3,7 @@ import {Formik, FormikValues} from "formik";
 import * as yup from "yup";
 import {useMediaQuery} from "@mui/material";
 import {tokens} from "../Theme.tsx";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {AbsenceType} from "../Types/AbsenceType.tsx";
 import DatePickerField from "./DatepickerField.tsx";
 import React from "react";

@@ -1,6 +1,6 @@
-import { Box, Typography, Button, useTheme, Stack, ButtonGroup, Menu, MenuItem } from "@mui/material";
+import { Box, Typography, Button, useTheme, Stack, ButtonGroup} from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import {generatePath, Link, useNavigate, useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 import { tokens } from "../../Theme.tsx";
 import { mockDataContacts} from "../../data/mockData.tsx";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
@@ -11,18 +11,8 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import Header from "../../Components/Header.tsx";
 import React, { useState } from "react";
-import {FormItemProps} from "../../Types/FormItemProps.tsx";
 
 
-const CollabItem = ({ title, to, selected, setSelected }: FormItemProps) => {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
-    return (
-        <Link to={to} style={{textDecoration:"none", color: colors.gray[100]}}>
-            <Typography variant="body2">{title}</Typography>
-        </Link>
-    );
-};
 
 const Collaborateurs = () => {
     const theme = useTheme();
