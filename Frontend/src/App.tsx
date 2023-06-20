@@ -21,6 +21,7 @@ import CreateSolde from "./Scenes/SoldeForm/CreateSolde.tsx";
 import EditSolde from "./Scenes/SoldeForm/EditSolde.tsx";
 import CreateAbsence from "./Scenes/AbsenceForm/CreateAbsence.tsx";
 import EditAbsence from "./Scenes/AbsenceForm/EditAbsence.tsx";
+import backgroundLogo from "./assets/Asset-6-01-1.svg"
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -31,26 +32,38 @@ function App() {
       <ColorModeContext.Provider value={colorMode}>
           <ThemeProvider theme={theme}>
               <CssBaseline />
-      <div className="app">
+      <div className="app"
+           style={{
+                   backgroundImage: `url(${backgroundLogo})`,
+                   backgroundRepeat: "no-repeat",
+                   backgroundSize: "45%",
+                   backgroundPosition: "center",
+                   position: "fixed",
+                   display: "flex",
+                   marginRight: "auto",
+                   marginLeft: "auto",
+                }}
+      >
           <Sidebar isSidebar={isSidebar}/>
         <main className="content">
             <Topbar setIsSidebar={setIsSidebar}/>
             <Routes>
                 <Route path="/" element={<Dashboard />}/>
                 <Route path="/Collaborateurs" element={<Collaborateurs />}/>
-                <Route path="/Absences" element={<Absences/>}/>
                 <Route path="/Collaborateurs/CreateUser" element={<CreateUser/>}/>
                 <Route path="/Collaborateurs/EditUser" element={<EditUser/>}/>
-                <Route path="/AbsenceForm" element={<AbsenceForm/>} />
-                <Route path="/SoldeForm" element={<SoldeForm/>} />
                 <Route path="/Collaborateurs/ViewUser" element={<ViewUser/>} />
                 <Route path="/ViewUser/SoldeUser" element={<SoldeUser/>} />
                 <Route path="/ViewUser/AbsenceUser" element={<AbsenceUser/>} />
-                <Route path="/SoldeUser/CreateSolde" element={<CreateSolde/>}/>
-                <Route path="/SoldeUser/EditSolde" element={<EditSolde/>}/>
                 <Route path="/ViewUser/CreateAbsence" element={<CreateAbsence/>} />
+                <Route path="/AbsenceForm" element={<AbsenceForm/>} />
                 <Route path="/AbsenceUser/EditAbsence" element={<EditAbsence/>} />
                 <Route path="/AbsenceUser/CreateAbsence" element={<CreateAbsence/>} />
+                <Route path="/SoldeForm" element={<SoldeForm/>} />
+                <Route path="/SoldeUser/CreateSolde" element={<CreateSolde/>}/>
+                <Route path="/SoldeUser/EditSolde" element={<EditSolde/>}/>
+                <Route path="/Absences" element={<Absences/>}/>
+                <Route path="/Absences/EditAbsence" element={<EditAbsence/>}/>
             </Routes>
         </main>
       </div>

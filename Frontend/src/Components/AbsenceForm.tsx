@@ -46,6 +46,9 @@ const AbsenceForm = (props : AbsenceProps) => {
                         gap="30px"
                         gridTemplateColumns="repeat(4,minmax(0, 1fr))"
                         sx={{
+                            "& .css-5evozk-MuiInputBase-root-MuiOutlinedInput-root" : {
+                                backgroundColor: `${colors.primary[500]}`,
+                            },
                             "& > div" : { gridColumn: isNonMobile ? undefined : "span 2"},
                             "& .css-jl329p-MuiFormLabel-root-MuiInputLabel-root.Mui-focused" : {
                                 color : colors.gray[100],
@@ -59,7 +62,10 @@ const AbsenceForm = (props : AbsenceProps) => {
                             },
                             "& .css-13hkz5-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline" : {
                                 borderColor : colors.gray[100],
-                            }
+                            },
+                            "& .css-13hkz5-MuiInputBase-root-MuiOutlinedInput-root": {
+                                backgroundColor: `${colors.primary[500]}`,
+                            },
                         }}
                     >
                         <TextField

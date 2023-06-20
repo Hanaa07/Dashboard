@@ -45,15 +45,18 @@ const sidebar = () => {
   return (
       <Box
           sx={{
+              "& .css-1wvake5": {
+                  borderColor: `${colors.gray[700]} !important`,
+              },
               "& .ps-sidebar-container": {
                   background: `${colors.primary[400]} !important`,
               },
               "& .ps-menu-button:hover": {
                   backgroundColor: `${colors.primary[400]} !important`,
-                  color: "#868dfb !important",
+                  color: `${colors.greenAccent[400]} !important`,
               },
               "& .ps-menu-button .ps-active": {
-                  color: "#6870fa !important",
+                  color: `${colors.greenAccent[500]} !important`,
               },
           }}
       >

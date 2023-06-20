@@ -10,10 +10,17 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import Header from "../../Components/Header.tsx";
+import React from "react";
 
 const Absences = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+
+    const handleClick = (event,to: string) => {
+        event.preventDefault();
+        window.location.href = to;
+
+    }
 
     const columns = [
         { field: "last_name", headerName: "Nom", flex: 1, cellClassName: "name-column--cell"},
@@ -29,7 +36,9 @@ const Absences = () => {
             renderCell: () => (
                 <Stack spacing={2} direction="row">
                     <ButtonGroup variant= "text" disableElevation size="small">
-                        <Button sx={{color: colors.gray[100]}}><EditOutlinedIcon /></Button>
+                        <Button sx={{ color: colors.gray[100] }} onClick={(event) => handleClick(event,"/Absences/EditAbsence")}>
+                            <EditOutlinedIcon />
+                        </Button>
                         <Button sx={{color: colors.gray[100]}}><DeleteOutlineOutlinedIcon /></Button>
                     </ButtonGroup>
                 </Stack>
@@ -54,7 +63,8 @@ const Absences = () => {
                     borderBottom: "none"
                 },
                 "& .MuiDataGrid-virtualScroller": {
-                    backgroundColor: colors.primary[400]
+                    backgroundColor: `${colors.primary[400]} transparent`,
+                    backdropFilter: "blur(9px)",
                 },
                 "& .MuiDataGrid-footerContainer": {
                     borderTop: "none",

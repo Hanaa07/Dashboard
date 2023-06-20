@@ -7,7 +7,7 @@ import {
     TableContainer,
     TableBody,
     TableRow,
-    useTheme, Button, MenuItem, Typography
+    useTheme, Button, MenuItem, Typography, Paper
 } from "@mui/material";
 import React, { useContext, useState } from "react";
 import { ColorModeContext, tokens } from "../../Theme.tsx";
@@ -50,8 +50,9 @@ const ViewUser = () => {
             </Box>
             <Box display="flex" justifyContent="center">
                 <Stack spacing={2} mt={5}>
-                    <TableContainer>
-                        <Table>
+                    <TableContainer component={Paper}>
+                        <Table sx={{
+                            backdropFilter: "blur(5px)"}}>
                             <TableBody>
                                 {
                                     currentUser ? (

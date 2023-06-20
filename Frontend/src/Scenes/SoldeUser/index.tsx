@@ -65,7 +65,8 @@ const SoldeUser = () => {
                         borderBottom: "none",
                     },
                     "& .MuiDataGrid-virtualScroller": {
-                        backgroundColor: colors.primary[400],
+                        backgroundColor: `${colors.primary[400]} transparent`,
+                        backdropFilter: "blur(9px)",
                     },
                     "& .MuiDataGrid-footerContainer": {
                         borderTop: "none",

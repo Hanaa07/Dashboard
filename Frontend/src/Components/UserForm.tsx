@@ -73,7 +73,16 @@ const UserForm = (props: UserProps) => {
                             },
                             "& .css-13hkz5-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline" : {
                                 borderColor : colors.gray[100],
-                            }
+                            },
+                            "& .css-5evozk-MuiInputBase-root-MuiOutlinedInput-root" : {
+                                backgroundColor: `${colors.primary[500]}`,
+                            },
+                            "& .css-lbnksu-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root" : {
+                                backgroundColor: `${colors.primary[500]}`,
+                            },
+                            "& .css-13hkz5-MuiInputBase-root-MuiOutlinedInput-root" : {
+                                backgroundColor: `${colors.primary[500]}`,
+                            },
                         }}
                     >
                         <TextField
