@@ -9,51 +9,47 @@ const UserSchema = new mongoose.Schema({
         type: mongoose.SchemaTypes.String,
         required: true,
     },
+    adresse: {
+        type: mongoose.SchemaTypes.String,
+        required: true,
+    },
     email: {
         type: mongoose.SchemaTypes.String,
         required: true,
         lowercase: true,
         unique: true,
     },
-    phoneNumber: {
+    phone: {
         type: mongoose.SchemaTypes.String,
         required: true,
-        unique: true,
+
     },
-    JoinedIn: {
-        type: mongoose.SchemaTypes.Date,
-        required: true, 
-        default: Date.now,
+    joinedIn: {
+        type: Date,
+        required: true,
     },
     createdAt: {
-        type: mongoose.SchemaTypes.Date,
-        default: new Date(),
+        type: Date,
+        required: true,
+        default: Date.now,
     },
     statut: {
         type: mongoose.SchemaTypes.String,
         required: true,
     },
-    balance: {
-        type: mongoose.SchemaTypes.Number,
+    exp_pro: {
+        type: Date,
         required: true,
-    }
+    },
+    exp_mit: {
+        type: Date,
+        required: true,
+    },
+    birth: {
+        type: mongoose.SchemaTypes.Date,
+        required: true,
+    },
 });
-/*
-const User = mongoose.model('user', UserSchema);
-
-const admin = new User;
-
-admin.user_id = 1;
-admin.fn = "salim";
-admin.ln = "el bouanani";
-admin.username = "MIT";
-admin.pwd = "MIT123";
-admin.email = "mit@gmail.com";
-admin.phoneNumber = 0612345145;
-admin.createdAt = '2023-02-03';
-admin.JoinedIn;
-admin.Dept = "Dev";
-*/
 
 
 module.exports = mongoose.model('users', UserSchema);

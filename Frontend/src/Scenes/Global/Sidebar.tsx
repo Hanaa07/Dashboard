@@ -21,18 +21,18 @@ const Item = ({ title, to, icon, selected, setSelected}: ItemProps) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
-      <MenuItem
-        active={selected === title}
-        style={{
-            color: colors.gray[100],
-        }}
-        onClick={()=> setSelected(title)}
-        icon={icon}
-      >
-          <Link to={to} >
+          <MenuItem
+              active={selected === title}
+              style={{
+                  color: colors.gray[100],
+                  textDecoration:"none",
+              }}
+              onClick={()=> setSelected(title)}
+              icon={icon}
+              component={<Link to={to}/>}
+          >
               <Typography>{title}</Typography>
-          </Link>
-      </MenuItem>
+          </MenuItem>
   )
 }
 
@@ -40,31 +40,27 @@ const sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
-  const [selected, setSelected] = useState<string>("Dashboard");
-
-  console.log(selected)
+  const [selected, setSelected] = useState<string>("");
 
   return (
       <Box
           sx={{
-              "& .pro-sidebar-inner": {
+              "& .css-1wvake5": {
+                  borderColor: `${colors.gray[700]} !important`,
+              },
+              "& .ps-sidebar-container": {
                   background: `${colors.primary[400]} !important`,
               },
-              "& .pro-icon-wrapper": {
-                  backgroundColor: "transparent !important",
+              "& .ps-menu-button:hover": {
+                  backgroundColor: `${colors.primary[400]} !important`,
+                  color: `${colors.greenAccent[400]} !important`,
               },
-              "& .pro-inner-item": {
-                  padding: "5px 35px 5px 20px !important",
-              },
-              "& .pro-inner-item:hover": {
-                  color: "#868dfb !important",
-              },
-              "& .pro-menu-item.active": {
-                  color: "#6870fa !important",
+              "& .ps-menu-button .ps-active": {
+                  color: `${colors.greenAccent[500]} !important`,
               },
           }}
       >
-        <Sidebar collapsed={isCollapsed} style={{height: '100vh'}} backgroundColor={colors.primary[400]}>
+        <Sidebar collapsed={isCollapsed} style={{height: "100vh"}} backgroundColor={colors.primary[400]}>
           <Menu iconShape="square">
               {/*LOGO AND MENU ICON*/}
               <MenuItem
@@ -113,11 +109,17 @@ const sidebar = () => {
               )}
 
               {/*MENU ITEMS*/}
-              <Box paddingLeft = {isCollapsed ? undefined : "10% "}>
+              <Box
+                  paddingLeft = {isCollapsed ? undefined : "10% "}
+                  sx={{
+                      "& .MuiBox-root .ps-menuitem-root": {
+                          color: colors.gray[100]
+                      }
+                  }}
+              >
                   <Item title="Dashboard" to="/" icon={<HomeOutlinedIcon/>} selected={selected} setSelected={setSelected}/>
-                  <Typography variant="subtitle2" color={colors.gray[300]} sx={{m: "15px 0 5px 20px"}}>Data</Typography>
-                  <Item title="Collaborateurs" to="/Collaborateurs" icon={<PeopleOutlinedIcon/>} selected={selected} setSelected={setSelected}/>
-                  <Item title="Absences" to="/Absences" icon={<ScheduleOutlinedIcon/>} selected={selected} setSelected={setSelected}/>
+                  <Item title="Collaborateurs" to="/collaborateurs" icon={<PeopleOutlinedIcon/>} selected={selected} setSelected={setSelected}/>
+                  <Item title="Absences" to="/absences" icon={<ScheduleOutlinedIcon/>} selected={selected} setSelected={setSelected}/>
               </Box>
           </Menu>
         </Sidebar>

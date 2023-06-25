@@ -9,12 +9,12 @@ const router = Router();
 /*router.get('/save', (req,res) => {
     const Admin1 = new User({
         user_id: 1,
-        fn: "salim",
-        ln: "el bouanani",
+        firstName: "salim",
+        lastName: "el bouanani",
         username: "MIT",
-        pwd: "MIT123",
+        password: "MIT123",
         email: "mit@gmail.com",
-        phoneNumber: 0612345145,
+        phone: 0612345145,
         createdAt: '2023-02-03',
         JoinedIn: '2020-01-01',
         Dept: "Dev",
