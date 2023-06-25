@@ -9,11 +9,9 @@ import DatePickerField from "./DatepickerField.tsx";
 import React from "react";
 
 type AbsenceProps = {
-    initialValues: AbsenceType,
+    initialValues: AbsenceType | null,
     onSubmit: (value: FormikValues) => void,
 }
-
-
 
 const AbsenceForm = (props : AbsenceProps) => {
     const theme = useTheme();
@@ -24,15 +22,18 @@ const AbsenceForm = (props : AbsenceProps) => {
     const {initialValues, onSubmit} = props;
 
     const absenceSchema = yup.object().shape({
-        first_name: yup.string().required("required"),
-        last_name: yup.string().required("required"),
-        start_date: yup.date().required("required"),
-        end_date: yup.date().required("required"),
+        absenceStartedAt: yup.date().required("required"),
+        absenceEndedAt: yup.date().required("required"),
         days: yup.number().required("required"),
     })
+
     return <Box m="20px">
         <Formik
-            initialValues={initialValues}
+            initialValues={{
+                absenceStartedAt: initialValues.absenceStartedAt,
+                absenceEndedAt: initialValues.absenceEndedAt,
+                days: initialValues.days
+            }}
             onSubmit={values => onSubmit(values)}
             validationSchema={absenceSchema}
         >
@@ -68,46 +69,22 @@ const AbsenceForm = (props : AbsenceProps) => {
                             },
                         }}
                     >
-                        <TextField
-                            fullwidth="true"
-                            variant="outlined"
-                            type="text"
-                            label="Nom"
-                            onBlur={handleBlur}
-                            value={values.last_name}
-                            name="last_name"
-                            error={!!touched.last_name && !!errors.last_name}
-                            helpertext={touched.last_name && errors.last_name}
-                            sx={{ gridColumn: "span 2" }}
-                        />
-                        <TextField
-                            fullwidth="true"
-                            variant="outlined"
-                            type="text"
-                            label="Prénom"
-                            onBlur={handleBlur}
-                            value={values.first_name}
-                            name="first_name"
-                            error={!!touched.first_name && !!errors.first_name}
-                            helpertext={touched.first_name && errors.first_name}
-                            sx={{ gridColumn: "span 2" }}
-                        />
                         <DatePickerField
-                            name="start_date"
+                            name="absenceStartedAt"
                             format={"DD/MM/YYYY"}
                             onBlur={handleBlur}
-                            error={!!touched.start_date && !!errors.start_date}
-                            helpertext={touched.start_date && errors.start_date}
+                            error={!!touched.absenceStartedAt && !!errors.absenceStartedAt}
+                            helpertext={touched.absenceStartedAt && errors.absenceStartedAt}
                             slotProps={{ textField: {label: "Date de début d'absence"}}}
                             sx={{ gridColumn: "span 2" }}
                             disableFuture
                         />
                         <DatePickerField
-                            name="end_date"
+                            name="absenceEndedAt"
                             format={"DD/MM/YYYY"}
                             onBlur={handleBlur}
-                            error={!!touched.end_date && !!errors.end_date}
-                            helpertext={touched.end_date && errors.end_date}
+                            error={!!touched.absenceEndedAt && !!errors.absenceEndedAt}
+                            helpertext={touched.absenceEndedAt && errors.absenceEndedAt}
                             slotProps={{ textField: {label: "Date de fin d'absence"}}}
                             sx={{ gridColumn: "span 2" }}
                             disableFuture
@@ -145,7 +122,8 @@ const AbsenceForm = (props : AbsenceProps) => {
                             color="secondary"
                             sx={{ backgroundColor: colors.greenAccent[700], color: colors.gray[100] }}
                             variant="contained"
-                            disableElevation>
+                            disableElevation
+                        >
                             <Typography>Confirmer</Typography>
                         </Button>
                     </div>

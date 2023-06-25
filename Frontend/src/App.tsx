@@ -11,8 +11,6 @@ import {useState} from "react";
 import Absences from "./Scenes/Absences"
 import CreateUser from "./Scenes/UserForm/CreateUser.tsx";
 import EditUser from "./Scenes/UserForm/EditUser.tsx";
-import SoldeForm from "./Scenes/SoldeForm/CreateSolde.tsx";
-import AbsenceForm from "./Scenes/AbsenceForm/CreateAbsence.tsx";
 import ViewUser from "./Scenes/ViewUser";
 import SoldeUser from "./Scenes/SoldeUser";
 import "react-datepicker/dist/react-datepicker.css"
@@ -21,7 +19,7 @@ import CreateSolde from "./Scenes/SoldeForm/CreateSolde.tsx";
 import EditSolde from "./Scenes/SoldeForm/EditSolde.tsx";
 import CreateAbsence from "./Scenes/AbsenceForm/CreateAbsence.tsx";
 import EditAbsence from "./Scenes/AbsenceForm/EditAbsence.tsx";
-import Calendar from "./Scenes/Calendar/calendar.tsx";
+// import Calendar from "./Scenes/Calendar/calendar.tsx";
 import backgroundLogo from "./assets/Asset-6-01-1.svg"
 
 function App() {
@@ -50,22 +48,18 @@ function App() {
             <Topbar setIsSidebar={setIsSidebar}/>
             <Routes>
                 <Route path="/" element={<Dashboard />}/>
-                <Route path="/Collaborateurs" element={<Collaborateurs />}/>
-                <Route path="/Collaborateurs/CreateUser" element={<CreateUser/>}/>
-                <Route path="/Collaborateurs/EditUser" element={<EditUser/>}/>
-                <Route path="/Collaborateurs/ViewUser" element={<ViewUser/>} />
-                <Route path="/ViewUser/SoldeUser" element={<SoldeUser/>} />
-                <Route path="/ViewUser/AbsenceUser" element={<AbsenceUser/>} />
-                <Route path="/ViewUser/CreateAbsence" element={<CreateAbsence/>} />
-                <Route path="/AbsenceForm" element={<AbsenceForm/>} />
-                <Route path="/AbsenceUser/EditAbsence" element={<EditAbsence/>} />
-                <Route path="/AbsenceUser/CreateAbsence" element={<CreateAbsence/>} />
-                <Route path="/SoldeForm" element={<SoldeForm/>} />
-                <Route path="/SoldeUser/CreateSolde" element={<CreateSolde/>}/>
-                <Route path="/SoldeUser/EditSolde" element={<EditSolde/>}/>
-                <Route path="/Absences" element={<Absences/>}/>
-                <Route path="/Absences/EditAbsence" element={<EditAbsence/>}/>
-                <Route path="/Calendar" element={<Calendar/>}/>
+                <Route path="/collaborateurs" element={<Collaborateurs />}/>
+                <Route path="/user/new" element={<CreateUser/>}/>
+                <Route path="/user/edit/:userId" element={<EditUser/>}/>
+                <Route path="/user/:userId" element={<ViewUser/>} />
+                <Route path="/solde/:userId" element={<SoldeUser/>} />
+                <Route path="/absence/user/:userId" element={<AbsenceUser/>} />
+                <Route path="/absence/user/new/:userId" element={<CreateAbsence/>} />
+                <Route path="/absence/edit/:absenceId" element={<EditAbsence/>} />
+                <Route path="/solde/new/:userId" element={<CreateSolde/>}/>
+                <Route path="/solde/edit/:userId" element={<EditSolde/>}/>
+                <Route path="/absences" element={<Absences/>}/>
+                {/*<Route path="/calendar" element={<Calendar/>}/>*/}
             </Routes>
         </main>
       </div>

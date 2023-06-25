@@ -13,10 +13,11 @@ const DatePickerField = <TInputDate, TDate = TInputDate>(
     const { name, ...restProps } = props;
     const [field] = useField(name);
     const {setFieldValue} = useFormikContext();
+
     return (
         <DatePicker
             {...restProps}
-            value={field.value ? dayjs(field.value): null}
+            value={field.value ? dayjs(field.value) : null}
             onChange={(val) => setFieldValue(name,val)}
         />
     );

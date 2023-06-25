@@ -5,12 +5,12 @@ import * as yup from "yup";
 import {useMediaQuery} from "@mui/material";
 import {tokens} from "../Theme.tsx";
 import {useNavigate} from "react-router-dom";
-import React, {useState} from "react";
+import React from "react";
 import {UserType} from "../Types/UserType.tsx";
 
 
 type UserProps = {
-    initialValues: UserType,
+    initialValues: UserType | null,
     onSubmit: (value: FormikValues) => void,
 }
 
@@ -19,34 +19,42 @@ const phoneRegExp = /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -
 const UserForm = (props: UserProps) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const [selected, setSelected] = useState<string>("UserForm");
     const isNonMobile = useMediaQuery("(min-width: 600px)");
     const navigate = useNavigate();
 
     const {initialValues, onSubmit} = props;
-
-
-
+    
     const userSchema = yup.object().shape({
-        nom: yup.string().required("required"),
-        prenom: yup.string().required("required"),
-        adresse_mail: yup.string().email("email invalide").required("required"),
-        num_tel: yup
+        lastName: yup.string().required("required"),
+        firstName: yup.string().required("required"),
+        email: yup.string().email("email invalide").required("required"),
+        phone: yup
             .string()
             .matches(phoneRegExp, "Num invalide")
             .required("required"),
-        start_date: yup.date().required("required"),
+        joinedIn: yup.date().required("required"),
         statut: yup.string().required("required"),
         adresse: yup.string().required("required"),
         exp_pro: yup.date().required("required"),
         exp_mit: yup.date().required("required"),
         birth: yup.date().required("required"),
-        balance: yup.number().required("requrired"),
+        initialDays: yup.number().required("required"),
     })
 
     return <Box m="20px">
         <Formik
-            initialValues={initialValues}
+            initialValues={{
+                firstName: initialValues.firstName,
+                lastName: initialValues.lastName,
+                adresse: initialValues.adresse,
+                email: initialValues.email,
+                phone: initialValues.phone,
+                joinedIn: initialValues.joinedIn,
+                statut: initialValues.statut,
+                exp_pro: initialValues.exp_pro,
+                exp_mit: initialValues.exp_mit,
+                birth: initialValues.birth,
+            }}
             onSubmit={values => onSubmit(values)}
             validationSchema={userSchema}
         >
@@ -92,12 +100,12 @@ const UserForm = (props: UserProps) => {
                             label="Nom"
                             onBlur={handleBlur}
                             onChange={(e) => {
-                                setFieldValue("nom", e.target.value)
+                                setFieldValue("lastName", e.target.value)
                             }}
-                            value={values.nom}
-                            name="nom"
-                            error={!!touched.nom && !!errors.nom}
-                            helpertext={touched.nom && errors.nom}
+                            value={values.lastName}
+                            name="lastName"
+                            error={!!touched.lastName && !!errors.lastName}
+                            helpertext={touched.lastName && errors.lastName}
                             sx={{ gridColumn: "span 2" }}
                         />
                         <TextField
@@ -107,12 +115,12 @@ const UserForm = (props: UserProps) => {
                             label="Prénom"
                             onBlur={handleBlur}
                             onChange={(e) => {
-                                setFieldValue("prenom", e.target.value)
+                                setFieldValue("firstName", e.target.value)
                             }}
-                            value={values.prenom}
-                            name="prenom"
-                            error={!!touched.prenom && !!errors.prenom}
-                            helpertext={touched.prenom && errors.prenom}
+                            value={values.firstName}
+                            name="firstName"
+                            error={!!touched.firstName && !!errors.firstName}
+                            helpertext={touched.firstName && errors.firstName}
                             sx={{ gridColumn: "span 2" }}
                         />
                         <TextField
@@ -122,12 +130,12 @@ const UserForm = (props: UserProps) => {
                             label="N° de téléphone"
                             onBlur={handleBlur}
                             onChange={(e) => {
-                                setFieldValue("num_tel", e.target.value)
+                                setFieldValue("phone", e.target.value)
                             }}
-                            value={values.num_tel}
-                            name="num_tel"
-                            error={!!touched.num_tel && !!errors.num_tel}
-                            helpertext={touched.num_tel && errors.num_tel}
+                            value={values.phone}
+                            name="phone"
+                            error={!!touched.phone && !!errors.phone}
+                            helpertext={touched.phone && errors.phone}
                             sx={{ gridColumn: "span 2" }}
                         />
                         <TextField
@@ -137,12 +145,12 @@ const UserForm = (props: UserProps) => {
                             label="Adresse mail"
                             onBlur={handleBlur}
                             onChange={(e) => {
-                                setFieldValue("adresse_mail", e.target.value)
+                                setFieldValue("email", e.target.value)
                             }}
-                            value={values.adresse_mail}
-                            name="adresse_mail"
-                            error={!!touched.adresse_mail && !!errors.adresse_mail}
-                            helpertext={touched.adresse_mail && errors.adresse_mail}
+                            value={values.email}
+                            name="email"
+                            error={!!touched.email && !!errors.email}
+                            helpertext={touched.email && errors.email}
                             sx={{ gridColumn: "span 2" }}
                         />
                         <FormControl fullwidth="true" sx={{ gridColumn: "span 2" }}>
@@ -184,11 +192,11 @@ const UserForm = (props: UserProps) => {
                             sx={{ gridColumn: "span 2" }}
                         />
                         <DatepickerField
-                            name="start_date"
+                            name="joinedIn"
                             format={"DD/MM/YYYY"}
                             onBlur={handleBlur}
-                            error={!!touched.start_date && !!errors.start_date}
-                            helpertext={touched.start_date && errors.start_date}
+                            error={!!touched.joinedIn && !!errors.joinedIn}
+                            helpertext={touched.joinedIn && errors.joinedIn}
                             slotProps={{ textField: {label: "Date d'entrée"}}}
                             sx={{ gridColumn: "span 2" }}
                             disableFuture
@@ -230,12 +238,12 @@ const UserForm = (props: UserProps) => {
                             label="Solde"
                             onBlur={handleBlur}
                             onChange={(e) => {
-                                setFieldValue("balance", e.target.value)
+                                setFieldValue("initialDays", e.target.value)
                             }}
-                            value={values.balance}
-                            name="balance"
-                            error={!!touched.balance && !!errors.balance}
-                            helpertext={touched.balance && errors.balance}
+                            value={values.initialDays}
+                            name="initialDays"
+                            error={!!touched.initialDays && !!errors.initialDays}
+                            helpertext={touched.initialDays && errors.initialDays}
                             sx={{ gridColumn: "span 2" }}
                         />
                     </Box>

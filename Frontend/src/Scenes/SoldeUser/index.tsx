@@ -1,42 +1,55 @@
 import { Box, Typography, Button, useTheme, Stack, ButtonGroup} from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import { tokens } from "../../Theme.tsx";
-import {mockSolde} from "../../data/mockData.tsx";
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import Header from "../../Components/Header.tsx";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import AddIcon from "@mui/icons-material/Add";
+import {HttpClient} from "../../utils/request.ts";
 
 const SoldeUser = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const [selected, setSelected] = useState<string>("SoldeUser");
+    const [soldes, setSoldes] = useState([]);
+    const { soldeId } = useParams();
+    const { userId}= useParams();
 
-    const handleClick = (event,to: string) => {
-      event.preventDefault();
-      window.location.href = to;
-    }
+    useEffect(() => {
+        HttpClient.get("/solde/" + soldeId).then(res => {
+            let receivedData = res.data;
+
+            if (receivedData.success === true) {
+                setSoldes(receivedData.data);
+            }
+        });
+    }, []);
 
     const columns = [
-        { field: "start_date", headerName: "Date Début", flex: 1, cellClassName: "name-column--cell" },
-        { field: "end_date", headerName: "Date Fin", flex: 1, cellClassName: "name-column--cell" },
-        { field: "balance", headerName: "Solde", flex: 1 },
-        { field: "days", headerName: "jours restants du solde", flex: 1 },
+        { field: "balanceStartedAt", headerName: "Date Début", flex: 1, cellClassName: "name-column--cell" },
+        { field: "balanceEndedAt", headerName: "Date Fin", flex: 1, cellClassName: "name-column--cell" },
+        { field: "initialDays", headerName: "Solde", flex: 1 },
+        { field: "remainingDays", headerName: "jours restants du solde", flex: 1 },
         {
             field: "actions",
             sortable: false,
             headerName: "Actions",
             flex: 1,
-            renderCell: () => (
+            renderCell: ({row}) => (
                 <Stack spacing={2} direction="row">
                     <ButtonGroup variant="text" disableElevation size="small">
-                        <Button sx={{ color: colors.gray[100] }} onClick={(event)=> handleClick(event,"/SoldeUser/EditSolde")}>
-                            <EditOutlinedIcon />
-                        </Button>
+                        <Link to={"/solde/edit"+ row._id} style={{textDecoration: "none",color: colors.gray[100]}}>
+                            <Button sx={{ color: colors.gray[100] }}>
+                                <EditOutlinedIcon />
+                            </Button>
+                        </Link>
                         <Button sx={{ color: colors.gray[100] }}>
-                            <DeleteOutlineOutlinedIcon />
+                            <DeleteOutlineOutlinedIcon onClick={()=> {
+                                HttpClient.get('/solde/delete/'+ row._id).then((res)=> {
+                                    console.log(res)
+                                });
+                            }}/>
                         </Button>
                     </ButtonGroup>
                 </Stack>
@@ -46,7 +59,7 @@ const SoldeUser = () => {
 
     return (
         <Box m="20px">
-            <Header title="SOLDES" subtitle="Liste des soldes de Jane doe" />
+            <Header title="SOLDES" subtitle="Liste des soldes de " />
             <Box
                 m="40px 0 0 0"
                 height="58vh"
@@ -77,10 +90,10 @@ const SoldeUser = () => {
                     }
                 }}
             >
-                <DataGrid columns={columns} rows={mockSolde} slots={{toolbar: GridToolbar}}/>
+                {soldes && <DataGrid columns={columns} rows={soldes} slots={{toolbar: GridToolbar}}/>}
             </Box>
             <Box m="50px 0 0 0" display="flex" justifyContent="flex-end" alignItems="flex-end">
-                <Link to="/SoldeUser/CreateSolde">
+                <Link to={"/solde/new/"+ userId}>
                 <Button
                     variant="contained"
                     size="medium"

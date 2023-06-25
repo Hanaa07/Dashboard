@@ -2,45 +2,46 @@ import {Box} from "@mui/material";
 import Header from "../../Components/Header.tsx";
 //import {useNavigate} from "react-router-dom";
 import {AbsenceType} from "../../Types/AbsenceType.tsx";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {mockAbsences} from "../../data/mockData.tsx";
 import AbsenceForm from "../../Components/AbsenceForm.tsx";
+import {HttpClient} from "../../utils/request.ts";
+import {useNavigate, useParams} from "react-router-dom";
 
 const EditAbsence = () => {
-    const currentAbsence = mockAbsences.find((data) => data.id === 20)
+    const [absence, setAbsence] = useState<AbsenceType>(null);
+    const {absenceId} = useParams();
+    const navigate = useNavigate();
 
-    const initialValues: AbsenceType = {
-        first_name: currentAbsence.first_name,
-        last_name: currentAbsence.last_name,
-        start_date: currentAbsence.start_date,
-        end_date: currentAbsence.end_date,
-        days: currentAbsence.days,
+    const fetchData = async () => {
+        const res =  await HttpClient.get('/absence/' + absenceId);
+        const receivedData = res.data;
+
+        if (receivedData.success === true) {
+            setAbsence(receivedData.data);
+        }
     }
+
+    useEffect(() => {
+        fetchData().catch(e => console.log(e))
+    }, [absenceId])
+
     const handleSubmit = (values: AbsenceType) => {
 
-        console.log("value finale",values)
+        console.log("value finale", values)
 
-        /*fetch("http://localhost:8000/Collaborateurs", {
-            method: "POST",
-            headers: {"content-type": "application/json"},
-            body: JSON.stringify(values)
-        })
-            .then((res) => {
-                alert("Saved successfully.");
-                navigate("/");
-            })
-            .catch((err) => {
-                console.log(err.message);
-            });*/
+        HttpClient.put('/absence/'+ absenceId, values).then((res) => {
+            let receivedData = res.data;
+            if (receivedData.success === true) {
+                return navigate('/absences')
+            }
+        });
     };
 
     return (
         <Box m="20px">
-            <Header title="MODIFICATION D'ABSENCE" subtitle="Modification d'absence pour ..." />
-            <AbsenceForm
-                initialValues={initialValues}
-                onSubmit={handleSubmit}
-            />
+            <Header title="MODIFICATION D'ABSENCE" subtitle={`Modification d'absence pour `}/>
+            {absence ? <AbsenceForm initialValues={absence} onSubmit={handleSubmit}/> : <></>}
         </Box>
     );
 }

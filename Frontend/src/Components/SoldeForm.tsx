@@ -8,7 +8,7 @@ import {useNavigate} from "react-router-dom";
 import {SoldeType} from "../Types/SoldeType.tsx";
 
 type SoldeProps = {
-    initialValues: SoldeType,
+    initialValues: SoldeType | null,
     onSubmit: (value: FormikValues) => void,
 }
 
@@ -21,15 +21,20 @@ const SoldeForm = (props : SoldeProps) => {
     const {initialValues, onSubmit} = props;
 
     const soldeSchema = yup.object().shape({
-        start_date: yup.date().required("required"),
-        end_date: yup.date().required("required"),
-        balance: yup.number().required("required"),
-        days: yup.number().required("required"),
+        balanceStartedAt: yup.date().required("required"),
+        balanceEndedAt: yup.date().required("required"),
+        initialDays: yup.number().required("required"),
+        remainingDays: yup.number().required("required"),
     })
 
     return <Box m="20px">
         <Formik
-            initialValues={initialValues}
+            initialValues={{
+                balanceStartedAt: initialValues.balanceStartedAt,
+                balanceEndedAt: initialValues.balanceEndedAt,
+                initialDays: initialValues.initialDays,
+                remainingDays: initialValues.remainingDays
+            }}
             onSubmit={values => onSubmit(values)}
             validationSchema={soldeSchema}
         >
@@ -62,21 +67,21 @@ const SoldeForm = (props : SoldeProps) => {
                     }}
                     >
                         <DatepickerField
-                            name="start_date"
+                            name="balanceStartedAt"
                             format={"DD/MM/YYYY"}
                             onBlur={handleBlur}
-                            error={!!touched.start_date && !!errors.start_date}
-                            helpertext={touched.start_date && errors.start_date}
+                            error={!!touched.balanceStartedAt && !!errors.balanceStartedAt}
+                            helpertext={touched.balanceStartedAt && errors.balanceStartedAt}
                             slotProps={{ textField: {label: "Date de début"}}}
                             sx={{ gridColumn: "span 2" }}
                             disableFuture
                         />
                         <DatepickerField
-                            name="end_date"
+                            name="balanceEndedAt"
                             format={"DD/MM/YYYY"}
                             onBlur={handleBlur}
-                            error={!!touched.end_date && !!errors.end_date}
-                            helpertext={touched.end_date && errors.end_date}
+                            error={!!touched.balanceEndedAt && !!errors.balanceEndedAt}
+                            helpertext={touched.balanceEndedAt && errors.balanceEndedAt}
                             slotProps={{ textField: {label: "Date de fin"}}}
                             sx={{ gridColumn: "span 2" }}
                             disableFuture
@@ -88,12 +93,12 @@ const SoldeForm = (props : SoldeProps) => {
                             label="Solde"
                             onBlur={handleBlur}
                             onChange={(e) => {
-                                setFieldValue("balance", e.target.value)
+                                setFieldValue("initialDays", e.target.value)
                             }}
-                            value={values.balance}
-                            name="balance"
-                            error={!!touched.balance && !!errors.balance}
-                            helpertext={touched.balance && errors.balance}
+                            value={values.initialDays}
+                            name="initialDays"
+                            error={!!touched.initialDays && !!errors.initialDays}
+                            helpertext={touched.initialDays && errors.initialDays}
                             sx={{ gridColumn: "span 2" }}
                         />
                         <TextField
@@ -103,12 +108,12 @@ const SoldeForm = (props : SoldeProps) => {
                             label="Jours restants du solde"
                             onBlur={handleBlur}
                             onChange={(e) => {
-                                setFieldValue("days", e.target.value)
+                                setFieldValue("remainingDays", e.target.value)
                             }}
-                            value={values.days}
-                            name="days"
-                            error={!!touched.days && !!errors.days}
-                            helpertext={touched.days && errors.days}
+                            value={values.remainingDays}
+                            name="remainingDays"
+                            error={!!touched.remainingDays && !!errors.remainingDays}
+                            helpertext={touched.remainingDays && errors.remainingDays}
                             sx={{ gridColumn: "span 2" }}
                         />
                     </Box>

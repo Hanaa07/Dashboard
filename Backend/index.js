@@ -7,13 +7,15 @@ const absenceRoute = require('./Routes/absence.routes');
 const userRoute = require('./Routes/user.routes');
 const soldeRoute = require('./Routes/solde.routes');
 const mongoose = require('mongoose');
-
+const cors = require("cors");
 
 //connect database
 connectDB();
 
 const app = express()
 const PORT = process.env.PORT
+
+app.use(cors());
 
 app.use(express.json({ extended: false }))
 app.use(express.urlencoded())

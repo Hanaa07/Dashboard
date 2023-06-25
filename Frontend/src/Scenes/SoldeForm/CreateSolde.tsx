@@ -1,34 +1,27 @@
 import React from "react";
 import SoldeForm from "../../Components/SoldeForm.tsx";
-//import { useNavigate } from "react-router-dom";
 import {SoldeType} from "../../Types/SoldeType.tsx";
 import {Box} from "@mui/material";
 import Header from "../../Components/Header.tsx";
+import {HttpClient} from "../../utils/request.ts";
+import {useParams} from "react-router-dom";
 
 
 const CreateSolde = () => {
     const initialValues: SoldeType = {
-        start_date: "",
-        end_date: "",
-        balance: undefined,
-        days: undefined,
+        balanceStartedAt: "",
+        balanceEndedAt: "",
+        initialDays: undefined,
+        remainingDays: undefined,
     }
     const handleSubmit = (values: SoldeType) => {
 
         console.log("value finale",values)
 
-        /*fetch("http://localhost:8000/Collaborateurs", {
-            method: "POST",
-            headers: {"content-type": "application/json"},
-            body: JSON.stringify(values)
-        })
-            .then((res) => {
-                alert("Saved successfully.");
-                navigate("/");
-            })
-            .catch((err) => {
-                console.log(err.message);
-            });*/
+        HttpClient.post('/solde/new', values).then((res) => {
+            console.log(res)
+        });
+
     };
 
     return (
@@ -42,4 +35,4 @@ const CreateSolde = () => {
     );
 }
 
-export default CreateSolde
+export default CreateSolde;

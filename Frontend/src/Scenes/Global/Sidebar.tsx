@@ -118,8 +118,8 @@ const sidebar = () => {
                   }}
               >
                   <Item title="Dashboard" to="/" icon={<HomeOutlinedIcon/>} selected={selected} setSelected={setSelected}/>
-                  <Item title="Collaborateurs" to="/Collaborateurs" icon={<PeopleOutlinedIcon/>} selected={selected} setSelected={setSelected}/>
-                  <Item title="Absences" to="/Absences" icon={<ScheduleOutlinedIcon/>} selected={selected} setSelected={setSelected}/>
+                  <Item title="Collaborateurs" to="/collaborateurs" icon={<PeopleOutlinedIcon/>} selected={selected} setSelected={setSelected}/>
+                  <Item title="Absences" to="/absences" icon={<ScheduleOutlinedIcon/>} selected={selected} setSelected={setSelected}/>
               </Box>
           </Menu>
         </Sidebar>

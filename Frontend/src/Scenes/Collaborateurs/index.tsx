@@ -1,40 +1,53 @@
 import { Box, Typography, Button, useTheme, Stack, ButtonGroup} from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import { tokens } from "../../Theme.tsx";
-import { mockDataContacts} from "../../data/mockData.tsx";
-import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
-import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import PersonAddAlt1OutlinedIcon from '@mui/icons-material/PersonAddAlt1Outlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import Header from "../../Components/Header.tsx";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
+import {HttpClient} from "../../utils/request.ts";
 
 
 
 const Collaborateurs = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const [selected, setSelected] = useState<string>("Collaborateurs");
+    const [users, setUsers] = useState([])
+    const { userId } = useParams();
 
-    const handleClick = (event,to: string) => {
-        event.preventDefault();
-        window.location.href = to;
+    useEffect(() => {
+        HttpClient.get("/user/").then(res => {
+            let receivedData = res.data;
+            console.log(receivedData)
 
-    }
-
-    const handleDelete = () => {
-
-    }
+            if (receivedData.success === true) {
+                setUsers(receivedData.data);
+            }
+        });
+    }, []);
 
     const columns = [
-        { field: "id", headerName: "ID", sortable: false },
-        { field: "nom", headerName: "Nom", flex: 1, cellClassName: "name-column--cell" },
-        { field: "prenom", headerName: "Prénom", flex: 1, cellClassName: "name-column--cell" },
-        { field: "start_date", headerName: "Date d'entrée", flex: 1 },
-        { field: "balance", headerName: "Solde", flex: 1 },
+        { field: "lastName",
+            headerName: "Nom",
+            flex: 1,
+            cellClassName: "name-column--cell"
+        },
+        { field: "firstName",
+            headerName: "Prénom",
+            flex: 1,
+            cellClassName: "name-column--cell"
+        },
+        { field: "joinedIn",
+            headerName: "Date d'entrée",
+            flex: 1
+        },
+        { field: "initialDays",
+            headerName: "Solde",
+            flex: 1
+        },
         {
             field: "statut",
             headerName: "Statut",
@@ -49,8 +62,6 @@ const Collaborateurs = () => {
                         justifyContent="space-between"
                         borderRadius="4px"
                     >
-                        {statut === "admin" && <AdminPanelSettingsOutlinedIcon />}
-                        {statut !== "admin" && <LockOpenOutlinedIcon />}
                         <Typography color={colors.gray[100]} sx={{ ml: "5px" }}>
                             {statut}
                         </Typography>
@@ -63,17 +74,26 @@ const Collaborateurs = () => {
             headerName: "Actions",
             sortable: false,
             flex: 1,
-            renderCell: () => (
+            renderCell: ({row}) => (
                 <Stack spacing={2} direction="row">
                     <ButtonGroup variant="text" disableElevation size="small">
-                            <Button sx={{ color: colors.gray[100] }} onClick={(event) => handleClick(event,"/Collaborateurs/ViewUser")}>
+                        <Link to={"/user/"+ row._id} style={{textDecoration: "none",color: colors.gray[100]}}>
+                            <Button sx={{ color: colors.gray[100] }}>
                                 <VisibilityOutlinedIcon />
                             </Button>
-                        <Button sx={{ color: colors.gray[100] }} onClick={(event) => handleClick(event,"/Collaborateurs/EditUser")}>
-                            <EditOutlinedIcon />
-                        </Button>
+                        </Link>
+                        <Link to={"/user/edit/"+ row._id} style={{textDecoration: "none",color: colors.gray[100]}}>
+                            <Button sx={{ color: colors.gray[100] }}>
+                                <EditOutlinedIcon />
+                            </Button>
+                        </Link>
                         <Button sx={{ color: colors.gray[100] }}>
-                            <DeleteOutlineOutlinedIcon />
+                            <DeleteOutlineOutlinedIcon onClick={()=> {
+                                HttpClient.get('/user/delete/'+ row._id).then((res)=> {
+                                    console.log(res)
+                                });
+                            }}
+                            />
                         </Button>
                     </ButtonGroup>
                 </Stack>
@@ -114,21 +134,21 @@ const Collaborateurs = () => {
                     }
                 }}
             >
-                <DataGrid columns={columns} rows={mockDataContacts} slots={{toolbar: GridToolbar}}/>
+                {users && <DataGrid columns={columns} rows={users} slots={{toolbar: GridToolbar}} getRowId={(row) => row._id}/>}
             </Box>
             <Box m="50px 0 0 0" display="flex" justifyContent="flex-end" alignItems="flex-end">
-                <Link to="/Collaborateurs/CreateUser">
-                <Button
-                    variant="contained"
-                    size="medium"
-                    color = "secondary"
-                    sx={{ backgroundColor: colors.greenAccent[700], color: colors.gray[100] }}
-                    startIcon={<PersonAddAlt1OutlinedIcon/>}
-                    disableElevation
-                >
-                    <Typography variant="body2">Ajouter un collaborateur</Typography>
-                </Button>
-            </Link>
+                <Link to="/user/new">
+                    <Button
+                        variant="contained"
+                        size="medium"
+                        color = "secondary"
+                        sx={{ backgroundColor: colors.greenAccent[700], color: colors.gray[100] }}
+                        startIcon={<PersonAddAlt1OutlinedIcon/>}
+                        disableElevation
+                    >
+                        <Typography variant="body2">Ajouter un collaborateur</Typography>
+                    </Button>
+                </Link>
             </Box>
         </Box>
     );

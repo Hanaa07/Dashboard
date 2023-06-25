@@ -18,23 +18,6 @@ const Dashboard = () => {
         <Box m="20px">
             <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Header title="DASHBOARD" subtitle="Welcome to your dashboard"/>
-                <Box>
-                    <Button
-                        color="secondary"
-                        sx={{
-                            backgroundColor: colors.greenAccent[700],
-                            color: colors.gray[100],
-                            fontSize: "14px",
-                            fontWeight: "bold",
-                            padding: "10px 20px",
-                        }}
-                        variant="contained"
-                        disableElevation
-                    >
-                        <DownloadOutlined/>
-                        Download Reports
-                    </Button>
-                </Box>
             </Box>
             <Box
                 display="grid"

@@ -1,40 +1,55 @@
 import { Box, Typography, Button, useTheme, Stack, ButtonGroup} from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import { tokens } from "../../Theme.tsx";
-import {mockSolde} from "../../data/mockData.tsx";
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import Header from "../../Components/Header.tsx";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import AddIcon from "@mui/icons-material/Add";
+import {HttpClient} from "../../utils/request.ts";
 
 const AbsenceUser = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const [selected, setSelected] = useState<string>("SoldeUser");
-    const handleClick = (event,to: string) => {
-        event.preventDefault();
-        window.location.href = to;
-    }
+    const [absences, setAbsences] = useState([])
+    const { absenceId } = useParams();
+    const { userId } = useParams();
+
+
+    useEffect(() => {
+        HttpClient.get("/absence/" + absenceId).then(res => {
+            let receivedData = res.data;
+
+            if (receivedData.success === true) {
+                setAbsences(receivedData.data);
+            }
+        });
+    }, []);
+
 
     const columns = [
-        { field: "start_date", headerName: "Date Début", flex: 1, cellClassName: "name-column--cell" },
-        { field: "end_date", headerName: "Date Fin", flex: 1, cellClassName: "name-column--cell" },
-        { field: "balance", headerName: "Solde", flex: 1 },
+        { field: "absenceStartedAt", headerName: "Date Début", flex: 1, cellClassName: "name-column--cell" },
+        { field: "absenceEndedAt", headerName: "Date Fin", flex: 1, cellClassName: "name-column--cell" },
         { field: "days", headerName: "jours d'absence", flex: 1 },
         {
             field: "actions",
             headerName: "Actions",
             flex: 1,
-            renderCell: () => (
+            renderCell: ({row}) => (
                 <Stack spacing={2} direction="row">
                     <ButtonGroup variant="text" disableElevation size="small">
-                        <Button sx={{ color: colors.gray[100] }} onClick={(event)=> handleClick(event,"/AbsenceUser/EditAbsence")}>
-                            <EditOutlinedIcon />
-                        </Button>
+                        <Link to={"/absence/edit"+ row._id} style={{textDecoration: "none",color: colors.gray[100]}}>
+                            <Button sx={{ color: colors.gray[100] }}>
+                                <EditOutlinedIcon />
+                            </Button>
+                        </Link>
                         <Button sx={{ color: colors.gray[100] }}>
-                            <DeleteOutlineOutlinedIcon />
+                            <DeleteOutlineOutlinedIcon nClick={()=> {
+                                HttpClient.get('/absence/delete/'+ row._id).then((res)=> {
+                                    console.log(res)
+                                });
+                            }}/>
                         </Button>
                     </ButtonGroup>
                 </Stack>
@@ -75,10 +90,10 @@ const AbsenceUser = () => {
                     }
                 }}
             >
-                <DataGrid columns={columns} rows={mockSolde} slots={{toolbar: GridToolbar}}/>
+                {absences && <DataGrid columns={columns} rows={absences} slots={{toolbar: GridToolbar}}/>}
             </Box>
             <Box m="50px 0 0 0" display="flex" justifyContent="flex-end" alignItems="flex-end">
-                <Link to="/AbsenceUser/CreateAbsence" style={{textDecoration:"none", color: colors.gray[100]}}>
+                <Link to={"/absence/user/new/" + userId} style={{textDecoration:"none", color: colors.gray[100]}}>
                 <Button
                     variant="contained"
                     size="medium"
@@ -87,7 +102,7 @@ const AbsenceUser = () => {
                     startIcon={<AddIcon/>}
                     disableElevation
                 >
-                    <Typography variant="body2">Ajouter</Typography>
+                    <Typography variant="body2">Ajouter une absence</Typography>
                 </Button>
                 </Link>
             </Box>

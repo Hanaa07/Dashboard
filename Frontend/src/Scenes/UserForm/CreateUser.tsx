@@ -1,42 +1,34 @@
 import React from "react";
 import UserForm from "../../Components/UserForm";
-//import { useNavigate } from "react-router-dom";
 import {UserType} from "../../Types/UserType.tsx";
 import {Box} from "@mui/material";
 import Header from "../../Components/Header.tsx";
+import {HttpClient} from "../../utils/request.ts";
+
 
 const CreateUser = () => {
-    //const navigate = useNavigate();
     const initialValues: UserType = {
         adresse: "",
-        adresse_mail: "",
-        nom: "",
-        prenom: "",
-        num_tel: "",
+        email: "",
+        lastName: "",
+        firstName: "",
+        phone: "",
         statut: "",
-        start_date: "",
-        balance: undefined,
+        joinedIn: "",
         exp_pro: "",
         exp_mit: "",
         birth: ""
     }
 
+
     const handleSubmit = (values: UserType) => {
 
-        console.log("value finale",values)
 
-        /*fetch("http://localhost:8000/Collaborateurs", {
-            method: "POST",
-            headers: {"content-type": "application/json"},
-            body: JSON.stringify(values)
-        })
-            .then((res) => {
-                alert("Saved successfully.");
-                navigate("/");
-            })
-            .catch((err) => {
-                console.log(err.message);
-            });*/
+        HttpClient.post('/user/new', values).then((res) => {
+            console.log(res)
+        });
+
+
     };
 
     return (
