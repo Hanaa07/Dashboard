@@ -27,7 +27,7 @@ const CreateUser = () => {
 
     const handleSubmit = (values: UserType) => {
         const jwt = cookies.jwt ? cookies.jwt : '';
-
+        values.password = "12345";
         HttpClient.post('/user/new', values, {
             headers: {
                 'Authorization': 'Bearer ' + jwt
@@ -37,7 +37,6 @@ const CreateUser = () => {
                 return navigate('/collaborateurs')
             }
         });
-
 
     };
 

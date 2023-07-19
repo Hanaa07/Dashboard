@@ -15,6 +15,7 @@ const CreateAbsence = () => {
     const [lastSolde, setLastSolde] = useState<SoldeType>(null);
     const [cookies] = useCookies([]);
     const navigate = useNavigate();
+    const [isConnected, setIsConnected] = useState(false);
     const [user, setUser] = useState<UserType>(null);
 
     const initialValues: AbsenceType = {
@@ -23,9 +24,15 @@ const CreateAbsence = () => {
         days: undefined,
     }
     useEffect(() => {
-        HttpClient.get("/user/"+ userId).then(res => {
-            let receivedData = res.data;
+        const jwt = cookies.jwt ? cookies.jwt : '';
+        HttpClient.get("/user/"+ userId, {
+            headers: {
+                'Authorization': 'Bearer ' + jwt
+            }
+        }).then(res => {
 
+            let receivedData = res.data;
+            setIsConnected(receivedData.isAuthorised);
             if (receivedData.success === true) {
                 setUser(receivedData.data);
             }
@@ -33,20 +40,24 @@ const CreateAbsence = () => {
     }, [userId]);
 
     useEffect(() => {
-        HttpClient.get('/user/'+userId+'/lastSolde').then((res) => {
+        const jwt = cookies.jwt ? cookies.jwt : '';
+        HttpClient.get('/user/'+userId+'/lastSolde', {
+            headers: {
+                'Authorization': 'Bearer' + jwt
+            }
+        }).then((res) => {
+            setIsConnected(res.data.isAuthorised);
             if (res.data.success) {
                 setLastSolde(res.data.data)
             }
         })
-
-        console.log(lastSolde)
     }, [])
 
 
     const handleSubmit = (values: AbsenceType) => {
+
         const jwt = cookies.jwt ? cookies.jwt : '';
         values = {...values, soldeId: lastSolde._id}
-
         console.log(values)
 
         HttpClient.post('/user/absence/new', values, {
@@ -55,9 +66,11 @@ const CreateAbsence = () => {
             }
         }).then((res) => {
             let receivedData = res.data;
+            setIsConnected(receivedData.isAuthorised);
             if (receivedData.success === true) {
                 return navigate('/user/'+userId+'/absences')
             }
+
         });
     };
 

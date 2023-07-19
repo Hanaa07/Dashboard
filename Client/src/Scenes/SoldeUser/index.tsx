@@ -1,5 +1,5 @@
 import { Box, Typography, Button, useTheme, Stack, ButtonGroup} from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import {DataGrid, frFR, GridToolbar} from "@mui/x-data-grid";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import { tokens } from "../../Theme.tsx";
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
@@ -19,6 +19,7 @@ const SoldeUser = () => {
     const { soldeId } = useParams();
     const { userId}= useParams();
     const [userName, setUserName] = useState('');
+    const [isConnected, setIsConnected] = useState(false);
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -53,36 +54,36 @@ const SoldeUser = () => {
                 dayjs(row.balanceEndedAt).format('DD/MM/YYYY') )},
         { field: "initialDays", headerName: "Solde", flex: 1 },
         { field: "remainingDays", headerName: "jours restants du solde", flex: 1 },
-        {
-            field: "actions",
-            sortable: false,
-            headerName: "Actions",
-            flex: 1,
-            renderCell: ({row}) => (
-                <Stack spacing={2} direction="row">
-                    <ButtonGroup variant="text" disableElevation size="small">
-                        <Link to={"/solde/"+ row._id +"/edit"} style={{textDecoration: "none",color: colors.gray[100]}}>
+            {
+                field: "actions",
+                sortable: false,
+                headerName: "Actions",
+                flex: 1,
+                renderCell: ({row}) => (
+                    <Stack spacing={2} direction="row">
+                        <ButtonGroup variant="text" disableElevation size="small">
+                            <Link to={"/user/"+userId+"/solde/"+ row._id +"/edit"} style={{textDecoration: "none",color: colors.gray[100]}}>
+                                <Button sx={{ color: colors.gray[100] }}>
+                                    <EditOutlinedIcon />
+                                </Button>
+                            </Link>
                             <Button sx={{ color: colors.gray[100] }}>
-                                <EditOutlinedIcon />
+                                <DeleteOutlineOutlinedIcon onClick={()=> {
+                                    const jwt = cookies.jwt ? cookies.jwt : '';
+                                    HttpClient.get('/solde/'+ row._id +'/delete',{
+                                        headers: {
+                                            'Authorization': 'Bearer ' + jwt
+                                        }
+                                    }).then((res)=> {
+                                        return window.location.reload()
+                                    });
+                                }}/>
                             </Button>
-                        </Link>
-                        <Button sx={{ color: colors.gray[100] }}>
-                            <DeleteOutlineOutlinedIcon onClick={()=> {
-                                const jwt = cookies.jwt ? cookies.jwt : '';
-                                HttpClient.get('/solde/'+ row._id +'/delete',{
-                                    headers: {
-                                        'Authorization': 'Bearer ' + jwt
-                                    }
-                                }).then((res)=> {
+                        </ButtonGroup>
+                    </Stack>
+                )
+            }];
 
-                                });
-                            }}/>
-                        </Button>
-                    </ButtonGroup>
-                </Stack>
-            ),
-        },
-    ];
 
     return (
         <Box m="20px">
@@ -117,22 +118,30 @@ const SoldeUser = () => {
                     }
                 }}
             >
-                {soldes && <DataGrid columns={columns} rows={soldes} slots={{toolbar: GridToolbar}} getRowId={(row) => row._id}/>}
+                {soldes && <DataGrid
+                    columns={columns}
+                    rows={soldes}
+                    localeText={frFR.components.MuiDataGrid.defaultProps.localeText}
+                    initialState={{pagination: { paginationModel: { pageSize: 25 } }}}
+                    slots={{toolbar: GridToolbar}}
+                    getRowId={(row) => row._id}/>}
             </Box>
-            <Box m="50px 0 0 0" display="flex" justifyContent="flex-end" alignItems="flex-end">
-                <Link to={"/user/"+ userId + "/solde/new"}>
-                    <Button
-                        variant="contained"
-                        size="medium"
-                        color="secondary"
-                        sx={{ backgroundColor: colors.greenAccent[700], color: colors.gray[100] }}
-                        startIcon={<AddIcon/>}
-                        disableElevation
-                    >
-                        <Typography variant="body2">Ajouter un solde</Typography>
-                    </Button>
-                </Link>
-            </Box>
+
+               <Box m="50px 0 0 0" display="flex" justifyContent="flex-end" alignItems="flex-end">
+                    <Link to={"/user/"+ userId + "/solde/new"}>
+                        <Button
+                            variant="contained"
+                            size="medium"
+                            color="secondary"
+                            sx={{ backgroundColor: colors.greenAccent[700], color: colors.gray[100] }}
+                            startIcon={<AddIcon/>}
+                            disableElevation
+                        >
+                            <Typography variant="body2">Ajouter un solde</Typography>
+                        </Button>
+                    </Link>
+                </Box>
+
         </Box>
     );
 };

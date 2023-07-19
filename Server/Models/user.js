@@ -22,7 +22,10 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
+    },
+    enabled: {
+      type: Boolean,
+      default: false,
     },
     phone: {
         type: mongoose.SchemaTypes.String,

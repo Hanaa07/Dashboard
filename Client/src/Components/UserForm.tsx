@@ -38,7 +38,6 @@ const UserForm = (props: UserProps) => {
         exp_pro: yup.date().required("required"),
         exp_mit: yup.date().required("required"),
         birth: yup.date().required("required"),
-        initialDays: yup.number().required("required"),
     })
 
     return <Box m="20px">
@@ -171,9 +170,8 @@ const UserForm = (props: UserProps) => {
                                 selectprops={{
                                     multiple: true
                                 }}>
-                                <MenuItem value="intern">intern</MenuItem>
-                                <MenuItem value="employee">employee</MenuItem>
-                                <MenuItem value="admin">admin</MenuItem>
+                                <MenuItem value="stagiaire">stagiaire</MenuItem>
+                                <MenuItem value="salarié">salarié</MenuItem>
                             </Select>
                         </FormControl>
                         <TextField
@@ -209,7 +207,6 @@ const UserForm = (props: UserProps) => {
                             helpertext={touched.exp_mit && errors.exp_mit}
                             slotProps={{ textField: {label: "Expérience à MonarkIT"}}}
                             sx={{ gridColumn: "span 2" }}
-                            disableFuture
                         />
                         <DatepickerField
                             name="exp_pro"
@@ -230,21 +227,6 @@ const UserForm = (props: UserProps) => {
                             slotProps={{ textField: {label: "Date de naissance"}}}
                             sx={{ gridColumn: "span 2" }}
                             disableFuture
-                        />
-                        <TextField
-                            fullwidth="true"
-                            variant="outlined"
-                            type="tel"
-                            label="Solde"
-                            onBlur={handleBlur}
-                            onChange={(e) => {
-                                setFieldValue("initialDays", e.target.value)
-                            }}
-                            value={values.initialDays}
-                            name="initialDays"
-                            error={!!touched.initialDays && !!errors.initialDays}
-                            helpertext={touched.initialDays && errors.initialDays}
-                            sx={{ gridColumn: "span 2" }}
                         />
                     </Box>
                     <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "20px" }}>

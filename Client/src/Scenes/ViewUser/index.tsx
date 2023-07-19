@@ -118,7 +118,7 @@ const ViewUser = () => {
             </Box>
             <Box m="50px 0 0 0" display="flex" justifyContent="flex-end" alignItems="flex-end">
                 {
-                    isConnected ? <Link to={"/user/" + userId +"/absence/new/" } style={{textDecoration:"none", color: colors.gray[100]}}>
+                    isConnected ? <Link to={"/user/" + userId +"/absence/new" } style={{textDecoration:"none", color: colors.gray[100]}}>
                         <Button
                             variant="contained"
                             size="medium"
@@ -132,7 +132,7 @@ const ViewUser = () => {
                         </Button>
                     </Link> : <></>
                 }
-                    <Link to={"/solde/" + userId} style={{textDecoration:"none", color: colors.gray[100]}}>
+                    <Link to={"/user/" + userId + "/solde"} style={{textDecoration:"none", color: colors.gray[100]}}>
                         <Button
                             variant="contained"
                             size="medium"

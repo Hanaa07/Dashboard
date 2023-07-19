@@ -19,6 +19,21 @@ const EditAbsence = () => {
     const [isConnected, setIsConnected] = useState(false);
     const [user, setUser] = useState<UserType>(null);
 
+    useEffect(() => {
+        const jwt = cookies.jwt ? cookies.jwt : '';
+        HttpClient.get("/user/"+ userId, {
+            headers: {
+                'Authorization': 'Bearer ' + jwt
+            }
+        }).then(res => {
+
+            let receivedData = res.data;
+            setIsConnected(receivedData.isAuthorised);
+            if (receivedData.success === true) {
+                setUser(receivedData.data);
+            }
+        });
+    }, [userId]);
 
     useEffect(() => {
         const jwt = cookies.jwt ? cookies.jwt : '';
@@ -33,8 +48,6 @@ const EditAbsence = () => {
                 setLastSolde(receivedData.data)
             }
         })
-
-        console.log(lastSolde)
     }, [])
     const fetchData = async () => {
         const jwt = cookies.jwt ? cookies.jwt : '';
@@ -57,9 +70,7 @@ const EditAbsence = () => {
 
     const handleSubmit = (values: AbsenceType) => {
         const jwt = cookies.jwt ? cookies.jwt : '';
-        console.log("value finale", values)
-
-        HttpClient.put('/absence/edit/'+ absenceId, values, {
+        HttpClient.put("/absence/"+ absenceId +"/edit", values, {
             headers: {
                 'Authorization': 'Bearer ' + jwt
             }
@@ -67,7 +78,7 @@ const EditAbsence = () => {
             let receivedData = res.data;
             setIsConnected(receivedData.isAuthorised);
             if (receivedData.success === true) {
-                return navigate('/absences')
+                return navigate("/absences")
             }
         });
     };

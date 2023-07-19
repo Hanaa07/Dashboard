@@ -16,7 +16,7 @@ const Dashboard = () => {
     return (
         <Box m="20px">
             <Box display="flex" justifyContent="space-between" alignItems="center">
-                <Header title="DASHBOARD" subtitle="Welcome to your dashboard"/>
+                <Header title="DASHBOARD" subtitle="Bienvenue à votre tableau de bord"/>
             </Box>
             <Box
                 display="grid"
@@ -30,7 +30,7 @@ const Dashboard = () => {
                     alignItems="center"
                     justifyContent="center"
                 >
-                    <StatBox title="Select Date" component={<DatePicker sx={{
+                    <StatBox title="Sélectionner date" component={<DatePicker sx={{
                         "& .css-13hkz5-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
                             borderColor: colors.gray[100],
                         }
@@ -43,7 +43,7 @@ const Dashboard = () => {
                     justifyContent="center"
                 >
                     <StatBox
-                        title="Select Collaborator"
+                        title="Sélectionner collaborateur"
                         component={
                             <>
                                 <FormControl fullWidth sx={{
@@ -54,13 +54,12 @@ const Dashboard = () => {
                                     <Select
                                         variant="outlined"
                                         displayEmpty
-                                        defaultValue="all"
+                                        defaultValue="tous"
                                         sx={{width: "270px"}}
                                     >
-                                        <MenuItem value="all">All</MenuItem>
-                                        <MenuItem value="intern">intern</MenuItem>
-                                        <MenuItem value="employee">employee</MenuItem>
-                                        <MenuItem value="admin">admin</MenuItem>
+                                        <MenuItem value="tous">Tous</MenuItem>
+                                        <MenuItem value="stagiaire">stagiaire</MenuItem>
+                                        <MenuItem value="salarié">salarié</MenuItem>
                                     </Select>
                                 </FormControl>
                             </>
@@ -74,7 +73,7 @@ const Dashboard = () => {
                     justifyContent="center"
                 >
                     <StatBox
-                        title="Total employees"
+                        title="Total des collaborateurs"
                         component={
                             <Typography variant="subtitle2">15</Typography>
                         }
@@ -87,7 +86,7 @@ const Dashboard = () => {
                     justifyContent="center"
                 >
                     <StatBox
-                        title="Employee days absent"
+                        title="Total des absences des collaborateurs"
                         component={
                             <Typography variant="subtitle2">1800</Typography>
                         }
@@ -117,14 +116,14 @@ const Dashboard = () => {
                                 fontWeight="bold"
                                 sx={{padding: "5px 10px 0 0px"}}
                             >
-                                Employees by Experience and Designation
+                                Salariés par Expérience
                             </Typography>
                             <Typography
                                 variant="subtitle2"
                                 fontWeight="bold"
                                 color={colors.greenAccent[500]}
                             >
-                                Drill down years to see the employees by designation
+                                Survoler les barres pour voir le total des salariés par expérience pour chaque période
                             </Typography>
                         </Box>
                     </Box>
@@ -150,7 +149,7 @@ const Dashboard = () => {
                         alignItems="center"
                     >
                         <Typography variant="subtitle1" fontWeight="bold">
-                            Attendance percentage
+                            Pourcentage de présence
                         </Typography>
                     </Box>
                     <Box height="250px" m="-20px 0 0 0">
@@ -181,14 +180,14 @@ const Dashboard = () => {
                                 fontWeight="bold"
                                 color={colors.gray[100]}
                             >
-                                Absences by Month
+                                Absences par Mois
                             </Typography>
                             <Typography
                                 variant="subtitle2"
                                 fontWeight="bold"
                                 color={colors.greenAccent[500]}
                             >
-                                Last 6 months
+                                Les 6 mois précédents
                             </Typography>
                         </Box>
                     </Box>

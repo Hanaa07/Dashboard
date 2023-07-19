@@ -1,5 +1,5 @@
 import { Box, Typography, Button, useTheme, Stack, ButtonGroup} from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar, frFR } from "@mui/x-data-grid";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import { tokens } from "../../Theme.tsx";
 import PersonAddAlt1OutlinedIcon from '@mui/icons-material/PersonAddAlt1Outlined';
@@ -91,17 +91,22 @@ const Collaborateurs = () => {
                         </Link>
                         {
                             isConnected ? <>
-                                <Link to={"/user/edit/"+ row._id} style={{textDecoration: "none",color: colors.gray[100]}}>
+                                <Link to={"/user/"+ row._id +"/edit"} style={{textDecoration: "none",color: colors.gray[100]}}>
                                     <Button sx={{ color: colors.gray[100] }}>
                                         <EditOutlinedIcon />
                                     </Button>
                                 </Link>
-                                <Button sx={{ color: colors.gray[100] }} onClick={()=> {
-                                    HttpClient.get('/user/delete/'+ row._id).then((res)=> {
-                                        navigate('/collaborateurs')
-                                    });
-                                }}>
-                                    <DeleteOutlineOutlinedIcon/>
+                                <Button sx={{ color: colors.gray[100] }}>
+                                    <DeleteOutlineOutlinedIcon onClick={()=> {
+                                        const jwt = cookies.jwt ? cookies.jwt : '';
+                                        HttpClient.get('/user/'+ row._id +'/delete',{
+                                            headers: {
+                                                'Authorization': 'Bearer ' + jwt
+                                            }
+                                        }).then((res)=> {
+                                            return navigate('/collaborateurs')
+                                        });
+                                    }}/>
                                 </Button>
                             </> : <></>
                         }
@@ -113,7 +118,7 @@ const Collaborateurs = () => {
 
     return (
         <Box m="20px">
-            <Header title="COLLABORATEURS" subtitle="Managing the Team Members" />
+            <Header title="COLLABORATEURS" subtitle="Gestion des membres de l'équipe" />
             <Box
                 m="40px 0 0 0"
                 height="58vh"
@@ -144,7 +149,14 @@ const Collaborateurs = () => {
                     }
                 }}
             >
-                {users && <DataGrid columns={columns} rows={users} slots={{toolbar: GridToolbar}} getRowId={(row) => row._id}/>}
+                {users && <DataGrid
+                    columns={columns}
+                    rows={users}
+                    localeText={frFR.components.MuiDataGrid.defaultProps.localeText}
+                    initialState={{pagination: { paginationModel: { pageSize: 25 } }}}
+                    slots={{toolbar: GridToolbar}}
+                    getRowId={(row) => row._id}
+                />}
             </Box>
             {
                 isConnected ? <Box m="50px 0 0 0" display="flex" justifyContent="flex-end" alignItems="flex-end">

@@ -22,11 +22,13 @@ import Login from "./Pages/Login.tsx";
 import EditAbsence from "./Scenes/AbsenceForm/EditAbsence.tsx";
 import Calendar from "./Scenes/Calendar/calendar.tsx";
 import backgroundLogo from "./assets/Asset-6-01-1.svg";
+import Error from "./Pages/Error.tsx";
 
 function App() {
     const [theme, colorMode] = useMode();
     const [isSidebar, setIsSidebar] = useState<boolean>(true);
     const [isLoginRoute, setIsLoginRoute] = useState<boolean>(false);
+    const [isConnected, setIsConnected] = useState(false);
     let location = useLocation()
 
 
@@ -62,19 +64,19 @@ function App() {
                             </Routes>
                             {!isLoginRoute && <Topbar setIsSidebar={setIsSidebar} />}
                             <Routes>
-                                <Route path="/dashboard" element={<Dashboard />}/>
+                                <Route path="/" element={<Dashboard />}/>
                                 <Route path="/collaborateurs" element={<Collaborateurs />}/>
                                 <Route path="/user/new" element={<CreateUser/>}/>
-                                <Route path="/user/edit/:userId" element={<EditUser/>}/>
-                                <Route path="/user/:userId" element={<ViewUser/>} />
-                                <Route path="/solde/:userId" element={<SoldeUser/>} />
-                                <Route path="/user/:userId/absences" element={<AbsenceUser/>} />
+                                <Route path="/user/:userId/edit" element={<EditUser/>}/>
                                 <Route path="/user/:userId/absence/new" element={<CreateAbsence/>} />
-                                <Route path="/user/:userId/absence/:absenceId/edit/" element={<EditAbsence/>} />
+                                <Route path="/user/:userId/absence/:absenceId/edit" element={<EditAbsence/>} />
                                 <Route path={"/user/:userId/solde/new"} element={<CreateSolde/>}/>
-                                <Route path="/solde/:soldeId/edit" element={<EditSolde/>}/>
-                                <Route path="/absences" element={<Absences/>}/>
+                                <Route path="/user/:userId/solde/:soldeId/edit" element={<EditSolde/>}/>
                                 <Route path="/calendar" element={<Calendar/>}/>
+                                <Route path="/user/:userId" element={<ViewUser/>} />
+                                <Route path="/user/:userId/solde" element={<SoldeUser/>} />
+                                <Route path="/user/:userId/absences" element={<AbsenceUser/>} />
+                                <Route path="/absences" element={<Absences/>}/>
                             </Routes>
                         </main>
                     </div>

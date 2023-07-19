@@ -4,7 +4,7 @@ import {SoldeType} from "../../Types/SoldeType.tsx";
 import {Box} from "@mui/material";
 import Header from "../../Components/Header.tsx";
 import {HttpClient} from "../../utils/request.ts";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useCookies} from "react-cookie";
 import {UserType} from "../../Types/UserType.tsx";
 
@@ -14,6 +14,7 @@ const CreateSolde = () => {
     const [cookies] = useCookies([]);
     const [user, setUser] = useState<UserType>(null);
     const [isConnected, setIsConnected] = useState(false);
+    const navigate = useNavigate()
 
     const initialValues: SoldeType = {
         balanceStartedAt: "",
@@ -47,6 +48,7 @@ const CreateSolde = () => {
                 'Authorization': 'Bearer ' + jwt
             }
         }).then((res) => {
+            return navigate("/user/"+userId+"/solde/")
         });
 
     };

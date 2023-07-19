@@ -20,6 +20,7 @@ import {tokens} from "../../Theme.tsx";
 const Calendar = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    const [isConnected, setIsConnected] = useState(false);
     const [currentEvents, setCurrentEvents] = useState<[]>(() => {
         const localValue = localStorage.getItem("DATES")
         if (localValue == null) return []
@@ -44,7 +45,7 @@ const Calendar = () => {
         localStorage.setItem("DATES", JSON.stringify(res))
     }
     const handleDateClick = (selected) => {
-        const title = prompt("Please enter a new title for your event");
+        const title = prompt("Veuillez donner un titre à votre événement");
         const calendarApi = selected.view.calendar;
         calendarApi.unselect();
 
@@ -63,23 +64,23 @@ const Calendar = () => {
 
     const handleEventClick = (selected) => {
         const action = prompt(
-            `What would you like to do with the event '${selected.event.title}'? Enter 'edit' to edit the title or 'delete' to delete the event.`
+            `Que souhaitez-vous faire à l'événement '${selected.event.title}'? Entrer 'm' pour modifier le titre ou 's' pour supprimer l'événement.`
         );
 
-        if (action === "edit") {
+        if (action === "m") {
             const newTitle = prompt(
-                "Please enter a new title for your event",
+                "Veuillez donner un nouveau titre à votre événement",
                 selected.event.title
-            );y
+            );
 
             if (newTitle) {
                 selected.event.setProp("title", newTitle);
                 setToLocaleStorage(newTitle)
             }
-        } else if (action === "delete") {
+        } else if (action === "s") {
             if (
                 window.confirm(
-                    `Are you sure you want to delete the event '${selected.event.title}'?`
+                    `Etes-vous sur(e) de vouloir supprimer l'événement ${selected.event.title}'?`
                 )
             ) {
                 console.log(selected)
@@ -94,7 +95,7 @@ const Calendar = () => {
 
     return (
         <Box m="20px">
-            <Header title="Calendar" subtitle="Full Calendar Interactive Page" />
+            <Header title="Calendrier" subtitle="Calendrier interactif" />
 
             <Box display="flex" justifyContent="space-between">
                 {/* CALENDAR SIDEBAR */}
@@ -104,7 +105,7 @@ const Calendar = () => {
                     p="15px"
                     borderRadius="15px"
                 >
-                    <Typography variant="h5">Events</Typography>
+                    <Typography variant="h5">Evénements</Typography>
                     <List>
                         {currentEvents.map((event) => (
                             <ListItem

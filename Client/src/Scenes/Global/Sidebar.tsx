@@ -98,7 +98,7 @@ const sidebar = () => {
                                   ADMIN
                               </Typography> :
                               <Typography variant="h6" color={colors.gray[100]}>
-                                  USER
+                                  UTILISATEUR
                               </Typography>
                           }
                           <IconButton onClick={() => setIsCollapsed(!isCollapsed)} >
@@ -132,10 +132,10 @@ const sidebar = () => {
                       }
                   }}
               >
-                  <Item title="Dashboard" to="/dashboard" icon={<HomeOutlinedIcon/>} selected={selected} setSelected={setSelected}/>
+                  <Item title="Dashboard" to="/" icon={<HomeOutlinedIcon/>} selected={selected} setSelected={setSelected}/>
                   <Item title="Collaborateurs" to="/collaborateurs" icon={<PeopleOutlinedIcon/>} selected={selected} setSelected={setSelected}/>
                   <Item title="Absences" to="/absences" icon={<ScheduleOutlinedIcon/>} selected={selected} setSelected={setSelected}/>
-                  <Item title="Calendar" to="/calendar" icon={<CalendarMonthOutlinedIcon/>} selected={selected} setSelected={setSelected}/>
+                  <Item title="Calendrier" to="/calendar" icon={<CalendarMonthOutlinedIcon/>} selected={selected} setSelected={setSelected}/>
               </Box>
           </Menu>
         </Sidebar>

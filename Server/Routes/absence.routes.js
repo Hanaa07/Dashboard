@@ -58,7 +58,7 @@ router.get('/', authenticateToken, (req, res) => {
     });
 
 //Delete the matching record
-    router.get('/delete/:id', authenticateToken, (req, res) => {
+    router.get('/:id/delete', authenticateToken, (req, res) => {
 
         if (!req.isAuthorised) {
             return res.send({"success": false, isAuthorised: req.isAuthorised, "message": 'Vous devez être connecté pour effectuer cette action !' ,"data": null});
@@ -78,7 +78,7 @@ router.get('/', authenticateToken, (req, res) => {
 
 
 //Just like with the delete request, we’ll be using the _id to target the correct item.
-    router.put('/edit/:id', authenticateToken, async (req, res) => {
+    router.put('/:id/edit', authenticateToken, async (req, res) => {
 
         if (!req.isAuthorised) {
             return res.send({"success": false, isAuthorised: req.isAuthorised, "message": 'Vous devez être connecté pour effectuer cette action !' ,"data": null});

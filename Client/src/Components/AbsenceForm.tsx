@@ -34,7 +34,9 @@ const AbsenceForm = (props : AbsenceProps) => {
                 absenceEndedAt: initialValues.absenceEndedAt,
                 days: initialValues.days
             }}
-            onSubmit={values => onSubmit(values)}
+            onSubmit={values => {
+                onSubmit(values)
+            }}
             validationSchema={absenceSchema}
         >
             {({ values, errors, touched, handleBlur, setFieldValue, handleSubmit}) => (
@@ -77,7 +79,6 @@ const AbsenceForm = (props : AbsenceProps) => {
                             helpertext={touched.absenceStartedAt && errors.absenceStartedAt}
                             slotProps={{ textField: {label: "Date de début d'absence"}}}
                             sx={{ gridColumn: "span 2" }}
-                            disableFuture
                         />
                         <DatePickerField
                             name="absenceEndedAt"
@@ -87,7 +88,6 @@ const AbsenceForm = (props : AbsenceProps) => {
                             helpertext={touched.absenceEndedAt && errors.absenceEndedAt}
                             slotProps={{ textField: {label: "Date de fin d'absence"}}}
                             sx={{ gridColumn: "span 2" }}
-                            disableFuture
                         />
                         <TextField
                             fullwidth="true"

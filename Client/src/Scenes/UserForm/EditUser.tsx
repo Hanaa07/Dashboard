@@ -14,12 +14,18 @@ const EditUser = () => {
     const [user, setUser] = useState<UserType>(null)
     const { userId } = useParams();
     const [cookies] = useCookies([]);
+    const [isConnected, setIsConnected] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
-        HttpClient.get("/user/"+ userId).then(res => {
+        const jwt = cookies.jwt ? cookies.jwt : '';
+        HttpClient.get("/user/"+ userId, {
+            headers: {
+                'Authorization': 'Bearer ' + jwt
+            }
+        }).then(res => {
             let receivedData = res.data;
-
+            setIsConnected(receivedData.isAuthorised);
             if (receivedData.success === true) {
                 setUser(receivedData.data);
             }
@@ -27,9 +33,14 @@ const EditUser = () => {
     }, [userId]);
 
     const fetchData = async () => {
-        const res = await HttpClient.get('/user/' + userId);
+        const jwt = cookies.jwt ? cookies.jwt : '';
+        const res = await HttpClient.get('/user/' + userId,{
+            headers: {
+                'Authorization': 'Bearer ' + jwt
+            }
+        })
         const receivedData = res.data;
-
+        setIsConnected(receivedData.isAuthorised);
         if (receivedData.success === true) {
             setUser(receivedData.data);
         }
@@ -38,16 +49,17 @@ const EditUser = () => {
         fetchData().catch(e => console.log(e))
     }, [userId])
 
-    const handleSubmit = (values: AbsenceType) => {
+    const handleSubmit = (values: UserType) => {
         const jwt = cookies.jwt ? cookies.jwt : '';
         console.log("value finale", values)
 
-        HttpClient.put('/user/'+ userId, values, {
+        HttpClient.put('/user/'+ userId + '/edit', values, {
             headers: {
                 'Authorization': 'Bearer ' + jwt
             }
         }).then((res) => {
             let receivedData = res.data;
+            setIsConnected(receivedData.isAuthorised);
             if (receivedData.success === true) {
                 return navigate('/collaborateurs')
             }
@@ -56,7 +68,7 @@ const EditUser = () => {
 
     return(
         <Box m="20px">
-            <Header title="MODIFICATION D'UN UTILISATEUR" subtitle={`Modification des informations personnelles de ${user.firstName} ${user.lastName}`} />
+            <Header title="MODIFICATION D'UN UTILISATEUR" subtitle={`Modification des informations personnelles de ${user?.firstName} ${user?.lastName}`} />
             {user ? <UserForm initialValues={user} onSubmit={handleSubmit}/> : <></>}
         </Box>
     )

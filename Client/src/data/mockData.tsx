@@ -23,7 +23,7 @@ export const mockDataContacts = [{
     "exp_pro": "5/3/2023",
     "exp_mit": "8/19/2022",
     "birth": "12/31/2022",
-    "statut": "employee"
+    "statut": "salarié"
 }, {
     "id": "3",
     "firstName": "Silvio",
@@ -35,7 +35,7 @@ export const mockDataContacts = [{
     "exp_pro": "7/13/2022",
     "exp_mit": "2/16/2023",
     "birth": "2/25/2023",
-    "statut": "employee"
+    "statut": "salarié"
 }, {
     "id": "4",
     "firstName": "Roxana",
@@ -47,7 +47,7 @@ export const mockDataContacts = [{
     "exp_pro": "7/26/2022",
     "exp_mit": "12/1/2022",
     "birth": "3/16/2023",
-    "statut": "employee"
+    "statut": "salarié"
 }, {
     "id": "5",
     "firstName": "Erv",
@@ -59,7 +59,7 @@ export const mockDataContacts = [{
     "exp_pro": "6/7/2022",
     "exp_mit": "7/14/2022",
     "birth": "12/1/2022",
-    "statut": "intern"
+    "statut": "stagiaire"
 }, {
     "id": "6",
     "firstName": "Dorene",
@@ -71,7 +71,7 @@ export const mockDataContacts = [{
     "exp_pro": "7/12/2022",
     "exp_mit": "1/7/2023",
     "birth": "11/24/2022",
-    "statut": "employee"
+    "statut": "salarié"
 }, {
     "id": "7",
     "firstName": "Shelden",
@@ -95,7 +95,7 @@ export const mockDataContacts = [{
     "exp_pro": "5/14/2023",
     "exp_mit": "1/8/2023",
     "birth": "11/4/2022",
-    "statut": "employee"
+    "statut": "salarié"
 }, {
     "id": "9",
     "firstName": "Timoteo",
@@ -107,7 +107,7 @@ export const mockDataContacts = [{
     "exp_pro": "5/3/2023",
     "exp_mit": "12/23/2022",
     "birth": "11/3/2022",
-    "statut": "intern"
+    "statut": "stagiaire"
 }, {
     "id": "10",
     "firstName": "Deny",
@@ -119,7 +119,7 @@ export const mockDataContacts = [{
     "exp_pro": "10/16/2022",
     "exp_mit": "10/4/2022",
     "birth": "4/17/2023",
-    "statut": "intern"
+    "statut": "stagiaire"
 }];
 
 export const mockAbsences = [{
@@ -1428,31 +1428,31 @@ export const mockSolde = [{
 
 export const mockBarData = [
     {
-        experience: "0-1 years",
-        employees: 10,
+        experience: "0-1 année",
+        salariés: 10,
     },
     {
-        experience: "1-3 years",
-        employees: 5,
+        experience: "1-3 années",
+        salariés: 5,
     },
     {
-        experience: "3-5 years",
-        employees: 11,
+        experience: "3-5 années",
+        salariés: 11,
     },
     {
-        experience: "5-7 years",
-        employees: 20,
+        experience: "5-7 années",
+        salariés: 20,
     },
     {
-        experience: "7+ years",
-        employees: 10,
+        experience: "7+ années",
+        salariés: 10,
     },
 ];
 
 export const mockPieData = [
     {
-        id: "Attendance",
-        label: "Attendance",
+        id: "Présence",
+        label: "Présence",
         value: 60,
         color: "hsl(229, 70%, 50%)",
     },
@@ -1478,7 +1478,7 @@ export const mockLineData = [
                 y: 75,
             },
             {
-                x: "Feb 2023",
+                x: "Fév 2023",
                 y: 36,
             },
             {
@@ -1486,11 +1486,11 @@ export const mockLineData = [
                 y: 116,
             },
             {
-                x: "May 2023",
+                x: "Mai 2023",
                 y: 35,
             },
             {
-                x: "Jun 2023",
+                x: "Jui 2023",
                 y: 10,
             },
         ],

@@ -1,5 +1,5 @@
 import {Box, Button, useTheme, Stack, ButtonGroup} from "@mui/material";
-import {DataGrid, GridToolbar} from "@mui/x-data-grid";
+import {DataGrid, frFR, GridToolbar} from "@mui/x-data-grid";
 import {tokens} from "../../Theme.tsx";
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
@@ -76,35 +76,45 @@ const Absences = () => {
             headerName: "Soldes",
             flex: 1
         },
-        {
-            field: "actions",
-            headerName: "Actions",
-            sortable: false,
-            flex: 1,
-            renderCell: ({ row }) => (
-                <Stack spacing={2} direction="row">
-                    <ButtonGroup variant= "text" disableElevation size="small">
-                        <Link to={"/user/"+row.solde.user._id+"/absence/"+ row._id+ "/edit/" } style={{textDecoration: "none",color: colors.gray[100]}}>
+    ];
+
+    if(isConnected){
+        columns.push(
+            {
+                field: "actions",
+                headerName: "Actions",
+                sortable: false,
+                flex: 1,
+                renderCell: ({ row }) => (
+                    <Stack spacing={2} direction="row">
+                        <ButtonGroup variant= "text" disableElevation size="small">
+                            <Link to={"/user/"+row.solde.user._id+"/absence/"+ row._id+ "/edit/" } style={{textDecoration: "none",color: colors.gray[100]}}>
+                                <Button sx={{color: colors.gray[100]}}>
+                                    <EditOutlinedIcon/>
+                                </Button>
+                            </Link>
                             <Button sx={{color: colors.gray[100]}}>
-                                <EditOutlinedIcon/>
+                                <DeleteOutlineOutlinedIcon onClick={()=> {
+                                    const jwt = cookies.jwt ? cookies.jwt : '';
+                                    HttpClient.get('/absence/delete/'+ row._id, {
+                                        headers: {
+                                            'Authorization': 'Bearer ' + jwt
+                                        }
+                                    }).then((res)=> {
+                                        window.location.reload()
+                                    });
+                                }}/>
                             </Button>
-                        </Link>
-                        <Button sx={{color: colors.gray[100]}}>
-                            <DeleteOutlineOutlinedIcon onClick={()=> {
-                                HttpClient.get('/absence/delete/'+ row._id).then((res)=> {
-                                    window.location.reload()
-                                });
-                            }}/>
-                        </Button>
-                    </ButtonGroup>
-                </Stack>
-            )
-        }
-    ]
+                        </ButtonGroup>
+                    </Stack>
+                )
+            }
+        )
+    }
 
     return (
         <Box m="20px">
-            <Header title="ABSENCES" subtitle="Managing the Attendance of Team Members"/>
+            <Header title="ABSENCES" subtitle="Gestion des absences des membres de l'équipe"/>
             <Box m="40px 0 0 0" height="58vh" sx={{
                 "& .MuiDataGrid-root": {
                     border: "none",
@@ -131,7 +141,7 @@ const Absences = () => {
                     color: colors.gray[100]
                 }
             }}>
-                {absences && <DataGrid columns={columns} rows={absences} slots={{toolbar: GridToolbar}} getRowId={(row) => row._id}/>}
+                {absences && <DataGrid columns={columns} rows={absences} localeText={frFR.components.MuiDataGrid.defaultProps.localeText} slots={{toolbar: GridToolbar}} getRowId={(row) => row._id}/>}
             </Box>
         </Box>
     )

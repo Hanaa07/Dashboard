@@ -39,20 +39,20 @@ router.get('/:id/delete', authenticateToken, async (req, res) => {
     }
 
     const data = req.params.id;
-    try {
-        const solde = await Solde.findByIdAndRemove(data);
+    const solde = await Solde.findByIdAndRemove(data);
 
-        if (!solde) {
-            return res.status(404).json({ error: 'Solde not found' });
-        }
-
-        await Absence.deleteMany({ solde: data });
-
-        return res.status(200).json({ isAuthorised: req.isAuthorised, message: 'Balance and associated absences deleted' });
-    } catch (err) {
-        return res.status(500).json({ isAuthorised: req.isAuthorised, error: 'Internal server error' });
+    if (!solde) {
+        return res.status(404).json({ error: 'Solde not found' });
     }
 
+    await Absence.deleteMany({ solde: data }, (err, savedData) => {
+
+        if (err) return res.send({"success": false, isAuthorised: req.isAuthorised, "message": err.message ,"data": null});
+
+        return res.send({"success": true, isAuthorised: req.isAuthorised, "message": "Votre opération a été exécutée avec succès !" ,"data": savedData})
+
+    });
+    return null;
 });
 
 
