@@ -4,7 +4,7 @@ import {Box, IconButton, Typography, useTheme} from "@mui/material";
 import {Link, useParams} from "react-router-dom";
 import {Path} from "react-router-dom";
 import {tokens} from "../../Theme.tsx";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import DonutSmallIcon from '@mui/icons-material/DonutSmall';
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import ScheduleOutlinedIcon from '@mui/icons-material/ScheduleOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
@@ -132,7 +132,7 @@ const sidebar = () => {
                       }
                   }}
               >
-                  <Item title="Dashboard" to="/" icon={<HomeOutlinedIcon/>} selected={selected} setSelected={setSelected}/>
+                  <Item title="Dashboard" to="/" icon={<DonutSmallIcon/>} selected={selected} setSelected={setSelected}/>
                   <Item title="Collaborateurs" to="/collaborateurs" icon={<PeopleOutlinedIcon/>} selected={selected} setSelected={setSelected}/>
                   <Item title="Absences" to="/absences" icon={<ScheduleOutlinedIcon/>} selected={selected} setSelected={setSelected}/>
                   <Item title="Calendrier" to="/calendar" icon={<CalendarMonthOutlinedIcon/>} selected={selected} setSelected={setSelected}/>

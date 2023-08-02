@@ -1,5 +1,6 @@
 export type UserType = {
     id?: string | undefined,
+    _id?: string | undefined,
     adresse: string,
     email: string,
     lastName: string,

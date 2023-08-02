@@ -1,109 +1,143 @@
 import { useTheme } from "@mui/material";
-import { ResponsiveBar } from "@nivo/bar";
+import React, {useEffect, useState} from 'react';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend, ChartOptions,
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+import {faker} from "@faker-js/faker";
 import {tokens} from "../Theme.tsx";
-import { mockBarData as data } from "../data/mockData";
+import {HttpClient} from "../utils/request.ts";
+import {useCookies} from "react-cookie";
+import dayjs from "dayjs";
+import {AbsenceType} from "../Types/AbsenceType.tsx";
+import {UserType} from "../Types/UserType.tsx";
 
-const BarChart = ({ isDashboard = false }) => {
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+);
+
+type ChartProps = {
+    intervalType: number,
+    absence: AbsenceType[],
+    user: UserType | null,
+}
+
+const BarChart = (props : ChartProps) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    const [users, setUsers] = useState([])
+    const [cookies] = useCookies([]);
+    const [nbrTotalPresences, setNbrTotalPresences] = useState<number>(0);
+    const [nbrUsers, setNbrUsers] = useState<number>(0)
+    const [selectedUser, setSelectedUser] = useState<UserType|null>(null);
+    const {intervalType, absence, user} = props;
+    const [absences, setAbsences] = useState([]);
 
-    return (
-        <ResponsiveBar
-            data={data}
-            theme={{
-                // added
-                axis: {
-                    domain: {
-                        line: {
-                            stroke: colors.gray[100],
-                        },
-                    },
-                    legend: {
-                        text: {
-                            fill: colors.gray[100],
-                        },
-                    },
-                    ticks: {
-                        line: {
-                            stroke: colors.gray[100],
-                            strokeWidth: 1,
-                        },
-                        text: {
-                            fill: colors.gray[100],
-                        },
-                    },
-                },
-                legends: {
-                    text: {
-                        fill: colors.gray[100],
-                    },
-                },
-            }}
-            keys={["salariés"]}
-            indexBy="experience"
-            margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
-            padding={0.3}
-            valueScale={{ type: "linear" }}
-            indexScale={{ type: "band", round: true }}
-            colors={{ scheme: "nivo" }}
-            borderColor={{
-                from: "color",
-            }}
-            axisTop={null}
-            axisRight={null}
-            axisBottom={{
-                tickSize: 5,
-                tickPadding: 5,
-                tickRotation: 0,
-                legend: isDashboard ? undefined : "country", // changed
-                legendPosition: "middle",
-                legendOffset: 32,
-            }}
-            axisLeft={{
-                tickSize: 5,
-                tickPadding: 5,
-                tickRotation: 0,
-                legend: isDashboard ? undefined : "food", // changed
-                legendPosition: "middle",
-                legendOffset: -40,
-            }}
-            enableLabel={false}
-            labelSkipWidth={12}
-            labelSkipHeight={12}
-            labelTextColor={{
-                from: "color",
-            }}
-            legends={[
-                {
-                    dataFrom: "keys",
-                    anchor: "bottom-right",
-                    direction: "column",
-                    justify: false,
-                    translateX: 120,
-                    translateY: 0,
-                    itemsSpacing: 2,
-                    itemWidth: 100,
-                    itemHeight: 20,
-                    itemDirection: "left-to-right",
-                    itemOpacity: 0.85,
-                    symbolSize: 20,
-                    effects: [
-                        {
-                            on: "hover",
-                            style: {
-                                itemBackground: "rgba(0, 0, 0, .03)",
-                                itemOpacity: 1,
-                            },
-                        },
-                    ],
-                },
-            ]}
-            role="application"
-            barAriaLabel={function (e) {
-                return e.id + ": " + e.formattedValue + " in country: " + e.indexValue;
-            }}
-        />
-    );
+
+    useEffect(() => {
+        const jwt = cookies.jwt ? cookies.jwt : '';
+        HttpClient.get("/user/", {
+            headers: {
+                'Authorization': 'Bearer ' + jwt
+            }
+        }).then(res => {
+            let receivedData = res.data;
+            console.log(receivedData)
+
+            if (receivedData.success === true) {
+                setUsers(receivedData.data);
+            }
+        });
+    }, []);
+
+    useEffect(() => {
+        HttpClient.post("/absence/stats", { userId: selectedUser?._id, intervalType: intervalType}).then(res => {
+            let receivedData = res.data;
+
+            console.log(res.data.data)
+
+            if (receivedData.success === true) {
+                setNbrTotalPresences(receivedData.data.nbrTotalPresences)
+                setNbrUsers(receivedData.data.nbrUsers)
+                setAbsences(receivedData.data.absences);
+            }
+        });
+    }, [selectedUser, intervalType]);
+
+    const options : any = {
+        type: 'horizontalBar',
+        indexAxis: 'y' as const,
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'right' as const,
+            },
+            title: {
+                display: true,
+            },
+        },
+        maintainAspectRatio: false,
+    };
+
+    const labels = users.slice(0,3).map((user) => [`${user.firstName} ${user.lastName}`]);
+    const presenceDays= []
+
+    switch (intervalType) {
+        case 1:
+            absences.map(absence => {
+                if (!presenceDays.includes(((absence.days / nbrTotalPresences) * 100).toFixed(2))) {
+                    presenceDays.push(((absence.days / nbrTotalPresences) * 100).toFixed(2))
+                }
+            })
+            break;
+        case 2:
+            absences.map(absence => {
+                if (!presenceDays.includes(((absence.days / nbrTotalPresences) * 100).toFixed(2))) {
+                    presenceDays.push(((absence.days / nbrTotalPresences) * 100).toFixed(2))
+                }
+            })
+            break;
+        case 3:
+            absences.map(absence => {
+                if (!presenceDays.includes(((absence.days / nbrTotalPresences) * 100).toFixed(2))) {
+                    presenceDays.push(((absence.days / nbrTotalPresences) * 100).toFixed(2))
+                }
+            })
+            break;
+        case 4:
+            absences.map(absence => {
+                if (!presenceDays.includes(((absence.days / nbrTotalPresences) * 100).toFixed(2))) {
+                    presenceDays.push(((absence.days / nbrTotalPresences) * 100).toFixed(2))
+                }
+            })
+            break;
+    }
+    
+    const data = {
+        labels,
+        datasets: [
+            {
+                label: 'Présence(%)',
+                data: presenceDays,
+                borderColor: 'rgba(54, 162, 235)',
+                backgroundColor: 'rgba(54, 162, 235, 0.4)',
+                borderWidth: 1,
+            },
+        ],
+    };
+
+    return <Bar options={options} data={data} height={13} width={50}/>;
 };
 
 export default BarChart;

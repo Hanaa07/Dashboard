@@ -85,7 +85,7 @@ const EditAbsence = () => {
 
     return (
         <Box m="20px">
-            <Header title="MODIFICATION D'ABSENCE" subtitle={`Modification d'absence pour ${lastSolde?.user?.firstName} ${lastSolde?.user?.lastName}`}/>
+            <Header title="MODIFICATION D'ABSENCE" subtitle={`Modification d'absence pour ${user?.firstName} ${user?.lastName}`}/>
             {(isConnected && absence) ? <AbsenceForm initialValues={absence} onSubmit={handleSubmit}/> : <></>}
         </Box>
     );

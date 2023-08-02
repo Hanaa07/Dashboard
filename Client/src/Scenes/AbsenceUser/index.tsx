@@ -10,6 +10,7 @@ import AddIcon from "@mui/icons-material/Add";
 import {HttpClient} from "../../utils/request.ts";
 import dayjs from "dayjs";
 import {useCookies} from "react-cookie";
+import dayjsBusinessDays from "dayjs-business-days2";
 
 const AbsenceUser = () => {
     const theme = useTheme();
@@ -19,7 +20,8 @@ const AbsenceUser = () => {
     const [isConnected, setIsConnected] = useState(false);
     const [cookies] = useCookies([]);
     const [userName, setUserName] = useState('');
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    dayjs.extend(dayjsBusinessDays);
 
 
     useEffect(() => {
@@ -44,7 +46,7 @@ const AbsenceUser = () => {
     }, []);
 
 
-    const columns = [
+    const columns : any = [
         { field: "absenceStartedAt", headerName: "Date Début", flex: 1, cellClassName: "name-column--cell",
             renderCell: ({row}) => (
                 dayjs(row.absenceStartedAt).format('DD/MM/YYYY') )},

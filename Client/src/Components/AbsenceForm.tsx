@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 import {AbsenceType} from "../Types/AbsenceType.tsx";
 import DatePickerField from "./DatepickerField.tsx";
 import React from "react";
+import {Dayjs} from "dayjs";
 
 type AbsenceProps = {
     initialValues: AbsenceType | null,
@@ -26,13 +27,18 @@ const AbsenceForm = (props : AbsenceProps) => {
         absenceEndedAt: yup.date().required("required"),
         days: yup.number().required("required"),
     })
+    const isWeekend = (date: Dayjs) => {
+        const day = date.day();
+
+        return day === 0 || day === 6;
+    };
 
     return <Box m="20px">
         <Formik
             initialValues={{
-                absenceStartedAt: initialValues.absenceStartedAt,
-                absenceEndedAt: initialValues.absenceEndedAt,
-                days: initialValues.days
+                absenceStartedAt: initialValues?.absenceStartedAt,
+                absenceEndedAt: initialValues?.absenceEndedAt,
+                days: initialValues?.days
             }}
             onSubmit={values => {
                 onSubmit(values)
@@ -79,6 +85,7 @@ const AbsenceForm = (props : AbsenceProps) => {
                             helpertext={touched.absenceStartedAt && errors.absenceStartedAt}
                             slotProps={{ textField: {label: "Date de début d'absence"}}}
                             sx={{ gridColumn: "span 2" }}
+                            shouldDisableDate={isWeekend}
                         />
                         <DatePickerField
                             name="absenceEndedAt"
@@ -88,6 +95,7 @@ const AbsenceForm = (props : AbsenceProps) => {
                             helpertext={touched.absenceEndedAt && errors.absenceEndedAt}
                             slotProps={{ textField: {label: "Date de fin d'absence"}}}
                             sx={{ gridColumn: "span 2" }}
+                            shouldDisableDate={isWeekend}
                         />
                         <TextField
                             fullwidth="true"

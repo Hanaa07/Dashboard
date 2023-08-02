@@ -1,115 +1,148 @@
-import { ResponsiveLine } from "@nivo/line";
+import React from 'react';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Filler,
+    Legend, ChartOptions
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
 import { useTheme } from "@mui/material";
 import {tokens} from "../Theme.tsx";
-import { mockLineData as data } from "../data/mockData";
+import {AbsenceType} from "../Types/AbsenceType.tsx";
 
-const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Filler,
+    Legend);
+
+type ChartProps = {
+    intervalType: number,
+    absences: AbsenceType[]
+}
+const LineChart = (props : ChartProps) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    const {absences, intervalType} = props;
+
+
+    ChartJS.defaults.borderColor = `${colors.gray[500]}`;
+    ChartJS.defaults.color = `${colors.gray[100]}`;
+
+    const options : ChartOptions<"line"> = {
+        responsive: true,
+        plugins: {
+            colors: {
+                enabled: true,
+            },
+            legend: {
+                position: 'right' as const,
+            },
+            title: {
+                display: true,
+                text: '',
+            },
+            maintainAspectRatio: false,
+        },
+    };
+
+    const months = [
+        'Jan',
+        'Fév',
+        'Mar',
+        'Avr',
+        'Mai',
+        'Juin',
+        'Jul',
+        'Aou',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Déc',
+    ]
+
+    let labels = [];
+    let datas = [];
+    let presencesDays = [];
+
+    switch (intervalType) {
+        case 1:
+            absences.map(absence => {
+                const startedDate =  new Date(absence.absenceStartedAt);
+                if (!labels.includes(startedDate.getDate())) {
+                    labels.push(startedDate.getDate())
+                }
+            })
+
+            labels.map((label, key ) => {
+                datas[key] = 0;
+                absences.map(absence => {
+                    const startedDate =  new Date(absence.absenceStartedAt);
+                    if (startedDate.getDate() === label) {
+                        datas[key]++
+                    }
+                })
+            })
+            break;
+        case 2:
+        case 3:
+        case 4:
+            absences.map(absence => {
+                const startedDate =  new Date(absence.absenceStartedAt);
+
+                if (!labels.includes(months[startedDate.getMonth()])) {
+                    labels.push(months[startedDate.getMonth()])
+                }
+            })
+
+            labels.map((label, key ) => {
+                datas[key] = 0;
+                absences.map(absence => {
+                    const startedDate =  new Date(absence.absenceStartedAt);
+                    if (months[startedDate.getMonth()] === label) {
+                        datas[key]++
+                    }
+                })
+            })
+
+            break;
+    }
+
+
+    const chartData : any= {
+        labels: labels,
+        datasets: [
+            {
+                label: 'Absences',
+                data: datas,
+                borderColor: 'rgba(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132)',
+            },
+            // {
+            //     label: 'Présences',
+            //     data: [10,40,1,6,20,15,31,17,10,2,0,7],
+            //     borderColor: 'rgb(53, 162, 235)',
+            //     backgroundColor: 'rgba(53, 162, 235)'',
+            // },
+            ],
+
+    }
 
     return (
-        <ResponsiveLine
-            data={data}
-            theme={{
-                axis: {
-                    domain: {
-                        line: {
-                            stroke: colors.gray[100],
-                        },
-                    },
-                    legend: {
-                        text: {
-                            fill: colors.gray[100],
-                        },
-                    },
-                    ticks: {
-                        line: {
-                            stroke: colors.gray[100],
-                            strokeWidth: 1,
-                        },
-                        text: {
-                            fill: colors.gray[100],
-                        },
-                    },
-                },
-                legends: {
-                    text: {
-                        fill: colors.gray[100],
-                    },
-                },
-                tooltip: {
-                    container: {
-                        color: colors.primary[500],
-                    },
-                },
-            }}
-            colors={isDashboard ? { datum: "color" } : { scheme: "nivo" }} // added
-            margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-            xScale={{ type: "point" }}
-            yScale={{
-                type: "linear",
-                min: "auto",
-                max: "auto",
-                stacked: true,
-                reverse: false,
-            }}
-            yFormat=" >-.2f"
-            curve="catmullRom"
-            axisTop={null}
-            axisRight={null}
-            axisBottom={{
-                orient: "bottom",
-                tickSize: 0,
-                tickPadding: 5,
-                tickRotation: 0,
-                legend: isDashboard ? undefined : "transportation", // added
-                legendOffset: 36,
-                legendPosition: "middle",
-            }}
-            axisLeft={{
-                orient: "left",
-                tickValues: 5, // added
-                tickSize: 3,
-                tickPadding: 5,
-                tickRotation: 0,
-                legend: isDashboard ? undefined : "count", // added
-                legendOffset: -40,
-                legendPosition: "middle",
-            }}
-            enableGridX={false}
-            enableGridY={false}
-            pointSize={8}
-            pointColor={{ theme: "background" }}
-            pointBorderWidth={2}
-            pointBorderColor={{ from: "serieColor" }}
-            pointLabelYOffset={-12}
-            useMesh={true}
-            legends={[
-                {
-                    anchor: "bottom-right",
-                    direction: "column",
-                    justify: false,
-                    translateX: 100,
-                    translateY: 0,
-                    itemsSpacing: 0,
-                    itemDirection: "left-to-right",
-                    itemWidth: 80,
-                    itemHeight: 20,
-                    itemOpacity: 0.75,
-                    symbolSize: 12,
-                    symbolShape: "circle",
-                    symbolBorderColor: "rgba(0, 0, 0, .5)",
-                    effects: [
-                        {
-                            on: "hover",
-                            style: {
-                                itemBackground: "rgba(0, 0, 0, .03)",
-                                itemOpacity: 1,
-                            },
-                        },
-                    ],
-                },
-            ]}
+        <Line
+            options={options}
+            data={chartData}
+            width={900}
         />
     );
 };

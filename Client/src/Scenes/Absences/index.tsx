@@ -10,6 +10,8 @@ import {Link, useParams} from 'react-router-dom'
 import dayjs from "dayjs";
 import {useCookies} from "react-cookie";
 import {UserType} from "../../Types/UserType.tsx";
+import dayjsBusinessDays from "dayjs-business-days2";
+
 
 const Absences = () => {
     const theme = useTheme();
@@ -19,6 +21,7 @@ const Absences = () => {
     const [user, setUser] = useState<UserType>(null);
     const [isConnected, setIsConnected] = useState(false);
     const {userId} = useParams();
+    dayjs.extend(dayjsBusinessDays);
 
     useEffect(() => {
         const jwt = cookies.jwt ? cookies.jwt : '';
@@ -55,7 +58,7 @@ const Absences = () => {
     }, []);
 
 
-    const columns = [
+    const columns: any = [
         {
             field: "FullName",
             valueGetter: (params) => {
@@ -65,7 +68,8 @@ const Absences = () => {
         {field: "absenceStartedAt", headerName: "Date Début", flex: 1,
             renderCell: ({row}) => (
                 dayjs(row.absenceStartedAt).format('DD/MM/YYYY') )},
-        {field: "absenceEndedAt", headerName: "Date Fin", flex: 1,renderCell: ({row}) => (
+        {field: "absenceEndedAt", headerName: "Date Fin", flex: 1,
+            renderCell: ({row}) => (
                 dayjs(row.absenceEndedAt).format('DD/MM/YYYY') )},
         {field: "days", headerName: "Nombre de jours d'absences", flex: 1},
         {

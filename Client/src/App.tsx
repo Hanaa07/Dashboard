@@ -45,18 +45,7 @@ function App() {
             <ColorModeContext.Provider value={colorMode}>
                 <ThemeProvider theme={theme}>
                     <CssBaseline />
-                    <div className="app"
-                         style={{
-                             backgroundImage: `url(${backgroundLogo})`,
-                             backgroundRepeat: "no-repeat",
-                             backgroundSize: "45%",
-                             backgroundPosition: "center",
-                             position: "fixed",
-                             display: "flex",
-                             marginRight: "auto",
-                             marginLeft: "auto",
-                         }}
-                    >
+                    <div className="app">
                         {isLoginRoute ? null : <Sidebar isSidebar={isSidebar} />}
                         <main className="content">
                             <Routes>

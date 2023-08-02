@@ -7,6 +7,7 @@ import {tokens} from "../Theme.tsx";
 import {useNavigate} from "react-router-dom";
 import React from "react";
 import {UserType} from "../Types/UserType.tsx";
+import {Dayjs} from "dayjs";
 
 
 type UserProps = {
@@ -23,6 +24,12 @@ const UserForm = (props: UserProps) => {
     const navigate = useNavigate();
 
     const {initialValues, onSubmit} = props;
+
+    const isWeekend = (date: Dayjs) => {
+        const day = date.day();
+
+        return day === 0 || day === 6;
+    };
     
     const userSchema = yup.object().shape({
         lastName: yup.string().required("required"),
@@ -197,6 +204,7 @@ const UserForm = (props: UserProps) => {
                             helpertext={touched.joinedIn && errors.joinedIn}
                             slotProps={{ textField: {label: "Date d'entrée"}}}
                             sx={{ gridColumn: "span 2" }}
+                            shouldDisableDate={isWeekend}
                             disableFuture
                         />
                         <DatepickerField
@@ -207,6 +215,7 @@ const UserForm = (props: UserProps) => {
                             helpertext={touched.exp_mit && errors.exp_mit}
                             slotProps={{ textField: {label: "Expérience à MonarkIT"}}}
                             sx={{ gridColumn: "span 2" }}
+                            shouldDisableDate={isWeekend}
                         />
                         <DatepickerField
                             name="exp_pro"
@@ -216,6 +225,7 @@ const UserForm = (props: UserProps) => {
                             helpertext={touched.exp_pro && errors.exp_pro}
                             slotProps={{ textField: {label: "Expérience professionelle"}}}
                             sx={{ gridColumn: "span 2" }}
+                            shouldDisableDate={isWeekend}
                             disableFuture
                         />
                         <DatepickerField

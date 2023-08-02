@@ -30,10 +30,10 @@ const SoldeForm = (props : SoldeProps) => {
     return <Box m="20px">
         <Formik
             initialValues={{
-                balanceStartedAt: initialValues.balanceStartedAt,
-                balanceEndedAt: initialValues.balanceEndedAt,
-                initialDays: initialValues.initialDays,
-                remainingDays: initialValues.remainingDays
+                balanceStartedAt: initialValues?.balanceStartedAt,
+                balanceEndedAt: initialValues?.balanceEndedAt,
+                initialDays: initialValues?.initialDays,
+                remainingDays: initialValues?.remainingDays
             }}
             onSubmit={values => onSubmit(values)}
             validationSchema={soldeSchema}
@@ -84,7 +84,6 @@ const SoldeForm = (props : SoldeProps) => {
                             helpertext={touched.balanceEndedAt && errors.balanceEndedAt}
                             slotProps={{ textField: {label: "Date de fin"}}}
                             sx={{ gridColumn: "span 2" }}
-                            disableFuture
                         />
                         <TextField
                             fullwidth="true"

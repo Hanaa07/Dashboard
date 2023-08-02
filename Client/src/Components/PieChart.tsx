@@ -1,109 +1,62 @@
-import { ResponsivePie } from "@nivo/pie";
-import {tokens} from "../Theme.tsx";
-import { useTheme } from "@mui/material";
+import React from 'react';
+import {Chart as ChartJS, ArcElement, Tooltip, Legend, ChartOptions} from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
+import {AbsenceType} from "../Types/AbsenceType.tsx";
 
+ChartJS.register(ArcElement, Tooltip, Legend);
 
-import { mockPieData as data } from "../data/mockData";
+type ChartProps = {
+    intervalType: number,
+    nbrTotalPresences: number,
+    absences: AbsenceType[]
+}
 
-const PieChart = () => {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
-    return (
-        <ResponsivePie
-            data={data}
-            theme={{
-                axis: {
-                    domain: {
-                        line: {
-                            stroke: colors.gray[100],
-                        },
-                    },
-                    legend: {
-                        text: {
-                            fill: colors.gray[100],
-                        },
-                    },
-                    ticks: {
-                        line: {
-                            stroke: colors.gray[100],
-                            strokeWidth: 1,
-                        },
-                        text: {
-                            fill: colors.gray[100],
-                        },
-                    },
-                },
-                legends: {
-                    text: {
-                        fill: colors.gray[100],
-                    },
-                },
-            }}
-            margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-            innerRadius={0.5}
-            padAngle={0.7}
-            cornerRadius={3}
-            activeOuterRadiusOffset={8}
-            borderColor={{
-                from: "color", modifiers: undefined,
-            }}
-            arcLinkLabelsSkipAngle={10}
-            arcLinkLabelsTextColor={colors.gray[100]}
-            arcLinkLabelsThickness={2}
-            arcLinkLabelsColor={{ from: "color" }}
-            enableArcLabels={false}
-            arcLabelsRadiusOffset={0.4}
-            arcLabelsSkipAngle={7}
-            arcLabelsTextColor={{
-                from: "color", modifiers: undefined,
-            }}
-            defs={[
-                {
-                    id: "dots",
-                    type: "patternDots",
-                    background: "inherit",
-                    color: "rgba(255, 255, 255, 0.3)",
-                    size: 4,
-                    padding: 1,
-                    stagger: true,
-                },
-                {
-                    id: "lines",
-                    type: "patternLines",
-                    background: "inherit",
-                    color: "rgba(255, 255, 255, 0.3)",
-                    rotation: -45,
-                    lineWidth: 6,
-                    spacing: 10,
-                },
-            ]}
-            legends={[
-                {
-                    anchor: "bottom",
-                    direction: "row",
-                    justify: false,
-                    translateX: 0,
-                    translateY: 56,
-                    itemsSpacing: 0,
-                    itemWidth: 100,
-                    itemHeight: 18,
-                    itemDirection: "left-to-right",
-                    itemOpacity: 1,
-                    symbolSize: 18,
-                    symbolShape: "circle",
-                    effects: [
-                        {
-                            on: 'hover',
-                            style: {
-                                itemBackground: "rgba(0, 0, 0, .03)",
-                                itemOpacity: 1,
-                            }
-                        },
-                    ],
-                },
-            ]}
-        />
-    );
+const PieChart = (props : ChartProps) => {
+    const {absences, intervalType, nbrTotalPresences} = props;
+
+    let nbrAbsenceTotal = 0;
+
+    absences.map(absence => {
+        if (absence.days) {
+            nbrAbsenceTotal += absence.days;
+        }
+    })
+
+    const presences = nbrTotalPresences - nbrAbsenceTotal;
+
+    const totalAbsencesPercentage = ((nbrAbsenceTotal/ nbrTotalPresences) * 100).toFixed(2);
+    const presencesPercentage = ((presences/ nbrTotalPresences) * 100).toFixed(2);
+
+    const options : ChartOptions<"doughnut"> = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'right' as const,
+            },
+        },
+        maintainAspectRatio: false,
+    };
+
+    const data : any = {
+        labels: ['Absence', 'Présence'],
+        datasets: [
+            {
+                label: '%',
+                data: [totalAbsencesPercentage, presencesPercentage],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.4)',
+                    'rgba(54, 162, 235, 0.4)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132)',
+                    'rgba(54, 162, 235)',
+                ],
+                borderWidth: 1,
+            },
+        ],
+    };
+        return <Doughnut options={options} data={data} height={250}/>
+
 };
 
 export default PieChart;

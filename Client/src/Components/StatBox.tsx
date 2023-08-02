@@ -4,13 +4,14 @@ import {tokens} from "../Theme.tsx";
 type StatBoxProps = {
     title: string,
     component: any,
+    nbrUsers: number | null
 }
 
 const StatBox = (props: StatBoxProps) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    const {title, component, nbrUsers} = props;
 
-    const {title, component} = props;
     return (
         <Box
             sx={{
@@ -19,10 +20,8 @@ const StatBox = (props: StatBoxProps) => {
                 alignItems: 'center',
                 height: '160px',
                 width: '400px',
-                backgroundColor: `${colors.primary[700]} transparent`,
-                backdropFilter: "blur(20px)",
+                backgroundColor: `${colors.primary[400]}`,
                 borderRadius: "15px",
-                border: `1px solid ${colors.primary[700]}`
             }}
         >
             <Box
@@ -38,12 +37,12 @@ const StatBox = (props: StatBoxProps) => {
                     <Typography
                         variant="subtitle1"
                         fontWeight="bold"
-                        sx={{ color: `${colors.gray[100]}`}} // Replace with your desired text color
+                        sx={{ color: `${colors.gray[100]}`}}
                     >
                         {title}
                     </Typography>
                 </Box>
-                <Box>
+                <Box m="15px 0 0 0">
                     {component}
                 </Box>
             </Box>
