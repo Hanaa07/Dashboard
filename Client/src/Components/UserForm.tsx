@@ -5,7 +5,6 @@ import * as yup from "yup";
 import {useMediaQuery} from "@mui/material";
 import {tokens} from "../Theme.tsx";
 import {useNavigate} from "react-router-dom";
-import React from "react";
 import {UserType} from "../Types/UserType.tsx";
 import {Dayjs} from "dayjs";
 
@@ -50,16 +49,16 @@ const UserForm = (props: UserProps) => {
     return <Box m="20px">
         <Formik
             initialValues={{
-                firstName: initialValues.firstName,
-                lastName: initialValues.lastName,
-                adresse: initialValues.adresse,
-                email: initialValues.email,
-                phone: initialValues.phone,
-                joinedIn: initialValues.joinedIn,
-                statut: initialValues.statut,
-                exp_pro: initialValues.exp_pro,
-                exp_mit: initialValues.exp_mit,
-                birth: initialValues.birth,
+                firstName: initialValues?.firstName,
+                lastName: initialValues?.lastName,
+                adresse: initialValues?.adresse,
+                email: initialValues?.email,
+                phone: initialValues?.phone,
+                joinedIn: initialValues?.joinedIn,
+                statut: initialValues?.statut,
+                exp_pro: initialValues?.exp_pro,
+                exp_mit: initialValues?.exp_mit,
+                birth: initialValues?.birth,
             }}
             onSubmit={values => onSubmit(values)}
             validationSchema={userSchema}
@@ -100,7 +99,7 @@ const UserForm = (props: UserProps) => {
                         }}
                     >
                         <TextField
-                            fullwidth="true"
+                            fullWidth
                             variant="outlined"
                             type="text"
                             label="Nom"
@@ -111,11 +110,11 @@ const UserForm = (props: UserProps) => {
                             value={values.lastName}
                             name="lastName"
                             error={!!touched.lastName && !!errors.lastName}
-                            helpertext={touched.lastName && errors.lastName}
+                            helperText={touched.lastName && errors.lastName}
                             sx={{ gridColumn: "span 2" }}
                         />
                         <TextField
-                            fullwidth="true"
+                            fullWidth
                             variant="outlined"
                             type="text"
                             label="Prénom"
@@ -126,11 +125,11 @@ const UserForm = (props: UserProps) => {
                             value={values.firstName}
                             name="firstName"
                             error={!!touched.firstName && !!errors.firstName}
-                            helpertext={touched.firstName && errors.firstName}
+                            helperText={touched.firstName && errors.firstName}
                             sx={{ gridColumn: "span 2" }}
                         />
                         <TextField
-                            fullwidth="true"
+                            fullWidth
                             variant="outlined"
                             type="text"
                             label="N° de téléphone"
@@ -141,11 +140,11 @@ const UserForm = (props: UserProps) => {
                             value={values.phone}
                             name="phone"
                             error={!!touched.phone && !!errors.phone}
-                            helpertext={touched.phone && errors.phone}
+                            helperText={touched.phone && errors.phone}
                             sx={{ gridColumn: "span 2" }}
                         />
                         <TextField
-                            fullwidth="true"
+                            fullWidth
                             variant="outlined"
                             type="text"
                             label="Adresse mail"
@@ -156,10 +155,10 @@ const UserForm = (props: UserProps) => {
                             value={values.email}
                             name="email"
                             error={!!touched.email && !!errors.email}
-                            helpertext={touched.email && errors.email}
+                            helperText={touched.email && errors.email}
                             sx={{ gridColumn: "span 2" }}
                         />
-                        <FormControl fullwidth="true" sx={{ gridColumn: "span 2" }}>
+                        <FormControl fullWidth sx={{ gridColumn: "span 2" }}>
                             <InputLabel id="select-statut">Statut</InputLabel>
                             <Select
                                 variant="outlined"
@@ -173,7 +172,7 @@ const UserForm = (props: UserProps) => {
                                 value={values.statut}
                                 name="statut"
                                 error={!!touched.statut && !!errors.statut}
-                                helpertext={touched.statut && errors.statut}
+                                helperText={touched.statut && errors.statut}
                                 selectprops={{
                                     multiple: true
                                 }}>
@@ -182,7 +181,7 @@ const UserForm = (props: UserProps) => {
                             </Select>
                         </FormControl>
                         <TextField
-                            fullwidth="true"
+                            fullWidth
                             variant="outlined"
                             type="text"
                             label="Adresse"
@@ -193,7 +192,7 @@ const UserForm = (props: UserProps) => {
                             value={values.adresse}
                             name="adresse"
                             error={!!touched.adresse && !!errors.adresse}
-                            helpertext={touched.adresse && errors.adresse}
+                            helperText={touched.adresse && errors.adresse}
                             sx={{ gridColumn: "span 2" }}
                         />
                         <DatepickerField

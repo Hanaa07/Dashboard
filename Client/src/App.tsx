@@ -21,14 +21,11 @@ import CreateAbsence from "./Scenes/AbsenceForm/CreateAbsence.tsx";
 import Login from "./Pages/Login.tsx";
 import EditAbsence from "./Scenes/AbsenceForm/EditAbsence.tsx";
 import Calendar from "./Scenes/Calendar/calendar.tsx";
-import backgroundLogo from "./assets/Asset-6-01-1.svg";
-import Error from "./Pages/Error.tsx";
 
 function App() {
     const [theme, colorMode] = useMode();
     const [isSidebar, setIsSidebar] = useState<boolean>(true);
     const [isLoginRoute, setIsLoginRoute] = useState<boolean>(false);
-    const [isConnected, setIsConnected] = useState(false);
     let location = useLocation()
 
 

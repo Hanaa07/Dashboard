@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {Sidebar, Menu, MenuItem} from "react-pro-sidebar";
 import {Box, IconButton, Typography, useTheme} from "@mui/material";
-import {Link, useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Path} from "react-router-dom";
 import {tokens} from "../../Theme.tsx";
 import DonutSmallIcon from '@mui/icons-material/DonutSmall';
@@ -40,7 +40,7 @@ const Item = ({ title, to, icon, selected, setSelected}: ItemProps) => {
 const sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [cookies] = useCookies([]);
+  const [cookies] = useCookies<any>([]);
   const [isConnected, setIsConnected] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>("");
@@ -76,7 +76,7 @@ const sidebar = () => {
           }}
       >
         <Sidebar collapsed={isCollapsed} style={{height: "100vh"}} backgroundColor={colors.primary[400]}>
-          <Menu iconShape="square">
+          <Menu>
               {/*LOGO AND MENU ICON*/}
               <MenuItem
                 onClick={() => setIsCollapsed(!isCollapsed)}

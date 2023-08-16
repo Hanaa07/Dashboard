@@ -1,5 +1,4 @@
-import { useTheme } from "@mui/material";
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -7,14 +6,11 @@ import {
     BarElement,
     Title,
     Tooltip,
-    Legend, ChartOptions,
+    Legend
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import {faker} from "@faker-js/faker";
-import {tokens} from "../Theme.tsx";
 import {HttpClient} from "../utils/request.ts";
 import {useCookies} from "react-cookie";
-import dayjs from "dayjs";
 import {AbsenceType} from "../Types/AbsenceType.tsx";
 import {UserType} from "../Types/UserType.tsx";
 
@@ -34,15 +30,13 @@ type ChartProps = {
 }
 
 const BarChart = (props : ChartProps) => {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
-    const [users, setUsers] = useState([])
-    const [cookies] = useCookies([]);
+    const [users, setUsers] = useState<any>([])
+    const [cookies] = useCookies<any>([]);
     const [nbrTotalPresences, setNbrTotalPresences] = useState<number>(0);
     const [nbrUsers, setNbrUsers] = useState<number>(0)
     const [selectedUser, setSelectedUser] = useState<UserType|null>(null);
     const {intervalType, absence, user} = props;
-    const [absences, setAbsences] = useState([]);
+    const [absences, setAbsences] = useState<any>([]);
 
 
     useEffect(() => {
@@ -90,33 +84,33 @@ const BarChart = (props : ChartProps) => {
         maintainAspectRatio: false,
     };
 
-    const labels = users.slice(0,3).map((user) => [`${user.firstName} ${user.lastName}`]);
-    const presenceDays= []
+    const labels = users.slice(0,3).map((user: UserType) => [`${user.firstName} ${user.lastName}`]);
+    const presenceDays : any = []
 
     switch (intervalType) {
         case 1:
-            absences.map(absence => {
+            absences.map((absence : any) => {
                 if (!presenceDays.includes(((absence.days / nbrTotalPresences) * 100).toFixed(2))) {
                     presenceDays.push(((absence.days / nbrTotalPresences) * 100).toFixed(2))
                 }
             })
             break;
         case 2:
-            absences.map(absence => {
+            absences.map((absence : any)=> {
                 if (!presenceDays.includes(((absence.days / nbrTotalPresences) * 100).toFixed(2))) {
                     presenceDays.push(((absence.days / nbrTotalPresences) * 100).toFixed(2))
                 }
             })
             break;
         case 3:
-            absences.map(absence => {
+            absences.map((absence : any) => {
                 if (!presenceDays.includes(((absence.days / nbrTotalPresences) * 100).toFixed(2))) {
                     presenceDays.push(((absence.days / nbrTotalPresences) * 100).toFixed(2))
                 }
             })
             break;
         case 4:
-            absences.map(absence => {
+            absences.map((absence : any) => {
                 if (!presenceDays.includes(((absence.days / nbrTotalPresences) * 100).toFixed(2))) {
                     presenceDays.push(((absence.days / nbrTotalPresences) * 100).toFixed(2))
                 }

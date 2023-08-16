@@ -1,4 +1,3 @@
-import React from "react";
 import UserForm from "../../Components/UserForm";
 import {UserType} from "../../Types/UserType.tsx";
 import {Box} from "@mui/material";
@@ -10,7 +9,7 @@ import {useCookies} from "react-cookie";
 
 const CreateUser = () => {
     const navigate = useNavigate()
-    const [cookies] = useCookies([]);
+    const [cookies] = useCookies<any>([]);
     const initialValues: UserType = {
         adresse: "",
         email: "",
@@ -27,7 +26,6 @@ const CreateUser = () => {
 
     const handleSubmit = (values: UserType) => {
         const jwt = cookies.jwt ? cookies.jwt : '';
-        values.password = "12345";
         HttpClient.post('/user/new', values, {
             headers: {
                 'Authorization': 'Bearer ' + jwt

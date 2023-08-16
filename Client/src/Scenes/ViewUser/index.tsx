@@ -10,7 +10,7 @@ import {
     useTheme, Button, Typography
 } from "@mui/material";
 import dayjs from "dayjs";
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import { tokens } from "../../Theme.tsx";
 import Header from "../../Components/Header.tsx";
 import {Link, useParams} from "react-router-dom";
@@ -23,8 +23,8 @@ const ViewUser = () => {
     const { userId } = useParams();
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const [user, setUser] = useState<UserType>(null);
-    const [cookies] = useCookies([]);
+    const [user, setUser] = useState<UserType>();
+    const [cookies] = useCookies<any>([]);
     const [isConnected, setIsConnected] = useState(false);
 
     useEffect(() => {

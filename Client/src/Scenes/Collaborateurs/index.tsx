@@ -1,25 +1,26 @@
 import { Box, Typography, Button, useTheme, Stack, ButtonGroup} from "@mui/material";
 import { DataGrid, GridToolbar, frFR } from "@mui/x-data-grid";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { tokens } from "../../Theme.tsx";
 import PersonAddAlt1OutlinedIcon from '@mui/icons-material/PersonAddAlt1Outlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import Header from "../../Components/Header.tsx";
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {HttpClient} from "../../utils/request.ts";
 import dayjs from "dayjs";
 import {useCookies} from "react-cookie";
+import {UserType} from "../../Types/UserType.tsx";
 
 
 
 const Collaborateurs = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState<UserType[]>([])
     const navigate = useNavigate();
-    const [cookies] = useCookies([]);
+    const [cookies] = useCookies<any>([]);
     const [isConnected, setIsConnected] = useState(false);
 
     useEffect(() => {
@@ -103,7 +104,7 @@ const Collaborateurs = () => {
                                             headers: {
                                                 'Authorization': 'Bearer ' + jwt
                                             }
-                                        }).then((res)=> {
+                                        }).then(()=> {
                                             return navigate('/collaborateurs')
                                         });
                                     }}/>
@@ -135,10 +136,6 @@ const Collaborateurs = () => {
                     "& .MuiDataGrid-columnHeaders": {
                         backgroundColor: colors.greenAccent[700],
                         borderBottom: "none",
-                    },
-                    "& .MuiDataGrid-virtualScroller": {
-                        backgroundColor: `${colors.primary[400]} transparent`,
-                        backdropFilter: "blur(9px)",
                     },
                     "& .MuiDataGrid-footerContainer": {
                         borderTop: "none",

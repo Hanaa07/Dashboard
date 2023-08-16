@@ -2,7 +2,7 @@ import Header from "../../Components/Header.tsx";
 import {Box, FormControl, MenuItem, Select, Typography, useTheme} from "@mui/material";
 import {tokens} from "../../Theme.tsx";
 import StatBox from "../../Components/StatBox.tsx";
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import BarChart from "../../Components/BarChart.tsx";
 import LineChart from "../../Components/LineChart.tsx";
 import PieChart from "../../Components/PieChart.tsx";
@@ -14,13 +14,12 @@ const Dashboard = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const [users, setUsers] = useState([])
-    const [cookies] = useCookies([]);
+    const [cookies] = useCookies<any>([]);
     const [intervalType, setIntervalType] = useState< 1 | 3 | 6 | 12>(1)
     const [nbrTotalPresences, setNbrTotalPresences] = useState<number>(0);
     const [nbrUsers, setNbrUsers] = useState<number>(0)
     const [selectedUser, setSelectedUser] = useState<UserType|null>(null);
     const [absences, setAbsences] = useState([]);
-    const [presence, setPresence] = useState<number>(0)
 
     useEffect(() => {
         const jwt = cookies.jwt ? cookies.jwt : '';
@@ -125,7 +124,7 @@ const Dashboard = () => {
                                         <MenuItem value={0}>
                                             Tous
                                         </MenuItem>
-                                        {users.map((user) => {
+                                        {users.map((user : any) => {
                                             return <MenuItem key={user._id} value={user}>{user?.lastName} {user?.firstName}</MenuItem>
                                         })}
                                     </Select>
@@ -155,7 +154,7 @@ const Dashboard = () => {
                     justifyContent="center"
                 >
                     <StatBox
-                        title={`Total des présences de ${intervalType === 1 ? ' ce mois' : intervalType === 2 ? ' ces 3 derniers mois' : intervalType === 3 ? ' ces 6 derniers mois' : ' cette année'}`}
+                        title={`Total des présences de ${intervalType === 1 ? ' ce mois' : intervalType === 3 ? ' ces 3 derniers mois' : intervalType === 6 ? ' ces 6 derniers mois' : ' cette année'}`}
                         nbrUsers={null}
                         component={
                             <Typography variant="subtitle2">{nbrTotalPresences}</Typography>
@@ -167,7 +166,6 @@ const Dashboard = () => {
                     gridRow="span 2"
                     sx={{
                         backgroundColor: `${colors.primary[400]}`,
-                        backdropFilter: "blur(20px)",
                         borderRadius: "15px",
                         border: `1px solid ${colors.primary[400]}`,
                         padding: "5px"
@@ -194,7 +192,6 @@ const Dashboard = () => {
                     gridRow="span 2"
                     sx={{
                         backgroundColor: `${colors.primary[400]}`,
-                        backdropFilter: "blur(20px)",
                         borderRadius: "15px",
                         border: `1px solid ${colors.primary[400]}`,
 
@@ -223,7 +220,6 @@ const Dashboard = () => {
                     padding="16px"
                     sx={{
                         backgroundColor: `${colors.primary[400]}`,
-                        backdropFilter: "blur(20px)",
                         borderRadius: "15px",
                         border: `1px solid ${colors.primary[400]}`,
                     }}
@@ -235,7 +231,7 @@ const Dashboard = () => {
                     >
                         Nombre d'absences pris
                         {
-                            intervalType === 1 ? ' ce mois' : intervalType === 2 ? ' il y\'a 3 mois' : intervalType === 3 ? ' il y\'a 6 mois' : ' cette année'
+                            intervalType === 1 ? ' ce mois' : intervalType === 3 ? ' il y\'a 3 mois' : intervalType === 6 ? ' il y\'a 6 mois' : ' cette année'
                         }
                     </Typography>
                     {
